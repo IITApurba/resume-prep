@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>High-Concurrency Payment &amp; Transaction Processing System — Interview Playbook</title>
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-serif-4/400.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-serif-4/400-italic.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-serif-4/600.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-serif-4/700.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-sans-3/400.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-sans-3/400-italic.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-sans-3/600.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-sans-3/700.css">
+<link rel="stylesheet" href="../../../styles/playbook.css">
+<style>
+:root { --accent: #2E4657; --tint: #EAF0F4; }
+@page { @top-left { content: "Book 1 · Payment & Transaction Processing"; } }
+</style>
+</head>
+<body class="book-1">
+
+<section class="cover">
+  <div class="cover-bar"></div>
+  <div class="cover-inner">
+    <div class="cover-top"><span>SDE Project Interview Playbook</span><span>Book 1 of 4</span></div>
+    <div class="cover-motif"><svg class="motif" viewBox="0 0 600 190" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="20" y1="20" x2="580" y2="20" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><line x1="20" y1="38" x2="580" y2="38" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><line x1="20" y1="56" x2="580" y2="56" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><line x1="20" y1="74" x2="580" y2="74" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><line x1="20" y1="92" x2="580" y2="92" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><line x1="20" y1="110" x2="580" y2="110" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><line x1="20" y1="128" x2="580" y2="128" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><line x1="20" y1="146" x2="580" y2="146" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><line x1="20" y1="164" x2="580" y2="164" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><line x1="300" y1="10" x2="300" y2="180" stroke="#6E6E6E" fill="none" stroke-width="1.4"/><line x1="306" y1="10" x2="306" y2="180" stroke="#6E6E6E" fill="none" stroke-width="1.4"/><line x1="80" y1="10" x2="80" y2="180" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><line x1="366" y1="10" x2="366" y2="180" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><line x1="95" y1="32" x2="245" y2="32" stroke="#7A7A7A" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 7"/><line x1="380" y1="50" x2="560" y2="50" stroke="#7A7A7A" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 7"/><line x1="95" y1="68" x2="215" y2="68" stroke="#7A7A7A" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 7"/><line x1="380" y1="86" x2="540" y2="86" stroke="#7A7A7A" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 7"/><line x1="95" y1="104" x2="185" y2="104" stroke="#7A7A7A" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 7"/><line x1="380" y1="122" x2="520" y2="122" stroke="#7A7A7A" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 7"/><line x1="200" y1="160" x2="290" y2="160" stroke="#6E6E6E" fill="none" stroke-width="1.4"/><line x1="200" y1="164" x2="290" y2="164" stroke="#6E6E6E" fill="none" stroke-width="1.4"/><line x1="486" y1="160" x2="576" y2="160" stroke="#6E6E6E" fill="none" stroke-width="1.4"/><line x1="486" y1="164" x2="576" y2="164" stroke="#6E6E6E" fill="none" stroke-width="1.4"/></svg></div>
+    <div class="cover-theme">Financial correctness · Transaction processing</div>
+    <h1 class="cover-title">High-Concurrency Payment &amp; Transaction Processing System</h1>
+    <div class="cover-sub">Interview Playbook</div>
+    <div class="cover-rule"></div>
+    <p class="cover-desc"><em>A secure, fault-tolerant payment backend for internal account-to-account transfers. Java 21, Spring Boot, PostgreSQL, Kafka, Redis, Docker and Kubernetes. Everything you need to explain the project, defend each resume bullet and answer the likely follow-ups in a 30–45 minute interview.</em></p>
+    <div class="cover-extra"><p><strong>Resume bullets this booklet defends</strong></p><ol>
+<li>Built Spring Boot microservices with ACID transactions, OAuth2/JWT auth, idempotency keys and optimistic locking for concurrent payments.</li>
+<li>Designed Kafka event processing with retries, consumer groups and DLQs, sustaining 10K+ requests/min at less than 200 ms p95 latency.</li>
+<li>Optimized PostgreSQL indexing, connection pooling &amp; Redis caching, reducing p95 latency ~40% and DB CPU ~30%; deployed on Kubernetes.</li>
+</ol></div>
+    <div class="cover-contents"><div class="cc-head">Contents</div><div class="toc"><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-1"><span class="toc-text"><span class="toc-num">Part 1</span>Project Fundamentals</span></a><span class="leader"></span><span class="pn" data-t="part-1">2</span></div><div class="toc-entry toc-sec"><a href="#s-11-what-is-this-project"><span class="toc-text"><span class="toc-snum">1.1</span>What is this project?</span></a><span class="leader"></span><span class="pn" data-t="s-11-what-is-this-project">2</span></div><div class="toc-entry toc-sec"><a href="#s-12-fundamentals-required-for-this-project"><span class="toc-text"><span class="toc-snum">1.2</span>Fundamentals required for this project</span></a><span class="leader"></span><span class="pn" data-t="s-12-fundamentals-required-for-this-project">2</span></div></div><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-2"><span class="toc-text"><span class="toc-num">Part 2</span>High-Level Design and Architecture</span></a><span class="leader"></span><span class="pn" data-t="part-2">8</span></div><div class="toc-entry toc-sec"><a href="#s-21-technology-stack"><span class="toc-text"><span class="toc-snum">2.1</span>Technology stack</span></a><span class="leader"></span><span class="pn" data-t="s-21-technology-stack">8</span></div><div class="toc-entry toc-sec"><a href="#s-22-high-level-architecture"><span class="toc-text"><span class="toc-snum">2.2</span>High-level architecture</span></a><span class="leader"></span><span class="pn" data-t="s-22-high-level-architecture">9</span></div><div class="toc-entry toc-sec"><a href="#s-23-important-architectural-decisions"><span class="toc-text"><span class="toc-snum">2.3</span>Important architectural decisions</span></a><span class="leader"></span><span class="pn" data-t="s-23-important-architectural-decisions">11</span></div></div><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-3"><span class="toc-text"><span class="toc-num">Part 3</span>How the Project Works</span></a><span class="leader"></span><span class="pn" data-t="part-3">12</span></div><div class="toc-entry toc-sec"><a href="#s-31-one-complete-end-to-end-request-flow"><span class="toc-text"><span class="toc-snum">3.1</span>One complete end-to-end request flow</span></a><span class="leader"></span><span class="pn" data-t="s-31-one-complete-end-to-end-request-flow">12</span></div><div class="toc-entry toc-sec"><a href="#s-32-important-alternative-scenarios"><span class="toc-text"><span class="toc-snum">3.2</span>Important alternative scenarios</span></a><span class="leader"></span><span class="pn" data-t="s-32-important-alternative-scenarios">13</span></div><div class="toc-entry toc-sec"><a href="#s-33-important-guarantees-and-limitations"><span class="toc-text"><span class="toc-snum">3.3</span>Important guarantees and limitations</span></a><span class="leader"></span><span class="pn" data-t="s-33-important-guarantees-and-limitations">14</span></div></div><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-4"><span class="toc-text"><span class="toc-num">Part 4</span>Complete Interview Explanation</span></a><span class="leader"></span><span class="pn" data-t="part-4">14</span></div><div class="toc-entry toc-sec"><a href="#s-41-two-minute-explanation"><span class="toc-text"><span class="toc-snum">4.1</span>Two-minute explanation</span></a><span class="leader"></span><span class="pn" data-t="s-41-two-minute-explanation">14</span></div><div class="toc-entry toc-sec"><a href="#s-42-five-minute-explanation"><span class="toc-text"><span class="toc-snum">4.2</span>Five-minute explanation</span></a><span class="leader"></span><span class="pn" data-t="s-42-five-minute-explanation">15</span></div><div class="toc-entry toc-sec"><a href="#s-43-ten-minute-explanation"><span class="toc-text"><span class="toc-snum">4.3</span>Ten-minute explanation</span></a><span class="leader"></span><span class="pn" data-t="s-43-ten-minute-explanation">16</span></div></div><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-5"><span class="toc-text"><span class="toc-num">Part 5</span>Interview Questions and Answers</span></a><span class="leader"></span><span class="pn" data-t="part-5">17</span></div><div class="toc-entry toc-sec"><a href="#s-51-basic-understanding"><span class="toc-text"><span class="toc-snum">5.1</span>Basic understanding</span></a><span class="leader"></span><span class="pn" data-t="s-51-basic-understanding">17</span></div><div class="toc-entry toc-sec"><a href="#s-52-core-concepts"><span class="toc-text"><span class="toc-snum">5.2</span>Core concepts</span></a><span class="leader"></span><span class="pn" data-t="s-52-core-concepts">18</span></div><div class="toc-entry toc-sec"><a href="#s-53-kafka-outbox-and-reliability"><span class="toc-text"><span class="toc-snum">5.3</span>Kafka, outbox and reliability</span></a><span class="leader"></span><span class="pn" data-t="s-53-kafka-outbox-and-reliability">20</span></div><div class="toc-entry toc-sec"><a href="#s-54-performance-and-caching"><span class="toc-text"><span class="toc-snum">5.4</span>Performance and caching</span></a><span class="leader"></span><span class="pn" data-t="s-54-performance-and-caching">22</span></div><div class="toc-entry toc-sec"><a href="#s-55-failures-trade-offs-and-resume-defence"><span class="toc-text"><span class="toc-snum">5.5</span>Failures, trade-offs and resume defence</span></a><span class="leader"></span><span class="pn" data-t="s-55-failures-trade-offs-and-resume-defence">22</span></div></div><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-6"><span class="toc-text"><span class="toc-num">Part 6</span>Final Revision Sheet</span></a><span class="leader"></span><span class="pn" data-t="part-6">25</span></div></div></div>
+      <div class="cc-extra">15 fundamentals explained · 4 diagrams · 28 interview questions (18 easy, 9 medium, 1 hard) · one-page revision sheet</div></div>
+    <div class="cover-bottom"><div class="series-head">The series</div><ul class="series"><li class="current"><span class="sq"></span>1. Payment &amp; Transaction Processing</li><li class=""><span class="sq"></span>2. Distributed Object Storage</li><li class=""><span class="sq"></span>3. Real-Time Event Processing</li><li class=""><span class="sq"></span>4. LLM Gateway &amp; Inference Router</li></ul></div>
+  </div>
+</section>
+<div class="body">
+
+
+
+<div class="keephead"><div class="part-banner" id="part-1" data-part="1"><span class="part-kicker">Part 1</span><h1 class="part-title">Project Fundamentals</h1></div><h2 id="s-11-what-is-this-project"><span class="secnum">1.1</span>What is this project?</h2></div>
+
+<p><strong>What it does.</strong> The system moves money between two accounts that live inside the same platform, for example from Alice's wallet to Bob's wallet. A client calls <code>POST /payments</code> with a source account, a destination account and an amount. The backend checks who is calling, makes sure the source account has enough money, debits one account, credits the other, records the movement in a ledger, and then tells other parts of the company ("a payment completed") through Kafka.</p>
+<p><strong>The problem it solves.</strong> Moving money looks like two simple updates, but in a real backend thousands of requests arrive at the same time, networks time out, clients retry, and servers crash halfway through. Without careful design you get the classic failures: the same payment charged twice because the client retried, an account going negative because two payments read the same balance at the same moment, money debited from Alice but never credited to Bob because the server crashed between the two updates, or an audit system that silently misses events.</p>
+<p><strong>Who would use it.</strong> Any product with internal balances: wallets, marketplaces paying sellers, gaming credits, a company's internal treasury. The backend is the "money core" that other services call.</p>
+<p><strong>Scope boundary to say out loud.</strong> This is internal transfers in one currency. No card networks, external banks, foreign exchange, refunds or multi-region deployment. It is two Spring Boot services, not a full banking platform.</p>
+<p><strong>What makes it technically interesting.</strong> Correctness under concurrency and failure, not raw speed. The project shows four separate races and how each is closed: overspending (optimistic locking), duplicate retries (idempotency keys), concurrent duplicates (unique-index locking), and the "database committed but the event was lost" problem (transactional outbox).</p>
+<div class="box box-analogy keep"><div class="box-label">Analogy</div>
+<p>Think of a bank branch with one official ledger book (PostgreSQL). Tellers (API pods) can serve customers in parallel, but every transfer is written into the book in one go, both lines or neither. Each customer gets a numbered ticket (idempotency key), so if they come back and ask again, the teller looks up the ticket instead of paying twice. A clerk later photocopies new entries for the audit office (outbox to Kafka); if the clerk is late, the money is still correct.</p>
+</div>
+<div class="box box-example keep"><div class="box-label">Example</div>
+<p>Alice has 1,000 cents. She sends 800 to Bob, her phone times out, and she taps "Pay" again. At the same moment a second, different 800-cent payment from Alice arrives. Correct outcome: exactly one 800-cent payment succeeds, the retry returns the same result instead of paying again, the other payment is rejected with <code>INSUFFICIENT_<wbr>FUNDS</code>, Alice ends at 200, Bob gains 800, and one <code>PAYMENT_COMPLETED</code> event reaches the audit consumer.</p>
+</div>
+<div class="keephead"><h2 id="s-12-fundamentals-required-for-this-project"><span class="secnum">1.2</span>Fundamentals required for this project</h2><p>Every term below comes from the three resume bullets, plus the few ideas needed to understand the architecture.</p></div>
+
+<div class="table-block"><table>
+<thead>
+<tr>
+<th>Resume bullet</th>
+<th>Concepts you must be able to explain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Spring Boot microservices with ACID transactions, OAuth2/JWT auth, idempotency keys and optimistic locking for concurrent payments</td>
+<td>Spring Boot services, ACID, double-entry ledger, OAuth2/JWT, idempotency keys, optimistic locking</td>
+</tr>
+<tr>
+<td>2. Kafka event processing with retries, consumer groups and DLQs, 10K+ requests/min at &lt; 200 ms p95</td>
+<td>Transactional outbox, Kafka topics/partitions/offsets, consumer groups, retries + DLQ, at-least-once + idempotent consumers, p95 and throughput</td>
+</tr>
+<tr>
+<td>3. PostgreSQL indexing, connection pooling and Redis caching, ~40% lower p95 and ~30% lower DB CPU; Kubernetes</td>
+<td>B-tree and partial indexes, connection pooling (HikariCP), Redis cache-aside, Docker and Kubernetes</td>
+</tr>
+</tbody>
+</table></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">1</span><span class="concept-name">Spring Boot microservices</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Spring Boot is a Java framework that provides a web server, database access, security and configuration out of the box. "Microservices" means the system is split into separately deployable services.</li>
+<li><span class="cl">Technical</span> Two services. <code>payment-service</code> owns the REST API, security, the money transaction and the outbox publisher. <code>payment-consumer</code> reads Kafka events and writes audit rows. Each is its own Kubernetes Deployment and scales independently.</li>
+<li><span class="cl">Why it matters</span> Slow side effects (audit) run elsewhere and can fail or lag without touching payment latency.</li>
+<li><span class="cl">In this project</span> Accounts stay inside <code>payment-service</code> on purpose; a separate account service with its own database would need a distributed transaction for every transfer.</li>
+<li><span class="cl">Interview angle</span> "Two services sharing one database is not textbook microservices." Agree honestly: it is an accepted trade-off because the consumer never writes balances; if it needed its own database, it would persist audit rows from Kafka into its own store.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">2</span><span class="concept-name">ACID transactions</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> A transaction is a group of database changes that behaves as one unit: either everything happens or nothing does.</li>
+<li><span class="cl">Technical</span> Atomicity (all-or-nothing), Consistency (constraints such as <code>balance &gt;= 0</code> always hold), Isolation (concurrent transactions do not see each other's half-done work; here PostgreSQL <code>READ COMMITTED</code>), Durability (after <code>COMMIT</code> the change survives a crash because it is in the write-ahead log on disk).</li>
+<li><span class="cl">Why it matters</span> A transfer touches several rows: two balances, a payment row, two ledger rows, an idempotency row and an outbox row. A crash between them must never leave money half-moved.</li>
+<li><span class="cl">In this project</span> All of those writes happen in one PostgreSQL transaction. The <code>COMMIT</code> is the financial commit point; Kafka and Redis are deliberately outside it.</li>
+<li><span class="cl">Interview angle</span> "Which isolation level and why not SERIALIZABLE?" <code>READ COMMITTED</code> plus a conditional <code>UPDATE</code> already prevents overspending; <code>SERIALIZABLE</code> would add overhead and retry errors to every transaction.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">3</span><span class="concept-name">Double-entry ledger</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Every movement of money is written twice: once as a debit on the account it left, once as a credit on the account it entered. The two always add up to zero.</li>
+<li><span class="cl">Technical</span> A successful transfer inserts one <code>DEBIT</code> row and one <code>CREDIT</code> row with the same <code>payment_id</code>, amount and currency. The <code>accounts.<wbr>balance_<wbr>minor</code> column is a stored running total of those entries, kept for fast checks. Money is stored as integers in minor units (cents), never floating point.</li>
+<li><span class="cl">Why it matters</span> The ledger is the audit trail. You can always prove that <code>balance =<wbr> opening + credits − debits</code>, and you can reconcile or investigate any discrepancy.</li>
+<li><span class="cl">In this project</span> Database constraints enforce row-level rules (<code>amount &gt; 0</code>, at most one debit and one credit per payment). Equality of debit and credit is guaranteed by writing both in the same transaction and checked by integration tests, because a single-row <code>CHECK</code> cannot compare two rows.</li>
+<li><span class="cl">Interview angle</span> "Why store a balance if the ledger already has it?" It is a deliberate denormalisation for O(1) balance checks inside the debit <code>UPDATE</code>; the ledger remains the history.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">4</span><span class="concept-name">OAuth2 and JWT authentication</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> The user logs in with an identity provider, which hands back a signed token. The payment API checks the signature instead of storing sessions.</li>
+<li><span class="cl">Technical</span> A JWT (JSON Web Token) is <code>header.<wbr>payload.<wbr>signature</code>. The payload carries claims such as <code>sub</code> (user id), <code>exp</code> (expiry), <code>iss</code> (issuer), <code>aud</code> (audience) and scopes. <code>payment-service</code> is an OAuth2 <strong>resource server</strong>: Spring Security fetches the issuer's public keys (JWKS), verifies the signature and claims, and rejects bad tokens with <code>401</code>. Keycloak issues tokens in development.</li>
+<li><span class="cl">Why it matters</span> Stateless authentication scales horizontally: any pod can validate any request with no shared session store.</li>
+<li><span class="cl">In this project</span> Authentication (who are you) is the JWT. Authorisation is two layers: scopes such as <code>payments.write</code> say what kind of action is allowed, and an ownership check (<code>accounts.<wbr>owner_<wbr>id =<wbr> jwt.<wbr>sub</code>) says which rows you may touch. A valid token cannot debit someone else's account (<code>403</code>).</li>
+<li><span class="cl">Interview angle</span> "Did you build OAuth2?" No. The service validates tokens; it does not issue them. Say "OAuth2 resource server with JWT validation".</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">5</span><span class="concept-name">Idempotency keys</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> The client attaches a unique ID to a payment request. If it sends the same request again, the server recognises the ID and returns the original result instead of paying again.</li>
+<li><span class="cl">Technical</span> The client sends an <code>Idempotency-Key</code> header. Inside the money transaction the server first inserts <code>(<wbr>subject,<wbr> idempotency_<wbr>key,<wbr> request_<wbr>hash)</code> into a table whose primary key is <code>(<wbr>subject,<wbr> idempotency_<wbr>key)</code>. Only the transaction whose insert succeeds may debit. A later duplicate hits the unique constraint, and the server returns the stored response. A different body with the same key gets <code>409 IDEMPOTENCY_<wbr>KEY_<wbr>REUSED</code>.</li>
+<li><span class="cl">Why it matters</span> A timeout is ambiguous: the client cannot tell "not executed" from "executed but the reply was lost". Retrying without a key risks a double charge; not retrying risks a lost payment.</li>
+<li><span class="cl">In this project</span> The key insert is in the same transaction as the debit, so "key recorded" and "money moved" commit together. If two copies arrive at once, PostgreSQL makes the second insert wait on the first; the loser never debits.</li>
+<li><span class="cl">Interview angle</span> "Why not a Redis lock?" A Redis lock lives outside the money transaction, so there is a window where the lock and the payment disagree. The unique index is the lock and the record at the same time.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">6</span><span class="concept-name">Optimistic locking (conditional update)</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Instead of locking an account before reading it, you read freely and, when writing, say "update only if nothing changed since I read it and there is still enough money".</li>
+<li><span class="cl">Technical</span> Each account row has a <code>version</code> column. The debit is one statement: <code>UPDATE accounts SET balance =<wbr> balance − :<wbr>amt,<wbr> version =<wbr> version + 1 WHERE id =<wbr> :<wbr>id AND version =<wbr> :<wbr>v AND balance &gt;<wbr>=<wbr> :<wbr>amt</code>. If it updates 0 rows, the service reloads the row: insufficient funds is returned as <code>422</code> and not retried; a changed version with enough money is a conflict and the whole transaction is retried (at most 3 attempts, then <code>409 CONCURRENT_<wbr>UPDATE</code>). Accounts are always updated in ascending id order to avoid deadlocks.</li>
+<li><span class="cl">Why it matters</span> It prevents the lost update: two requests both read 1,000, both subtract 800, and the account ends at −600 or one write overwrites the other.</li>
+<li><span class="cl">In this project</span> It is not lock-free. The <code>UPDATE</code> holds a short row lock until commit; a waiting <code>UPDATE</code> re-checks its <code>WHERE</code> clause on the new row and matches 0 rows. What we avoid is holding a long <code>SELECT FOR UPDATE</code> lock from the start of the request.</li>
+<li><span class="cl">Interview angle</span> "Optimistic vs pessimistic?" Pessimistic (<code>SELECT FOR UPDATE</code>) suits a few very hot accounts; optimistic suits traffic spread over many accounts where conflicts are rare.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">7</span><span class="concept-name">Transactional outbox</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Instead of sending a Kafka message directly, the service writes "an event needs to be sent" into a table in the same database transaction as the payment. A background publisher sends it later.</li>
+<li><span class="cl">Technical</span> This solves the dual-write problem: PostgreSQL and Kafka are two systems, and you cannot commit both atomically without two-phase commit. Commit-then-publish loses the event if the pod dies in between; publish-then-commit can announce a payment that rolled back. The outbox row commits with the money. The publisher claims rows with <code>FOR UPDATE SKIP LOCKED</code> and a 30-second lease, sends them with <code>acks=all</code>, then marks them <code>PUBLISHED</code>.</li>
+<li><span class="cl">Why it matters</span> Every committed payment eventually produces an event, and Kafka outages never block payments.</li>
+<li><span class="cl">In this project</span> The publisher runs every 200 ms in each <code>payment-service</code> pod; leases stop two pods from claiming the same row at once. A crash after the broker acknowledges but before marking <code>PUBLISHED</code> causes a re-send, so delivery is at-least-once.</li>
+<li><span class="cl">Interview angle</span> "Why not Debezium (CDC)?" Polling needs no extra infrastructure; the cost is ~200 ms event delay and some DB queries. CDC is the upgrade if lag matters.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">8</span><span class="concept-name">Kafka: topics, partitions and offsets</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Kafka is a durable, append-only log of messages. Producers write to the end; consumers read at their own pace and can re-read.</li>
+<li><span class="cl">Technical</span> A topic (<code>payment.events</code>) is split into partitions (12 here). Each message is appended to one partition, chosen by hashing its key (<code>sourceAccountId</code>), and gets an increasing offset. Order is guaranteed only within a partition. Messages stay for the retention period (7 days) whether or not they were read.</li>
+<li><span class="cl">Why it matters</span> It decouples the payment path from slower work: the consumer can be down for an hour and catch up later without data loss.</li>
+<li><span class="cl">In this project</span> Kafka carries already-committed facts (<code>PAYMENT_COMPLETED</code>). It never creates, confirms or rolls back money; PostgreSQL does. Keying by source account keeps one account's events on one partition.</li>
+<li><span class="cl">Interview angle</span> "Does Kafka give exactly-once payments?" No. Payments are exactly-once in the database; Kafka delivery is at-least-once and consumers deduplicate.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">9</span><span class="concept-name">Consumer groups</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> A consumer group is a team of consumers that share the work of reading a topic, each partition handled by exactly one member.</li>
+<li><span class="cl">Technical</span> Kafka assigns partitions to group members. With 12 partitions, 2 pods × 6 listener threads = 12 consumers, one per partition. If a pod dies, a rebalance moves its partitions to survivors. Each consumer commits its offset (its bookmark) after processing; after a crash, consumption resumes from the last committed offset.</li>
+<li><span class="cl">Why it matters</span> It gives parallelism and failover for free. More consumers than partitions sit idle, so partitions set the maximum parallelism.</li>
+<li><span class="cl">In this project</span> Group <code>payment-<wbr>audit-<wbr>consumers</code> writes <code>audit_log</code>. The offset is committed after the database write, so a crash in between causes redelivery, which is why the consumer deduplicates on <code>eventId</code>.</li>
+<li><span class="cl">Interview angle</span> "How would you scale consumption?" Add pods up to the partition count; beyond 12, add partitions (planned up front, because changing the count remaps keys).</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">10</span><span class="concept-name">Retries, dead-letter queues and idempotent consumers</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> If processing a message fails, try again a few times; if it still fails, park it in a separate "dead-letter" topic so it does not block everything behind it.</li>
+<li><span class="cl">Technical</span> Spring Kafka's <code>DefaultErrorHandler</code> retries transient errors with exponential backoff (1 s, 2 s, 4 s). After the retry budget, <code>DeadLetterPublishingRecoverer</code> publishes the original record plus exception headers to <code>payment.<wbr>events.<wbr>DLT</code> and commits the offset so the partition moves on. Poison messages (bad JSON) skip retries and go straight to the DLT. Duplicates are absorbed by unique keys on <code>processed_<wbr>events.<wbr>event_<wbr>id</code> and <code>audit_<wbr>log.<wbr>payment_<wbr>id</code>.</li>
+<li><span class="cl">Why it matters</span> Without a DLQ, one bad message blocks its partition forever; without dedup, at-least-once delivery creates duplicate audit rows.</li>
+<li><span class="cl">In this project</span> DLT replay is a manual operations step after the bug is fixed; dedup makes replay safe.</li>
+<li><span class="cl">Interview angle</span> "What is the downside of in-process retries?" A failing record blocks its partition for up to ~7 s of backoff; non-blocking retry topics are the alternative.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">11</span><span class="concept-name">Redis caching (cache-aside)</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Keep frequently read data in fast memory so the database does less work.</li>
+<li><span class="cl">Technical</span> Cache-aside: on a read, check Redis; on a miss, read PostgreSQL and store the value with a TTL. After a transfer commits, the service deletes the two accounts' keys. Account metadata lives 60 s; balances 5 s. Redis also holds a best-effort rate limiter.</li>
+<li><span class="cl">Why it matters</span> GET traffic stops competing with payments for database connections and CPU.</li>
+<li><span class="cl">In this project</span> Redis is never in the debit path; debits always read PostgreSQL. If Redis is down, reads go to the database and payments continue. A GET balance can be up to ~5 s stale (the "cache-aside fill race": a slow read can re-insert an old value after the delete), and the TTL bounds that.</li>
+<li><span class="cl">Interview angle</span> "Why not keep balances in Redis?" It cannot atomically debit one key, credit another and write a durable ledger. A cache that decides money becomes a second source of truth.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">12</span><span class="concept-name">Database indexing</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> An index is like a book's index: it lets the database jump to the rows it needs instead of scanning the whole table.</li>
+<li><span class="cl">Technical</span> PostgreSQL's default B-tree index finds a row in O(log n). Composite indexes cover multi-column lookups (<code>(<wbr>subject,<wbr> idempotency_<wbr>key)</code>). Partial indexes store only rows matching a condition, e.g. outbox rows that are still <code>PENDING</code>, so the publisher's poll touches the small backlog, not 7 days of published rows.</li>
+<li><span class="cl">Why it matters</span> Without them, the outbox poll (5 times a second per pod) and cleanup jobs would repeatedly scan growing tables, burning CPU and evicting useful pages from memory.</li>
+<li><span class="cl">In this project</span> Primary keys serve the hot path; partial indexes serve the outbox claim and cleanup; composite indexes serve payment history. Every index adds a small write cost.</li>
+<li><span class="cl">Interview angle</span> "How do you know an index is used?" <code>EXPLAIN (<wbr>ANALYZE,<wbr> BUFFERS)</code> and <code>pg_<wbr>stat_<wbr>statements</code> before and after.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">13</span><span class="concept-name">Connection pooling (HikariCP)</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Opening a database connection is slow, so the app keeps a pool of open connections and lends them to requests.</li>
+<li><span class="cl">Technical</span> HikariCP holds a fixed set of connections (20 per API pod in the optimised setup). A request borrows one for its transaction and returns it. If all are busy, requests wait; that waiting is pure added latency. By Little's law, connections needed ≈ transactions per second × transaction duration.</li>
+<li><span class="cl">Why it matters</span> An uncontended transfer is roughly 10–25 ms of real work (illustrative), so a 200 ms p95 budget is mostly about queueing. A too-small pool makes requests queue; a too-large pool overloads PostgreSQL.</li>
+<li><span class="cl">In this project</span> Total connections (<code>pods × pool size</code>) must stay below PostgreSQL's <code>max_connections</code> with headroom. Short transactions with no network calls inside keep connection hold time low.</li>
+<li><span class="cl">Interview angle</span> "Why not just make the pool huge?" Beyond the database's cores, extra connections add context switching and lock contention, not throughput.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">14</span><span class="concept-name">Latency percentiles and throughput</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> p95 latency of 200 ms means 95 of every 100 requests finished within 200 ms. Throughput is requests completed per unit time.</li>
+<li><span class="cl">Technical</span> Sort all durations in the measurement window; p95 is the value at the 95th-percentile rank. Averages hide slow outliers. 10K requests/min ≈ 167 per second. Percentiles from different pods are merged from histograms, never averaged.</li>
+<li><span class="cl">Why it matters</span> The resume numbers are stated this way, so you must know exactly what they mean.</li>
+<li><span class="cl">In this project</span> They refer to <code>POST /payments</code>, measured client-side with k6 at a fixed arrival rate. They are benchmark targets, not recorded results (Q24, Part 6).</li>
+<li><span class="cl">Interview angle</span> "Why p95 and not average?" The average can look fine while 1 in 20 users waits seconds.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">15</span><span class="concept-name">Docker and Kubernetes deployment</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Docker packages the app and its dependencies into an image; Kubernetes runs many copies of that image, restarts crashed ones and routes traffic to healthy ones.</li>
+<li><span class="cl">Technical</span> Two Deployments (2 replicas each), a ClusterIP Service, a ConfigMap (URLs, pool size) and a Secret (passwords). Readiness probes include the database, so a pod that cannot reach PostgreSQL gets no traffic; liveness probes do not, so a DB outage does not cause restart loops. Graceful shutdown drains in-flight requests.</li>
+<li><span class="cl">Why it matters</span> Rolling updates, self-healing and independent scaling of API and consumer.</li>
+<li><span class="cl">In this project</span> PostgreSQL, Kafka and Redis are provided dependencies. API scaling is capped by the database connection budget; consumer scaling by partitions.</li>
+<li><span class="cl">Interview angle</span> "Would you autoscale on CPU?" Optionally (min 2, max 4), but the real ceiling is the database, so replicas × pool size must stay within its connection limit.</li>
+</ul></div>
+<div class="box box-caution keep"><div class="box-label">Resume flag</div>
+<p>Four phrases could create a stronger impression than the design supports. Say them precisely: (1) "microservices" means two services sharing one PostgreSQL, a deliberate trade-off; (2) "OAuth2/JWT auth" means a resource server validating tokens, not an authorization server; (3) "optimistic locking" is a version-checked conditional <code>UPDATE</code> that still takes a short row lock, not lock-free; (4) "10K+ requests/min at &lt; 200 ms p95" sits in the Kafka bullet but refers to <code>POST /payments</code> throughput; Kafka then carries about 10K events/min. All four numbers on the resume are benchmark targets, not measured results.</p>
+</div>
+<div class="keephead"><div class="part-banner" id="part-2" data-part="2"><span class="part-kicker">Part 2</span><h1 class="part-title">High-Level Design and Architecture</h1></div><h2 id="s-21-technology-stack"><span class="secnum">2.1</span>Technology stack</h2></div>
+
+<div class="table-block"><table>
+<thead>
+<tr>
+<th>Technology</th>
+<th>Purpose in the project</th>
+<th>Why it was selected</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Java 21 + Spring Boot 3</td>
+<td>REST API, transactions, security, Kafka listeners</td>
+<td>Mature JDBC transactions, Spring Security resource server and Spring Kafka; lets the project focus on payment correctness instead of plumbing</td>
+</tr>
+<tr>
+<td>PostgreSQL 16</td>
+<td>Source of truth: accounts, payments, ledger, idempotency keys, outbox, audit</td>
+<td>ACID transactions, constraints, row-level locking and unique indexes do the hard concurrency work</td>
+</tr>
+<tr>
+<td>HikariCP</td>
+<td>Database connection pool</td>
+<td>Fast, bundled with Spring Boot, exposes wait-time metrics</td>
+</tr>
+<tr>
+<td>Apache Kafka</td>
+<td>Durable asynchronous delivery of <code>PAYMENT_COMPLETED</code> events</td>
+<td>Replayable log, partitions for parallelism, consumer groups for failover</td>
+</tr>
+<tr>
+<td>Redis 7</td>
+<td>Cache for account metadata and GET balance; best-effort rate limiting</td>
+<td>Sub-millisecond reads; TTLs; safe to lose</td>
+</tr>
+<tr>
+<td>Spring Security + Keycloak</td>
+<td>JWT validation (Keycloak issues tokens in dev)</td>
+<td>Standard OAuth2 resource-server support; stateless</td>
+</tr>
+<tr>
+<td>Docker + Kubernetes</td>
+<td>Packaging, replicas, probes, rolling updates</td>
+<td>Independent scaling of API and consumer; self-healing</td>
+</tr>
+<tr>
+<td>k6, Micrometer, Prometheus</td>
+<td>Load testing and metrics</td>
+<td>Arrival-rate load generation; p95 histograms, pool and outbox metrics</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>How they work together.</strong> A request enters <code>payment-service</code>, Spring Security validates the JWT, and HikariCP lends a connection for one PostgreSQL transaction that moves the money and records an outbox row. After commit the service deletes two Redis keys and replies. Separately, the outbox publisher ships committed events to Kafka, and <code>payment-consumer</code> (a consumer group) turns them into audit rows. Kubernetes runs and scales both services.</p>
+<div class="keephead"><h2 id="s-22-high-level-architecture"><span class="secnum">2.2</span>High-level architecture</h2><p><strong>In simple words.</strong> There is one synchronous path where money moves (client → API → PostgreSQL), one asynchronous path where other systems hear about it (PostgreSQL outbox → Kafka → consumer), and one read path that is accelerated by a cache (API → Redis, falling back to PostgreSQL). Money only ever flows through the first path.</p></div>
+
+
+<figure class="diagram" id="fig-1"><img src="diagrams/figure-1.svg" alt="Figure 1" style="width:657.6px"><figcaption><span class="fig-num">Figure 1</span><span class="fig-sep"> — </span>The simple picture: one write path, one event path, one read cache</figcaption></figure>
+<p><strong>Component responsibilities</strong></p>
+<div class="table-block"><table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>payment-service</code></td>
+<td>Validates JWT, scopes and ownership; runs the transfer transaction (idempotency insert, conditional debit/credit, ledger, payment, outbox); deletes Redis keys after commit; runs the outbox publisher; serves GETs via cache-aside</td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td>Authoritative balances, payments, ledger, idempotency keys, outbox; enforces <code>CHECK</code>, <code>UNIQUE</code> and foreign-key constraints</td>
+</tr>
+<tr>
+<td>Kafka <code>payment.events</code></td>
+<td>Durable, replayable fan-out of committed payment facts</td>
+</tr>
+<tr>
+<td><code>payment-consumer</code></td>
+<td>Consumer group that deduplicates on <code>eventId</code>, writes <code>audit_log</code>, retries transient failures, sends poison messages to the DLT</td>
+</tr>
+<tr>
+<td>Redis</td>
+<td>Account-metadata and balance cache for GETs; best-effort rate limiter. Never authorises a debit</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>Two Deployments with probes, rolling updates and independent replica counts</td>
+</tr>
+</tbody>
+</table></div>
+
+<figure class="diagram" id="fig-2"><img src="diagrams/figure-2.svg" alt="Figure 2" style="width:657.6px"><figcaption><span class="fig-num">Figure 2</span><span class="fig-sep"> — </span>Detailed HLD. Top lane: the request commits one transaction (dotted: Redis keys deleted after commit). Bottom lane: outbox rows flow to Kafka and the consumer group; poison messages go to the DLT</figcaption></figure>
+<p><strong>How components communicate.</strong> Client to API: synchronous HTTPS/JSON. API to PostgreSQL: JDBC through HikariCP, one transaction per transfer. API to Redis: synchronous commands with a 50 ms timeout, best effort. Publisher to Kafka: asynchronous produce with <code>acks=all</code>. Kafka to consumer: pull-based, offsets committed after the database write.</p>
+<p><strong>Complete data flow.</strong></p>
+<ol>
+<li><strong>Write path (synchronous, one transaction):</strong> insert idempotency key → conditional debit and credit in id order → insert payment, two ledger rows and an outbox row → store the response on the key row → <code>COMMIT</code> → delete Redis keys → <code>201 Created</code>.</li>
+<li><strong>Event path (asynchronous):</strong> publisher claims <code>PENDING</code> outbox rows → produces to Kafka → marks <code>PUBLISHED</code> → consumer group writes <code>processed_events</code> + <code>audit_log</code> → commits offset.</li>
+<li><strong>Read path (cache-aside):</strong> <code>GET /balance</code> → Redis hit returns <code>cached: true</code>; miss reads PostgreSQL and sets the key with a 5 s TTL.</li>
+</ol>
+<p>The event path only reads committed facts and the read path never feeds the write path. That one-way flow is why Kafka or Redis failures cannot corrupt balances.</p>
+<p><strong>Where data is stored.</strong> Everything durable is in PostgreSQL: <code>accounts</code> (balance, version, owner), <code>payments</code>, <code>ledger_entries</code>, <code>idempotency_keys</code> (kept 24 h), <code>outbox_events</code> (published rows deleted after 7 days), <code>processed_events</code> and <code>audit_log</code>. Kafka keeps events for 7 days. Redis keeps disposable copies with TTLs.</p>
+<p><strong>How it scales.</strong></p>
+<ul>
+<li><strong>API:</strong> add <code>payment-service</code> pods; the ceiling is the database connection budget (<code>pods × 20 &lt; max_<wbr>connections − headroom</code>) and the single PostgreSQL primary.</li>
+<li><strong>Consumers:</strong> add pods up to the 12 partitions (2 × 6 threads today).</li>
+<li><strong>Reads:</strong> Redis absorbs repeated GETs.</li>
+<li><strong>Hot spots:</strong> one very busy account serialises on its row; conflicts become retries and occasional <code>409</code>s.</li>
+</ul>
+<p><strong>What happens when a major component fails</strong></p>
+<div class="table-block"><table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>What the system does</th>
+<th>Effect on money</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PostgreSQL down</td>
+<td>Requests fail fast with <code>503</code>; readiness removes pods from the Service; clients retry with the same key later</td>
+<td>None: nothing committed</td>
+</tr>
+<tr>
+<td>Kafka down</td>
+<td>Payments continue; outbox rows accumulate; publishers drain them when Kafka returns</td>
+<td>None; audit is delayed</td>
+</tr>
+<tr>
+<td>Redis down</td>
+<td>Cache and rate limiter bypassed; reads go to PostgreSQL</td>
+<td>None; GETs slower</td>
+</tr>
+<tr>
+<td>API pod crashes mid-transaction</td>
+<td>PostgreSQL rolls the transaction back; client retries</td>
+<td>None</td>
+</tr>
+<tr>
+<td>API pod crashes after commit</td>
+<td>Client times out, retries with same key, gets the stored result; another pod publishes the outbox row</td>
+<td>Money moved exactly once</td>
+</tr>
+<tr>
+<td>Consumer pod crashes</td>
+<td>Rebalance; partitions move; uncommitted records redelivered; dedup absorbs them</td>
+<td>None</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="s-23-important-architectural-decisions"><span class="secnum">2.3</span>Important architectural decisions</h2>
+<p><strong>1. PostgreSQL is the single source of truth for money.</strong>
+<em>Chosen:</em> all financial state and the event intent in one relational database. <em>Why:</em> ACID transactions, constraints and row locks give correctness without inventing anything. <em>Alternative:</em> Redis or Kafka as the ledger (event sourcing). <em>Why not:</em> Redis cannot atomically debit, credit and durably log; Kafka-first designs need extra machinery to reject overspends before acceptance. <em>Trade-off:</em> one primary is the write-scaling ceiling.</p>
+<p><strong>2. Optimistic conditional update instead of pessimistic locks or SERIALIZABLE.</strong>
+<em>Chosen:</em> <code>UPDATE … WHERE version =<wbr> :<wbr>v AND balance &gt;<wbr>=<wbr> :<wbr>amt</code> under <code>READ COMMITTED</code>, ordered by account id, bounded retries. <em>Why:</em> conflicts are rare when traffic is spread over many accounts; locks are held only for the short update-to-commit window. <em>Alternative:</em> <code>SELECT … FOR UPDATE</code> at the start, or <code>SERIALIZABLE</code>. <em>Why not:</em> longer lock hold time, or serialization failures across all transactions. <em>Trade-off:</em> hot accounts see retries and some <code>409 CONCURRENT_<wbr>UPDATE</code>.</p>
+<p><strong>3. Idempotency key inserted inside the money transaction.</strong>
+<em>Chosen:</em> the unique <code>(subject, key)</code> insert is the first statement of the transfer transaction. <em>Why:</em> the key and the debit commit or roll back together; PostgreSQL's unique index blocks a concurrent duplicate. <em>Alternative:</em> Redis <code>SETNX</code> lock or a separately committed "reserve" row. <em>Why not:</em> both create a window where the lock and the payment disagree. <em>Trade-off:</em> a blocked duplicate holds a connection while it waits.</p>
+<p><strong>4. Transactional outbox instead of publishing directly to Kafka.</strong>
+<em>Chosen:</em> write the event row in the same transaction; a lease-based poller publishes it. <em>Why:</em> no lost events, and Kafka availability never blocks payments. <em>Alternative:</em> commit-then-publish, two-phase commit, or Debezium CDC. <em>Why not:</em> the first loses events on crash, 2PC couples availability, CDC adds infrastructure. <em>Trade-off:</em> ~200 ms event delay and at-least-once delivery.</p>
+<p><strong>5. Two services, one shared database.</strong>
+<em>Chosen:</em> <code>payment-service</code> owns all money tables; <code>payment-consumer</code> only writes audit tables. <em>Why:</em> avoids distributed transactions while keeping slow work off the request path. <em>Alternative:</em> a separate account service with its own database. <em>Why not:</em> every transfer would need 2PC or a saga across two money owners. <em>Trade-off:</em> a known microservices anti-pattern, accepted and documented with a migration path.</p>
+<p><strong>6. Redis only as a fail-open read cache.</strong>
+<em>Chosen:</em> cache GETs with short TTLs, delete after commit, never read Redis for debits. <em>Why:</em> speed without risking money. <em>Alternative:</em> authorise debits from cached balances. <em>Why not:</em> a stale cache would approve overspends. <em>Trade-off:</em> GET balance can be up to ~5 s stale.</p>
+<div class="keephead"><div class="part-banner" id="part-3" data-part="3"><span class="part-kicker">Part 3</span><h1 class="part-title">How the Project Works</h1></div><div class="keephead"><h2 id="s-31-one-complete-end-to-end-request-flow"><span class="secnum">3.1</span>One complete end-to-end request flow</h2><p>Alice transfers 800 cents to Bob. Figure 3 shows the sequence; the numbered steps explain each one.</p></div></div>
+
+
+
+<figure class="diagram" id="fig-3"><img src="diagrams/figure-3.svg" alt="Figure 3" style="width:657.6px"><figcaption><span class="fig-num">Figure 3</span><span class="fig-sep"> — </span>End-to-end payment flow: synchronous commit, asynchronous event</figcaption></figure>
+<ol>
+<li><strong>Request arrives.</strong> The client sends <code>POST /<wbr>api/<wbr>v1/<wbr>payments</code> with a bearer JWT, an <code>Idempotency-Key</code> header and <code>{source,<wbr> destination,<wbr> amount,<wbr> currency}</code>. Kubernetes routes it to any <code>payment-service</code> pod.</li>
+<li><strong>Authentication and validation.</strong> Spring Security verifies the JWT signature (cached JWKS), expiry, issuer, audience and the <code>payments.write</code> scope. The body is validated; a Redis rate limiter checks the caller (skipped if Redis is down).</li>
+<li><strong>Transaction begins.</strong> HikariCP lends a connection; PostgreSQL <code>BEGIN</code>.</li>
+<li><strong>Idempotency insert.</strong> <code>INSERT INTO idempotency_<wbr>keys (<wbr>subject,<wbr> key,<wbr> request_<wbr>hash)</code>. If it succeeds, this request owns the payment. A savepoint is set right after it.</li>
+<li><strong>Load and authorise.</strong> Both accounts are read by primary key; the service checks Alice owns the source, both accounts are <code>ACTIVE</code> and currencies match.</li>
+<li><strong>Conditional debit and credit.</strong> In ascending account-id order: debit Alice only if her version is unchanged and her balance ≥ 800; credit Bob only if active. Each <code>UPDATE</code> bumps the version.</li>
+<li><strong>Ledger, payment and outbox.</strong> Insert the <code>payments</code> row (<code>COMPLETED</code>), a <code>DEBIT</code> and a <code>CREDIT</code> ledger row with the same amount, and an <code>outbox_events</code> row (<code>PENDING</code>). Store the <code>201</code> response body on the idempotency row.</li>
+<li><strong>Commit.</strong> PostgreSQL makes all of it durable at once. This is the financial commit point.</li>
+<li><strong>Post-commit cleanup.</strong> Best-effort <code>DEL</code> of both accounts' Redis keys; failures are only logged.</li>
+<li><strong>Response.</strong> <code>201 Created</code> with the payment id and status.</li>
+<li><strong>Event publication (asynchronous).</strong> Within ~200 ms a publisher claims the outbox row with a lease, produces <code>PAYMENT_COMPLETED</code> to Kafka (key = Alice's account id), and marks it <code>PUBLISHED</code> after the broker acknowledges.</li>
+<li><strong>Consumption.</strong> The consumer that owns that partition inserts into <code>processed_events</code> (dedup) and <code>audit_log</code>, commits its offset, and may delete the Redis keys again.</li>
+</ol>
+<h2 id="s-32-important-alternative-scenarios"><span class="secnum">3.2</span>Important alternative scenarios</h2>
+<p><strong>Scenario A: The client times out and retries.</strong> The first request committed but the pod died before replying. The retry (same key, same body) fails its key insert with a unique violation, rolls back, re-reads the stored response in a fresh transaction and returns it with <code>200</code>. No second debit. If both copies arrive together, the second insert waits on the first; it then either replays (first committed) or proceeds as the only payer (first rolled back). Details in Q7 and Q21.</p>
+<p><strong>Scenario B: Two different payments race for the same balance.</strong> This is the case optimistic locking exists for (Figure 4).</p>
+
+<figure class="diagram" id="fig-4"><img src="diagrams/figure-4.svg" alt="Figure 4" style="width:483.7px"><figcaption><span class="fig-num">Figure 4</span><span class="fig-sep"> — </span>Two 800-cent debits against a 1,000-cent balance: exactly one succeeds</figcaption></figure>
+<p>Without the predicate, both updates would subtract 800 and the account would reach −600 (and the <code>CHECK (<wbr>balance &gt;<wbr>=<wbr> 0)</code> constraint would then throw instead of returning a clean business error).</p>
+<p><strong>Scenario C: A consumer keeps failing on one event.</strong> A transient database error is retried after 1 s, 2 s and 4 s; if all attempts fail, the record goes to <code>payment.<wbr>events.<wbr>DLT</code> with exception headers, the offset is committed and the partition continues. Money is unaffected because it committed earlier. After a fix, operators replay the DLT; consumer dedup makes replay safe. (Kafka being fully down is covered in Q17.)</p>
+<h2 id="s-33-important-guarantees-and-limitations"><span class="secnum">3.3</span>Important guarantees and limitations</h2>
+<div class="table-block"><table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Guaranteed?</th>
+<th>Where it comes from</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No negative balance</td>
+<td>Yes</td>
+<td>Conditional <code>UPDATE</code> predicate + <code>CHECK (<wbr>balance &gt;<wbr>=<wbr> 0)</code></td>
+</tr>
+<tr>
+<td>No partial transfer (debit without credit)</td>
+<td>Yes</td>
+<td>One transaction; savepoint for business failures</td>
+</tr>
+<tr>
+<td>At most one financial effect per (subject, key) within 24 h</td>
+<td>Yes</td>
+<td>Composite primary key insert inside the transaction</td>
+</tr>
+<tr>
+<td>Balanced ledger per payment</td>
+<td>Yes, by transaction + tests</td>
+<td>Both rows written together; cross-row equality is not a <code>CHECK</code></td>
+</tr>
+<tr>
+<td>Event eventually published for every committed payment</td>
+<td>Yes, while PostgreSQL is intact</td>
+<td>Outbox row committed with the money; leases reclaim stuck rows</td>
+</tr>
+<tr>
+<td>Event published exactly once</td>
+<td>No</td>
+<td>At-least-once; consumers deduplicate</td>
+</tr>
+<tr>
+<td>Global event ordering</td>
+<td>No</td>
+<td>Ordered per partition (per source account) only, and even that is weakened by multiple publishers</td>
+</tr>
+<tr>
+<td>Fresh GET balance</td>
+<td>No</td>
+<td>Up to ~5 s stale from Redis</td>
+</tr>
+<tr>
+<td>Duplicate protection without a key</td>
+<td>No</td>
+<td>The key is required; a new key per retry is a new payment</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Where consistency comes from:</strong> PostgreSQL alone, through transactions, row locks, unique indexes and constraints. Kafka and Redis add speed and decoupling, never correctness. <strong>Failures</strong> are handled by rolling back (nothing committed), replaying (committed, reply lost), re-publishing (event not yet sent) and deduplicating (event sent twice). <strong>Accepted trade-offs:</strong> eventual audit, slightly stale reads, retries on hot accounts, a single-primary write ceiling, and a shared database between two services.</p>
+<div class="keephead"><div class="part-banner" id="part-4" data-part="4"><span class="part-kicker">Part 4</span><h1 class="part-title">Complete Interview Explanation</h1></div><h2 id="s-41-two-minute-explanation"><span class="secnum">4.1</span>Two-minute explanation</h2></div>
+
+<div class="box box-say"><div class="box-label">Say it aloud</div>
+<p>"I built a payment backend for internal account-to-account transfers, like moving money between two wallets on the same platform. The hard part isn't speed, it's staying correct when thousands of requests arrive at once, clients retry after timeouts, and servers crash halfway.</p>
+<p>It's two Spring Boot services on Kubernetes, with PostgreSQL as the single source of truth. When a transfer comes in, the service validates the caller's JWT and checks they own the source account. Then, in one ACID transaction, it inserts the client's idempotency key, debits and credits the two accounts with a version-checked conditional update so concurrent payments can't overspend, writes a double-entry ledger, and writes an outbox row. That commit is the moment money moves.</p>
+<p>A background publisher reads the outbox and sends a payment-completed event to Kafka, where a consumer group writes audit records with retries and a dead-letter topic. Redis caches read-only account data but never decides a balance.</p>
+<p>My main contribution was closing four races: duplicate retries with idempotency keys, overspending with optimistic locking, concurrent duplicates with unique-index locking, and lost events with the transactional outbox. I sized it for 10K payment requests a minute at under 200 ms p95; those are benchmark targets with a documented test method, not production measurements."</p>
+</div>
+<h2 id="s-42-five-minute-explanation"><span class="secnum">4.2</span>Five-minute explanation</h2>
+<div class="box box-say"><div class="box-label">Say it aloud</div>
+<p>"<strong>Problem.</strong> The goal was a payment backend that moves money between internal accounts safely under concurrency. Four things go wrong in naive designs: a client retries after a timeout and gets charged twice; two payments read the same balance and both succeed, overspending; a crash leaves money debited but not credited; and the database commits but the event to downstream systems is lost.</p>
+<p><strong>Requirements.</strong> Functionally: create accounts, transfer funds, query balances and payment status, authenticated with JWT and authorised by account ownership. Non-functionally: no negative balances, no double payments, no partial transfers, events that are never lost, and a target of 10K transfer requests per minute at under 200 ms p95.</p>
+<p><strong>Technology.</strong> Java and Spring Boot for the services, PostgreSQL because ACID transactions and row locks do the hard correctness work, Kafka for durable asynchronous events, Redis as a read cache, and Kubernetes to run two independently scalable deployments.</p>
+<p><strong>Architecture.</strong> [Draw Figure 1.] <code>payment-service</code> handles the API, security and the money transaction. PostgreSQL holds accounts, payments, the ledger, idempotency keys and an outbox table. A publisher inside each API pod ships outbox rows to a Kafka topic with 12 partitions. <code>payment-consumer</code> is a consumer group that writes audit rows.</p>
+<p><strong>Request flow.</strong> The JWT is validated, then one transaction: insert the idempotency key; update both accounts in id order with <code>WHERE version =<wbr> v AND balance &gt;<wbr>=<wbr> amount</code>; insert the payment, a debit and a credit ledger row, and an outbox row; commit. After commit I delete the Redis keys and return 201.</p>
+<p><strong>Key decisions.</strong> I keep money in one database to avoid distributed transactions. I use optimistic locking because traffic spreads over many accounts. The idempotency key lives in the same transaction as the debit, so a concurrent duplicate blocks on the unique index and never pays. And I use an outbox because publishing to Kafka after commit can lose events if the pod dies.</p>
+<p><strong>Reliability and performance.</strong> If Kafka is down, payments continue and the outbox drains later. If Redis is down, reads go to the database. Consumers retry 1, 2 and 4 seconds, then send poison messages to a DLT, and deduplicate on event id. For latency, the real enemy is queueing, so I tuned HikariCP, added partial indexes for the outbox poll, and cached GETs in Redis. The resume numbers are targets I designed for and wrote a k6 methodology to verify."</p>
+</div>
+<h2 id="s-43-ten-minute-explanation"><span class="secnum">4.3</span>Ten-minute explanation</h2>
+<div class="box box-say"><div class="box-label">Say it aloud</div>
+<p>"<strong>Motivation.</strong> Payments are a good test of backend fundamentals because every shortcut shows up as lost or duplicated money. I scoped it to internal transfers in one currency so the project is about correctness, not integrating card networks.</p>
+<p><strong>Architecture.</strong> [Draw Figure 2.] Two services. <code>payment-service</code> is an OAuth2 resource server: it validates JWTs from Keycloak, then checks scopes and ownership, so even a valid token cannot touch someone else's account. It owns the transfer transaction and runs the outbox publisher. <code>payment-consumer</code> reads <code>payment.events</code> as a consumer group and writes audit rows. Both share one PostgreSQL. I'll be upfront that sharing a database is an anti-pattern; I accepted it because the consumer never writes balances, and splitting account ownership into another service would force two-phase commit or a saga on every payment.</p>
+<p><strong>The transaction, step by step.</strong> First, insert <code>(<wbr>subject,<wbr> idempotency_<wbr>key)</code>. That composite primary key is effectively a mutex: if two identical requests arrive together, the second insert waits on the first transaction's uncommitted row. When the first commits, the second gets a unique violation, rolls back, opens a fresh transaction and replays the stored response. If the first rolled back, the second proceeds. Either way exactly one debit happens.</p>
+<p>Next, I set a savepoint and update both accounts in ascending id order, which prevents A-to-B and B-to-A transfers from deadlocking. The debit is a conditional update with the version and the balance in the WHERE clause. Under READ COMMITTED, a waiting update re-checks its WHERE clause after the lock is released. So with a 1,000 balance and two 800 debits, one updates a row and the other updates zero. Then I reload the row and classify: balance too low means 422 insufficient funds, no retry; version changed but funds still sufficient means retry the whole transaction, up to three times, then 409. It's not lock-free: the update holds a row lock until commit. What I avoid is a long <code>SELECT FOR UPDATE</code> at the start of every request.</p>
+<p>Then I write the payment, two ledger rows with the same amount, and an outbox row, store the response on the key row, and commit.</p>
+<p><strong>Why the outbox.</strong> Kafka and PostgreSQL can't commit atomically. If I commit then publish, a crash in between loses the event. If I publish then commit, I might announce a payment that rolled back. The outbox row commits with the money. Every 200 ms a publisher claims pending rows using <code>FOR UPDATE SKIP LOCKED</code> and a 30-second lease, sends them with <code>acks=all</code>, and marks them published. If it crashes after Kafka acknowledges but before marking, the event is sent twice. That's at-least-once, so the consumer deduplicates on event id and the audit table has a unique payment id.</p>
+<p><strong>Kafka processing.</strong> The topic has 12 partitions keyed by source account, so one account's events stay ordered on one partition. Two consumer pods with six threads give one thread per partition. Offsets are committed after the database write. Transient failures retry with 1, 2 and 4 second backoff; after that the record goes to a dead-letter topic so the partition isn't blocked, and replay is a manual step after a fix.</p>
+<p><strong>Caching.</strong> Redis caches account metadata for 60 seconds and balances for 5 seconds, with deletes after commit. A GET can still be up to five seconds stale because of a cache-aside fill race, but debits never read Redis, so staleness can never cause an overspend.</p>
+<p><strong>Performance.</strong> An uncontended transfer is about ten indexed statements and a commit, roughly 10 to 25 milliseconds. So the 200 ms p95 budget is mostly about queueing for connections and row locks. The levers are a right-sized HikariCP pool, partial indexes so the outbox poll scans only the backlog, short transactions with no network I/O inside, and Redis taking GET traffic off the database. I'd verify with k6 at a fixed arrival rate of 167 POSTs per second, a two-minute warm-up, a ten-minute steady window, baseline versus optimised, three runs each. The 10K per minute, 200 ms, 40% and 30% figures are targets; I wouldn't call them production measurements.</p>
+<p><strong>Failure handling.</strong> PostgreSQL down: fast 503s, readiness pulls pods, clients retry with the same key. Pod crash before commit: rollback. After commit: replay. Kafka down: outbox backlog. Consumer crash: rebalance and redelivery.</p>
+<p><strong>Limitations and next steps.</strong> Single PostgreSQL primary, so writes don't scale out; hot accounts serialise; events are at-least-once and only per-partition ordered; reads can be briefly stale. With more time I'd add pessimistic locking or sub-account bucketing for very hot accounts, CDC instead of polling, time-partitioned idempotency tables, and OpenTelemetry tracing."</p>
+</div>
+<div class="keephead"><div class="part-banner" id="part-5" data-part="5"><span class="part-kicker">Part 5</span><h1 class="part-title">Interview Questions and Answers</h1></div><div class="keephead"><h2 id="s-51-basic-understanding"><span class="secnum">5.1</span>Basic understanding</h2><h4 class="question" id="q1"><span class="qnum">Q1</span><span class="qtext">What does your payment system do, in one minute?</span><span class="qlevel q-easy">Easy</span></h4></div></div>
+
+
+<p>It is a backend that moves money between two internal accounts, for example between two wallets on the same platform. A client calls <code>POST /payments</code> with a JWT and an idempotency key. The service validates the caller and checks they own the source account, then performs the transfer as a single PostgreSQL transaction: it records the idempotency key, debits the source with a version-checked conditional update, credits the destination, writes a double-entry ledger, and writes an outbox row. After commit, a publisher sends a <code>PAYMENT_COMPLETED</code> event to Kafka, and a consumer group writes audit records with retries and a dead-letter topic. Redis caches read-only account data. The emphasis is correctness under concurrency and failure: no double payments, no overspending, no half-finished transfers and no lost events.</p>
+<p class="followup"><strong>Related follow-up:</strong> "What is out of scope?" External banks, card networks, FX, refunds and multi-region.</p>
+<h4 class="question" id="q2"><span class="qnum">Q2</span><span class="qtext">Why is moving money between two accounts harder than two UPDATE statements?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Because they run amid concurrency and failures. A crash between debit and credit leaves money missing, so both need one atomic transaction. Two requests can read the same balance at once and both subtract, overspending the account (the lost-update race). A client that times out cannot tell whether the first attempt ran, so a naive retry charges twice. And other systems must hear about the payment, but the database and Kafka cannot commit together, so an event can be lost. The fixes, in order: ACID transaction, optimistic conditional update, idempotency key, transactional outbox.</p>
+<h4 class="question" id="q3"><span class="qnum">Q3</span><span class="qtext">Walk me through what happens during a normal transfer request.</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Spring Security validates the JWT (signature, expiry, issuer, audience, scope). One PostgreSQL transaction then: inserts the idempotency key (success means this request owns the payment); loads both accounts and checks ownership, status and currency; updates them in id order, with the debit conditional on an unchanged version and sufficient balance; inserts the payment, a debit and a credit ledger row and an outbox row; stores the response on the key row; commits. After commit it deletes the two Redis keys and returns <code>201</code>. Asynchronously, the outbox publisher sends the event to Kafka and the consumer writes the audit row. (Full step list in 3.1.)</p>
+<p class="followup"><strong>Related follow-up:</strong> "Which step is the commit point?" The PostgreSQL <code>COMMIT</code>. Kafka and Redis are outside it.</p>
+<h4 class="question" id="q4"><span class="qnum">Q4</span><span class="qtext">Where is the source of truth, and why there?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>PostgreSQL is the only source of truth for money: balances, payments, the ledger, idempotency keys and the outbox. A relational database gives exactly what money needs: multi-row ACID transactions, constraints such as <code>balance &gt;= 0</code>, unique indexes that act as locks, and row-level locking for concurrent updates. Kafka is a delivery mechanism for facts that are already committed; it never creates or confirms money. Redis is a disposable cache; if it lost all data, balances would still be correct. Keeping one authority also means there is no second copy that can disagree, which is the root of many financial bugs. The trade-off is that a single PostgreSQL primary is the write-scaling ceiling; sharding accounts would be the next step at much larger scale.</p>
+<div class="keephead"><h2 id="s-52-core-concepts"><span class="secnum">5.2</span>Core concepts</h2><h4 class="question" id="q5"><span class="qnum">Q5</span><span class="qtext">What does ACID mean, and how does each letter apply to a transfer?</span><span class="qlevel q-easy">Easy</span></h4></div>
+
+<p>Atomicity: the key insert, both account updates, the payment row, both ledger rows and the outbox row commit together or not at all, so a crash cannot leave a debit without a credit. Consistency: database rules always hold after a commit; here <code>CHECK (<wbr>balance_<wbr>minor &gt;<wbr>=<wbr> 0)</code>, positive amounts, foreign keys, and one debit plus one credit per payment. Isolation: concurrent transactions do not see each other's uncommitted changes; the project uses PostgreSQL's <code>READ COMMITTED</code> plus a conditional update, which is enough to stop overspending without the cost of <code>SERIALIZABLE</code>. Durability: once <code>COMMIT</code> returns, the change is in PostgreSQL's write-ahead log on disk and survives a crash of the database or the JVM. The design also refuses <code>synchronous_<wbr>commit =<wbr> off</code>, because that trades durability of acknowledged payments for latency.</p>
+<p class="followup"><strong>Related follow-up:</strong> "Can a CHECK constraint guarantee debit equals credit?" No, it sees one row only; the transaction and tests guarantee it.</p>
+<h4 class="question" id="q6"><span class="qnum">Q6</span><span class="qtext">Why did you use idempotency keys?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Because clients retry, and a timeout is ambiguous. If a client sends a payment and the connection drops, it cannot know whether the server never received it, failed, or succeeded and lost the reply. Not retrying risks losing a payment; retrying blindly risks paying twice. An idempotency key is a client-generated unique id for one logical payment. The server inserts <code>(<wbr>subject,<wbr> key,<wbr> request_<wbr>hash)</code> as the first statement of the money transaction, with <code>(subject, key)</code> as the primary key. If the insert succeeds, this request is the first and proceeds. If it fails with a unique violation, the payment already happened (or is in flight), so the server returns the stored response instead of debiting again. The check must be atomic with the debit: if the key were recorded in a separate step, a crash or race between the two could leave a key without a payment or a payment without a key.</p>
+<p class="followup"><strong>Related follow-up:</strong> "What if the same key arrives with a different amount?" Request hashes differ, so it returns <code>409 IDEMPOTENCY_<wbr>KEY_<wbr>REUSED</code> with no financial effect.</p>
+<h4 class="question" id="q7"><span class="qnum">Q7</span><span class="qtext">What happens if two identical requests with the same key arrive at exactly the same time?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>Both open transactions and both try to insert the same <code>(subject, key)</code>. PostgreSQL lets the first insert proceed and makes the second <strong>wait</strong>, because a unique index entry from an uncommitted transaction blocks conflicting inserts. The waiting request has not touched any account yet. Two outcomes follow. If the first transaction commits (success or a stored business error), the second insert fails with <code>23505 unique_<wbr>violation</code>, which aborts its transaction; the application rolls back, opens a new transaction, reads the stored row, checks the request hash and returns the original response with <code>200</code>. If the first transaction rolls back (crash, deadlock, version conflict), its uncommitted key disappears, the second insert succeeds, and the second request becomes the only one allowed to debit. In both cases exactly one session runs the debit. This is why the unique index, not an application-level check-then-insert, is the lock.</p>
+<p class="followup"><strong>Related follow-up:</strong> "Different users sending the same key?" Different <code>subject</code>, different row; they are independent payments.</p>
+<h4 class="question" id="q8"><span class="qnum">Q8</span><span class="qtext">Explain optimistic locking and how it prevents overspending.</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Optimistic locking assumes conflicts are rare: you read without locking and make the write conditional on nothing having changed. Each account row has a <code>version</code>. The debit is <code>UPDATE accounts SET balance =<wbr> balance − 800,<wbr> version =<wbr> version + 1 WHERE id =<wbr> A AND version =<wbr> 0 AND balance &gt;<wbr>=<wbr> 800</code>. With a balance of 1,000 and two concurrent 800 debits, the first update matches and takes a short row lock. The second waits on that lock; when the first commits, PostgreSQL re-evaluates the second's <code>WHERE</code> clause on the new row (balance 200, version 1) and updates zero rows. The service then reloads: balance 200 &lt; 800, so it returns <code>422 INSUFFICIENT_<wbr>FUNDS</code> and does not retry. If the version changed but funds were still sufficient, it would retry the whole transaction, up to three times. The result: exactly one payment succeeds and the balance never goes negative.</p>
+<p class="followup"><strong>Related follow-up:</strong> "Is that lock-free?" No; the update holds a row lock until commit. It avoids long upfront locks, not all locks.</p>
+<h4 class="question" id="q9"><span class="qnum">Q9</span><span class="qtext">Why both idempotency keys and optimistic locking? Isn't one enough?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>They solve different races. An idempotency key protects against the <strong>same</strong> payment being executed twice, for example a client retrying after a timeout or sending two copies at once. It does nothing when two <strong>different</strong> payments, with different keys, compete for one balance; both keys are new, so both would proceed. Optimistic locking protects against that second case: two different payments cannot both debit the same balance if only one fits, because the conditional update lets only one win. Conversely, optimistic locking does not stop a retry with no key from creating a second, perfectly valid payment, because the second attempt sees a fresh version and enough money. Using only idempotency leaves overspending; using only locking leaves double charges. The cost is two mechanisms to implement and test, which is acceptable for money.</p>
+<h4 class="question" id="q10"><span class="qnum">Q10</span><span class="qtext">What is double-entry bookkeeping and how is it represented?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Double-entry means every movement is recorded as two equal and opposite entries: a debit on the account money left and a credit on the account money entered. The sum over all entries is always zero, so money is never created or destroyed by accident. Here each successful transfer inserts two rows into <code>ledger_entries</code> with the same <code>payment_id</code>, the same amount in integer cents and the same currency, one <code>DEBIT</code> and one <code>CREDIT</code>. The <code>accounts.<wbr>balance_<wbr>minor</code> column is a running total kept for fast checks, and tests verify <code>balance =<wbr> opening + credits − debits</code>. A unique constraint on <code>(<wbr>payment_<wbr>id,<wbr> entry_<wbr>type)</code> stops two debits for one payment, but equality of the two amounts is guaranteed by writing both from the same variable in the same transaction. In an interview, mention that money is never stored as floating point, because binary floats cannot represent cents exactly.</p>
+<h4 class="question" id="q11"><span class="qnum">Q11</span><span class="qtext">Explain JWT and OAuth2 as used in this project.</span><span class="qlevel q-easy">Easy</span></h4>
+<p>OAuth2 is a framework for delegated authorisation; in this project it is used through the "resource server" role. An identity provider (Keycloak in development) authenticates the user and issues a JWT access token. A JWT has three Base64 parts: a header, a payload of claims (<code>sub</code>, <code>exp</code>, <code>iss</code>, <code>aud</code>, scopes) and a signature. <code>payment-service</code> never stores sessions; on every request Spring Security verifies the signature against the provider's public keys (cached from its JWKS endpoint) and checks expiry, issuer, audience and scope. Invalid tokens get <code>401</code>. Then authorisation happens in two layers: scopes such as <code>payments.write</code> grant a capability, and the service checks <code>accounts.<wbr>owner_<wbr>id =<wbr> jwt.<wbr>sub</code> for the specific account. A valid token for Alice still gets <code>403</code> if it tries to debit Bob's account. Because validation is stateless, any pod can serve any request.</p>
+<p class="followup"><strong>Related follow-up:</strong> "How do you revoke a JWT?" You mostly can't before expiry; use short lifetimes and token introspection for high-value operations.</p>
+<div class="keephead"><h2 id="s-53-kafka-outbox-and-reliability"><span class="secnum">5.3</span>Kafka, outbox and reliability</h2><h4 class="question" id="q12"><span class="qnum">Q12</span><span class="qtext">What is the transactional outbox pattern and why did you need it?</span><span class="qlevel q-easy">Easy</span></h4></div>
+
+<p>It solves the dual-write problem. After a payment commits, Kafka must hear about it, but PostgreSQL and Kafka are two systems with no shared transaction. If the service commits and then publishes, a crash in between loses the event: the money moved but audit never runs. If it publishes first and then the transaction rolls back, downstream systems hear about a payment that never happened. With the outbox, the event is written as a row in <code>outbox_events</code> inside the same transaction as the payment, so the event intent is exactly as durable as the money. A background publisher then reads pending rows and sends them to Kafka, marking them <code>PUBLISHED</code> after the broker acknowledges. If Kafka is down, rows simply wait. The cost is a small delay (the poll runs every 200 ms) and at-least-once delivery.</p>
+<p class="followup"><strong>Related follow-up:</strong> "Why not <code>@TransactionalEventListener(<wbr>AFTER_<wbr>COMMIT)</code>?" It still loses the event if the JVM dies right after commit.</p>
+<h4 class="question" id="q13"><span class="qnum">Q13</span><span class="qtext">Several API pods run the outbox publisher. How do you stop them sending the same row?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>Each publisher claims a batch with a short transaction: <code>UPDATE outbox_<wbr>events SET status =<wbr> 'PUBLISHING',<wbr> claimed_<wbr>by =<wbr> me,<wbr> lease_<wbr>until =<wbr> now(<wbr>) + 30 s WHERE id IN (<wbr>SELECT id … WHERE status =<wbr> 'PENDING' OR (<wbr>status =<wbr> 'PUBLISHING' AND lease_<wbr>until &lt; now(<wbr>)) ORDER BY created_<wbr>at LIMIT 50 FOR UPDATE SKIP LOCKED)</code>, and commits that claim. <code>SKIP LOCKED</code> means two publishers polling at the same moment skip each other's locked rows instead of waiting, and the committed lease means other publishers ignore the row until it expires. Kafka sends happen <strong>after</strong> the claim commits, so no database lock is held across network I/O. On acknowledgement the row is marked <code>PUBLISHED</code>. If a publisher dies, its lease expires and another pod reclaims the row. One duplicate window remains: Kafka acknowledged but the pod crashed before marking <code>PUBLISHED</code>. That is why delivery is at-least-once and consumers deduplicate.</p>
+<h4 class="question" id="q14"><span class="qnum">Q14</span><span class="qtext">What are consumer groups and how did you size them?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>A consumer group is a set of consumers that share a topic: Kafka assigns each partition to exactly one member, so members process different partitions in parallel, and if one dies its partitions are reassigned to the others (a rebalance). Each member tracks an offset per partition, the position of the next message to read, and commits it after processing. The topic <code>payment.events</code> has 12 partitions. The target is 10K+ payments per minute, about 167 events per second, roughly 14 per partition, so 12 partitions give comfortable headroom. Two consumer pods with six listener threads each give 12 consumers, one per partition, and losing a pod still leaves six threads. Adding more consumers than partitions does not help; extra consumers sit idle. The partition key is <code>sourceAccountId</code>, which keeps one account's events in order on one partition.</p>
+<p class="followup"><strong>Related follow-up:</strong> "Can you add partitions later?" Yes, but keys remap to new partitions, breaking per-key ordering across the change, so plan the count up front.</p>
+<h4 class="question" id="q15"><span class="qnum">Q15</span><span class="qtext">How do retries and the dead-letter queue work in the consumer?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>When the consumer's database write fails, Spring Kafka's <code>DefaultErrorHandler</code> retries the same record with exponential backoff: 1 s, then 2 s, then 4 s, but only for errors marked transient, such as a database timeout. Errors that will never succeed, such as malformed JSON or a validation failure, are marked non-retryable and skip retries. When retries are exhausted, <code>DeadLetterPublishingRecoverer</code> publishes the original record, plus headers describing the exception, to <code>payment.<wbr>events.<wbr>DLT</code> and commits the offset, so the partition moves on instead of being blocked forever by a poison message. Money is unaffected because it was already committed. Operators inspect the DLT, fix the bug and replay the records; consumer deduplication makes replay safe even if some had already been processed.</p>
+<p class="followup"><strong>Related follow-up:</strong> "Downside?" In-process retries block that partition for the backoff time; separate retry topics avoid this at the cost of more topics.</p>
+<h4 class="question" id="q16"><span class="qnum">Q16</span><span class="qtext">Kafka is at-least-once. How do you prevent duplicate side effects?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>Duplicates can come from two places: the outbox publisher re-sending after a crash between the broker's ack and marking the row published, and the consumer being redelivered a record after a crash between its database write and its offset commit. The consumer is therefore idempotent. Every event carries an <code>eventId</code> equal to the outbox row id. Processing one record is one database transaction that inserts into <code>processed_events</code> (primary key <code>event_id</code>) and <code>audit_log</code> (unique <code>payment_id</code>). If the event was already processed, the insert conflicts and the record is treated as already done, then its offset is committed. The dedup table keeps rows for 14 days, longer than the topic's 7-day retention, so any redelivered or replayed event is still recognised. An idempotent Kafka producer alone is not enough, because it only removes duplicates from one producer session, not from two different publisher pods.</p>
+<h4 class="question" id="q17"><span class="qnum">Q17</span><span class="qtext">What happens if Kafka is completely down for ten minutes?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Payments keep working, because Kafka is not part of the money transaction: each transfer still commits its <code>PENDING</code> outbox row and returns <code>201</code>. Publishers fail to send; claimed rows wait for their 30-second lease to expire and are reclaimed. <code>outbox_pending</code> and the oldest-pending-age metric rise and alert. When Kafka returns, publishers drain the backlog automatically (batches of 50 every 200 ms, roughly 250 events/s per pod, above the 167/s steady state). Audit is delayed, not lost; duplicates from reclaimed leases are absorbed by consumer dedup. Readiness deliberately excludes Kafka so a broker outage does not remove API pods.</p>
+<div class="keephead"><h2 id="s-54-performance-and-caching"><span class="secnum">5.4</span>Performance and caching</h2><h4 class="question" id="q18"><span class="qnum">Q18</span><span class="qtext">How does Redis caching work here, and why is it not used for debits?</span><span class="qlevel q-easy">Easy</span></h4></div>
+
+<p>The pattern is cache-aside. On <code>GET /<wbr>accounts/<wbr>{id}</code> or <code>GET /balance</code>, the service checks Redis; on a hit it returns the cached value, on a miss it reads PostgreSQL and stores the value with a TTL of 60 seconds for metadata and 5 seconds for balances. After a transfer commits, the service deletes both accounts' keys; the consumer may delete them again as a supplement. Debits never read Redis: the conditional <code>UPDATE</code> always uses the PostgreSQL row. The reason is that a cache is stale by definition. A race called the cache-aside fill race shows it: a slow GET reads the old balance, a transfer commits and deletes the key, then the slow GET writes the old balance back. The 5-second TTL bounds that staleness for reads, but if debits trusted the cache, staleness would become overspending. Redis is also fail-open: if it is down, reads go to the database and payments are unaffected.</p>
+<h4 class="question" id="q19"><span class="qnum">Q19</span><span class="qtext">How do indexing and connection pooling reduce latency and database CPU?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>Latency at load is mostly waiting, not working. An uncontended transfer is about ten primary-key statements and a commit, roughly 10–25 ms (illustrative), so the p95 budget is consumed by queueing for a pooled connection or a row lock. <strong>Connection pooling:</strong> HikariCP keeps a fixed set of open connections. With a pool of 5 per pod, bursts of 167 transfers per second plus uncached GETs exceed available connections and requests queue inside Hikari; queueing delay grows sharply as utilisation approaches 100%. Raising the pool to 20 per pod (staying under PostgreSQL's connection limit) removes most of that wait. <strong>Indexing:</strong> without partial indexes, the outbox poll (five times a second per pod) and cleanup jobs scan whole tables, including days of published rows, which burns CPU and pushes useful pages out of memory. A partial index on pending rows makes the poll proportional to the small backlog. <strong>Redis</strong> removes repeated GET queries. The expected effect is lower POST p95 mainly from the pool and indexes, and lower DB CPU mainly from indexes and Redis.</p>
+<p class="followup"><strong>Related follow-up:</strong> "How would you prove which change helped?" An ablation: indexes only, then plus pool, then plus Redis, at the same load.</p>
+<h4 class="question" id="q20"><span class="qnum">Q20</span><span class="qtext">How does the system scale, and what limits it?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>The API is stateless, so you add <code>payment-service</code> pods; JWT validation needs no shared session. The real ceiling is PostgreSQL: one primary takes all writes, and each pod's pool adds connections, so replicas × pool size must stay under <code>max_connections</code> with headroom (e.g. 2 × 20 for the API plus 2 × 10 for consumers, under 100). Consumers scale up to the 12 partitions; reads scale with Redis. Two limits matter: one very hot account serialises on its row (retries and some <code>409</code>s), and writes cannot exceed what one primary can commit. At larger scale: shard accounts, bucket hot accounts into sub-accounts, and use read replicas only for history, never for balance decisions, because replica lag would make them unsafe.</p>
+<div class="keephead"><h2 id="s-55-failures-trade-offs-and-resume-defence"><span class="secnum">5.5</span>Failures, trade-offs and resume defence</h2><h4 class="question" id="q21"><span class="qnum">Q21</span><span class="qtext">What happens if the pod crashes after the commit but before replying?</span><span class="qlevel q-easy">Easy</span></h4></div>
+
+<p>From the database's point of view the payment is complete: the money moved, the ledger and the outbox row are committed, and the idempotency row stores the <code>201</code> response. The client sees a timeout or connection reset. A well-behaved client retries with the same idempotency key and body, possibly reaching another pod. That pod's key insert fails with a unique violation, it opens a fresh transaction, finds the stored response with a matching hash and returns it with <code>200</code> and the same payment id. No second debit happens. The outbox row is published by whichever pod's publisher claims it next, so the event is not lost either. This scenario is exactly why idempotency exists: the client cannot distinguish "never happened" from "happened, reply lost", and the key makes retrying safe in both cases.</p>
+<h4 class="question" id="q22"><span class="qnum">Q22</span><span class="qtext">Why not use SELECT FOR UPDATE or the SERIALIZABLE isolation level?</span><span class="qlevel q-medium">Medium</span></h4>
+<p><code>SELECT … FOR UPDATE</code> (pessimistic locking) locks the account rows at the start of the request and holds them until commit. It is correct, but locks are held longer, including during validation and other statements, so concurrent transfers on busy accounts queue behind each other and deadlock risk grows. It offers no extra correctness over a conditional update whose <code>WHERE</code> clause re-checks balance and version. <code>SERIALIZABLE</code> makes PostgreSQL detect any non-serialisable interleaving and abort one transaction with <code>40001</code>; that adds tracking overhead and retry work to every transaction, including ones that never conflict. The chosen design keeps <code>READ COMMITTED</code>, uses a single conditional <code>UPDATE</code> (short lock from update to commit), orders updates by id to avoid deadlocks, and retries rare conflicts. Pessimistic locking would be reasonable for a small set of extremely hot accounts, which is listed as a future improvement.</p>
+<h4 class="question" id="q23"><span class="qnum">Q23</span><span class="qtext">What are the main limitations, and what would you improve?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Scope: internal single-currency transfers; no refunds, holds or external rails. Scalability: one PostgreSQL primary caps writes; hot accounts serialise on one row. Consistency: events are at-least-once and ordered only per partition; GET balances can be ~5 s stale; idempotency keys expire after 24 h. Architecture: two services share one database. Operations: the polling outbox adds a few hundred ms of event delay; in-process consumer retries briefly stall a partition. With more time: pessimistic locks or sub-accounts for hot accounts, Debezium CDC, non-blocking retry topics, time-partitioned idempotency and outbox tables, a synchronous standby, mTLS, OpenTelemetry tracing, and actually running the benchmark to fill the results table.</p>
+<h4 class="question" id="q24"><span class="qnum">Q24</span><span class="qtext">What exactly does "10K+ requests/min at under 200 ms p95" mean, and how would you measure it?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>It means at least 10,000 <code>POST /payments</code> requests per minute, about 167 per second, each a full ACID transfer, with 95% of them completing in under 200 ms, measured at the client. GET traffic is additional and not counted, and Kafka should then carry about 10K <code>PAYMENT_COMPLETED</code> events per minute. The method: k6 with an <strong>open-loop arrival-rate</strong> executor at 167 POST/s, so the generator keeps sending even when the server slows (a closed loop would hide latency, called coordinated omission); about 500 GET/s on top; 10,000 seeded accounts so contention is realistic; unique idempotency keys; a 2-minute warm-up discarded and a 10-minute steady window; three runs; report achieved versus offered rate, p95 and p99, error rate, and run SQL invariant checks afterwards. Percentiles from different pods are merged from histograms, never averaged. Honestly, 167 transfers per second is modest for PostgreSQL; the point is doing it with idempotency, conditional updates, a ledger and an outbox in every transaction.</p>
+<p class="followup"><strong>Related follow-up:</strong> "Is it measured?" No. It is a benchmark target with a written methodology; the results table is still empty.</p>
+<h4 class="question" id="q25"><span class="qnum">Q25</span><span class="qtext">How would you justify the ~40% p95 and ~30% DB CPU reductions?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>Both are A/B targets at the same offered load, not measured results. The baseline is the same code with a small Hikari pool (5 per pod), only the indexes required for correctness, and Redis off. The optimised run uses a pool of 20, partial indexes for the outbox claim and cleanup, history indexes, and Redis for GETs. The reduction formula is <code>(<wbr>baseline − optimised) /<wbr> baseline</code>, for example 300 ms to 180 ms is 40% (illustrative arithmetic only). The p95 gain is expected mainly from removing connection-pool waiting; the CPU gain mainly from replacing repeated sequential scans with partial-index lookups and moving GET queries to Redis. Evidence required: absolute p95 and CPU for both configurations, three runs each, identical POST and GET rates, an ablation showing each lever's share, <code>pg_<wbr>stat_<wbr>statements</code> deltas, and disclosure of the baseline settings. A percentage is only as honest as its baseline; an artificially tiny pool would inflate it.</p>
+<h4 class="question" id="q26"><span class="qnum">Q26</span><span class="qtext">If you had to design this for 100× the traffic, what would change?</span><span class="qlevel q-hard">Hard</span></h4>
+<p>At about 17K transfers per second, one PostgreSQL primary would be the bottleneck for commits and WAL writes. I would shard accounts by id range or hash across several PostgreSQL clusters. Transfers within one shard stay a single local transaction. Cross-shard transfers can no longer be one ACID transaction, so they would become a saga: debit the source shard and record a pending transfer with an outbox event, credit the destination shard idempotently, and compensate with a reversing entry if the credit fails. Idempotency keys would be partitioned by time and dropped by partition. Hot accounts (for example a merchant receiving many payments) would be split into sub-accounts. The outbox would move to CDC (Debezium) to cut polling load, Kafka partitions would increase, and consumers would scale with them. I would keep the core rule: one authoritative store per account, and every cross-system step idempotent.</p>
+<h4 class="question" id="q27"><span class="qnum">Q27</span><span class="qtext">Why did you call it microservices if both services share one database?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>I'd answer directly: it's two independently deployable Spring Boot services, and they do share one PostgreSQL database, which is a known microservices anti-pattern. The split exists for operational reasons: the consumer scales and fails independently of the API, so slow audit work never touches payment latency. The shared database is a deliberate trade-off for correctness. All financial tables (accounts, payments, ledger, idempotency, outbox) are written only by <code>payment-service</code>; the consumer writes only <code>processed_events</code> and <code>audit_log</code>. The alternative that would be genuinely wrong is splitting account ownership into a separate service with its own database, because then every transfer would need two-phase commit or a saga across two owners of money. If the consumer later needed independence, it would stop using this database and persist audit rows from Kafka into its own store, with no change to the money path.</p>
+<h4 class="question" id="q28"><span class="qnum">Q28</span><span class="qtext">What did you personally design or implement, and what is still unverified?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Be precise. The design and intended implementation cover: the transfer transaction (idempotency insert as mutex, savepoint, id-ordered conditional updates, reload-and-classify, bounded retries), the double-entry ledger schema and its invariants, JWT resource-server security with ownership checks, the lease-based transactional outbox, the Kafka consumer group with retries, DLT and deduplication, cache-aside with post-commit invalidation, the indexing and pooling plan, Kubernetes manifests with probes, and a k6 benchmark methodology with SQL invariant checks. What is not verified: none of the throughput, latency or percentage figures has a recorded run; they are benchmark targets. Say so without being asked if the interviewer probes numbers: "These are the targets I designed for, and I wrote the test procedure; I wouldn't present them as production measurements." That honesty is usually respected and protects the rest of your answers.</p>
+<div class="page-break"></div>
+<div class="part-banner" id="part-6" data-part="6"><span class="part-kicker">Part 6</span><h1 class="part-title">Final Revision Sheet</h1></div>
+<div class="rev2">
+<h3>1. Project in one paragraph</h3>
+<p>Spring Boot backend for internal transfers. One PostgreSQL ACID transaction per transfer: idempotency key, conditional debit/credit, double-entry ledger, outbox row. A publisher relays events to Kafka; a consumer group audits with retries, DLT and dedup. Redis caches GETs only. Two services on Kubernetes, one database.</p>
+<h3>2. Architecture in one diagram</h3>
+<p class="flowline"><b>Sync:</b> Client → API (JWT, owner) → PostgreSQL txn [key → debit/credit → ledger, outbox] → COMMIT → 201</p>
+<p class="flowline"><b>Async:</b> outbox → publisher (lease) → Kafka (12 partitions) → consumer group → audit_log / DLT</p>
+<h3>3. Stack and responsibilities</h3>
+<ul>
+<li><strong>Spring Boot:</strong> API, security, transactions, Kafka listeners</li>
+<li><strong>PostgreSQL:</strong> the only source of truth</li>
+<li><strong>Kafka:</strong> async, at-least-once event delivery</li>
+<li><strong>Redis:</strong> fail-open read cache, rate limiter</li>
+<li><strong>HikariCP:</strong> connection pool (20 per API pod)</li>
+<li><strong>Kubernetes:</strong> 2 Deployments, probes, scaling</li>
+</ul>
+<h3>4. Five most important concepts</h3>
+<ol>
+<li>ACID transaction as the commit point</li>
+<li>Idempotency key = unique insert inside the transaction</li>
+<li>Optimistic conditional <code>UPDATE</code> (version + balance)</li>
+<li>Transactional outbox (dual-write problem)</li>
+<li>At-least-once delivery + idempotent consumer</li>
+</ol>
+<h3>5. Five key decisions</h3>
+<ol>
+<li>Money only in PostgreSQL</li>
+<li>Conditional update, not pessimistic locks</li>
+<li>Key insert inside the money transaction</li>
+<li>Polling outbox, not publish-after-commit</li>
+<li>Two services, one DB (accepted)</li>
+</ol>
+<h3>6. Five likely questions</h3>
+<ol>
+<li>Why idempotency keys? Concurrent duplicates?</li>
+<li>How do you stop overspending?</li>
+<li>Why the outbox?</li>
+<li>What if Kafka / Redis / a pod fails?</li>
+<li>What do the numbers mean; measured?</li>
+</ol>
+<h3>7. Main limitations</h3>
+<p>Single PostgreSQL primary; hot accounts serialise; at-least-once, per-partition-ordered events; GET balance ≤ 5 s stale; shared database; internal single-currency transfers only; numbers not yet measured.</p>
+<h3>8. Numerical claims and evidence status</h3>
+<div class="table-block keep"><table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Meaning</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10K+ req/min</td>
+<td>≥ 167 POST/s, k6 open loop</td>
+<td>Target, unverified</td>
+</tr>
+<tr>
+<td>&lt; 200 ms p95</td>
+<td>Those POSTs, client-side</td>
+<td>Target, unverified</td>
+</tr>
+<tr>
+<td>~40% p95</td>
+<td>Baseline vs optimised, same load</td>
+<td>Target, unverified</td>
+</tr>
+<tr>
+<td>~30% DB CPU</td>
+<td>PostgreSQL CPU, same load</td>
+<td>Target, unverified</td>
+</tr>
+</tbody>
+</table></div>
+<h3>9. Ten things to remember</h3>
+<ol>
+<li>The commit point is PostgreSQL <code>COMMIT</code>, nothing else.</li>
+<li>Money is integer cents; never floats.</li>
+<li><code>(<wbr>subject,<wbr> idempotency_<wbr>key)</code> primary key is the mutex.</li>
+<li>Concurrent duplicate: second insert <strong>waits</strong>, then replays or wins.</li>
+<li>0-row debit → reload → low balance = <code>422</code>, version change = retry (max 3) → <code>409</code>.</li>
+<li>Update accounts in ascending id order to prevent deadlocks.</li>
+<li>Optimistic here still takes a short row lock; not lock-free.</li>
+<li>Outbox: claim with <code>SKIP LOCKED</code> + 30 s lease, send after the claim commits.</li>
+<li>Consumer: retries 1/2/4 s → DLT; dedup on <code>eventId</code> (14 days &gt; 7-day retention).</li>
+<li>Redis never authorises a debit; Kafka never confirms money.</li>
+</ol>
+</div>
+</div>
+</body></html>

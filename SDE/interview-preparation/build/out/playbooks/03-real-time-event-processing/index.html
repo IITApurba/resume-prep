@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Real-Time Event Processing Platform — Interview Playbook</title>
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-serif-4/400.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-serif-4/400-italic.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-serif-4/600.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-serif-4/700.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-sans-3/400.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-sans-3/400-italic.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-sans-3/600.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-sans-3/700.css">
+<link rel="stylesheet" href="../../../styles/playbook.css">
+<style>
+:root { --accent: #34493F; --tint: #EBF1EE; }
+@page { @top-left { content: "Book 3 · Real-Time Event Processing"; } }
+</style>
+</head>
+<body class="book-3">
+
+<section class="cover">
+  <div class="cover-bar"></div>
+  <div class="cover-inner">
+    <div class="cover-top"><span>SDE Project Interview Playbook</span><span>Book 3 of 4</span></div>
+    <div class="cover-motif"><svg class="motif" viewBox="0 0 600 190" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="20" y1="120" x2="580" y2="120" stroke="#6E6E6E" fill="none" stroke-width="1.4"/><path d="M572 114 L582 120 L572 126" stroke="#6E6E6E" fill="none" stroke-width="1.4"/><line x1="34" y1="120" x2="34" y2="106" stroke="#7A7A7A" stroke-width="2"/><circle cx="34" cy="106" r="2.6" fill="#7A7A7A"/><line x1="52" y1="120" x2="52" y2="99" stroke="#7A7A7A" stroke-width="2"/><circle cx="52" cy="99" r="2.6" fill="#7A7A7A"/><line x1="61" y1="120" x2="61" y2="92" stroke="#7A7A7A" stroke-width="2"/><circle cx="61" cy="92" r="2.6" fill="#7A7A7A"/><line x1="90" y1="120" x2="90" y2="85" stroke="#7A7A7A" stroke-width="2"/><circle cx="90" cy="85" r="2.6" fill="#7A7A7A"/><line x1="104" y1="120" x2="104" y2="78" stroke="#7A7A7A" stroke-width="2"/><circle cx="104" cy="78" r="2.6" fill="#7A7A7A"/><line x1="131" y1="120" x2="131" y2="101" stroke="#7A7A7A" stroke-width="2"/><circle cx="131" cy="101" r="2.6" fill="#7A7A7A"/><line x1="150" y1="120" x2="150" y2="94" stroke="#7A7A7A" stroke-width="2"/><circle cx="150" cy="94" r="2.6" fill="#7A7A7A"/><line x1="158" y1="120" x2="158" y2="87" stroke="#7A7A7A" stroke-width="2"/><circle cx="158" cy="87" r="2.6" fill="#7A7A7A"/><line x1="196" y1="120" x2="196" y2="80" stroke="#7A7A7A" stroke-width="2"/><circle cx="196" cy="80" r="2.6" fill="#7A7A7A"/><line x1="214" y1="120" x2="214" y2="103" stroke="#7A7A7A" stroke-width="2"/><circle cx="214" cy="103" r="2.6" fill="#7A7A7A"/><line x1="240" y1="120" x2="240" y2="96" stroke="#7A7A7A" stroke-width="2"/><circle cx="240" cy="96" r="2.6" fill="#7A7A7A"/><line x1="252" y1="120" x2="252" y2="89" stroke="#7A7A7A" stroke-width="2"/><circle cx="252" cy="89" r="2.6" fill="#7A7A7A"/><line x1="281" y1="120" x2="281" y2="82" stroke="#7A7A7A" stroke-width="2"/><circle cx="281" cy="82" r="2.6" fill="#7A7A7A"/><line x1="300" y1="120" x2="300" y2="105" stroke="#7A7A7A" stroke-width="2"/><circle cx="300" cy="105" r="2.6" fill="#7A7A7A"/><line x1="318" y1="120" x2="318" y2="98" stroke="#7A7A7A" stroke-width="2"/><circle cx="318" cy="98" r="2.6" fill="#7A7A7A"/><line x1="349" y1="120" x2="349" y2="91" stroke="#7A7A7A" stroke-width="2"/><circle cx="349" cy="91" r="2.6" fill="#7A7A7A"/><line x1="362" y1="120" x2="362" y2="84" stroke="#7A7A7A" stroke-width="2"/><circle cx="362" cy="84" r="2.6" fill="#7A7A7A"/><line x1="391" y1="120" x2="391" y2="77" stroke="#7A7A7A" stroke-width="2"/><circle cx="391" cy="77" r="2.6" fill="#7A7A7A"/><line x1="410" y1="120" x2="410" y2="100" stroke="#7A7A7A" stroke-width="2"/><circle cx="410" cy="100" r="2.6" fill="#7A7A7A"/><line x1="436" y1="120" x2="436" y2="93" stroke="#7A7A7A" stroke-width="2"/><circle cx="436" cy="93" r="2.6" fill="#7A7A7A"/><line x1="452" y1="120" x2="452" y2="86" stroke="#7A7A7A" stroke-width="2"/><circle cx="452" cy="86" r="2.6" fill="#7A7A7A"/><line x1="480" y1="120" x2="480" y2="79" stroke="#7A7A7A" stroke-width="2"/><circle cx="480" cy="79" r="2.6" fill="#7A7A7A"/><line x1="497" y1="120" x2="497" y2="102" stroke="#7A7A7A" stroke-width="2"/><circle cx="497" cy="102" r="2.6" fill="#7A7A7A"/><line x1="521" y1="120" x2="521" y2="95" stroke="#7A7A7A" stroke-width="2"/><circle cx="521" cy="95" r="2.6" fill="#7A7A7A"/><line x1="548" y1="120" x2="548" y2="88" stroke="#7A7A7A" stroke-width="2"/><circle cx="548" cy="88" r="2.6" fill="#7A7A7A"/><path d="M24 140 v10 h130 v-10" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><path d="M164 140 v10 h130 v-10" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><path d="M304 140 v10 h130 v-10" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><path d="M444 140 v10 h130 v-10" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><path d="M20 40 C120 20, 200 60, 300 40 S480 20, 580 40" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><path d="M20 54 C120 34, 200 74, 300 54 S480 34, 580 54" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><path d="M20 68 C120 48, 200 88, 300 68 S480 48, 580 68" stroke="#9A9A9A" fill="none" stroke-width="1.1"/></svg></div>
+    <div class="cover-theme">Stream processing · Event time</div>
+    <h1 class="cover-title">Real-Time Event Processing Platform</h1>
+    <div class="cover-sub">Interview Playbook</div>
+    <div class="cover-rule"></div>
+    <p class="cover-desc"><em>A fault-tolerant streaming platform: user-activity events flow through Kafka into an Apache Flink job that applies event-time windows, watermarks, keyed state, deduplication and checkpointing, then serves online user features in Redis and per-minute product analytics in PostgreSQL. Java, Kafka, Flink, PostgreSQL, Redis, AWS and Kubernetes. Everything you need for a 30–45 minute interview.</em></p>
+    <div class="cover-extra"><p><strong>Resume bullets this booklet defends</strong></p><ol>
+<li>Built distributed Kafka + Flink pipelines with event-time windows, checkpointing and deduplication for reliable real-time stream processing.</li>
+<li>Implemented consumer-group scaling and backpressure handling, sustaining 10K+ events/sec with under 1 sec p95 latency under concurrent I/O.</li>
+<li>Added checkpoint recovery &amp; event replay, achieving less than 30 sec recovery; optimised partitioning and parallelism, improving throughput ~2x.</li>
+</ol></div>
+    <div class="cover-contents"><div class="cc-head">Contents</div><div class="toc"><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-1"><span class="toc-text"><span class="toc-num">Part 1</span>Project Fundamentals</span></a><span class="leader"></span><span class="pn" data-t="part-1">2</span></div><div class="toc-entry toc-sec"><a href="#s-11-what-is-this-project"><span class="toc-text"><span class="toc-snum">1.1</span>What is this project?</span></a><span class="leader"></span><span class="pn" data-t="s-11-what-is-this-project">2</span></div><div class="toc-entry toc-sec"><a href="#s-12-fundamentals-required-for-this-project"><span class="toc-text"><span class="toc-snum">1.2</span>Fundamentals required for this project</span></a><span class="leader"></span><span class="pn" data-t="s-12-fundamentals-required-for-this-project">3</span></div></div><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-2"><span class="toc-text"><span class="toc-num">Part 2</span>High-Level Design and Architecture</span></a><span class="leader"></span><span class="pn" data-t="part-2">8</span></div><div class="toc-entry toc-sec"><a href="#s-21-technology-stack"><span class="toc-text"><span class="toc-snum">2.1</span>Technology stack</span></a><span class="leader"></span><span class="pn" data-t="s-21-technology-stack">8</span></div><div class="toc-entry toc-sec"><a href="#s-22-high-level-architecture"><span class="toc-text"><span class="toc-snum">2.2</span>High-level architecture</span></a><span class="leader"></span><span class="pn" data-t="s-22-high-level-architecture">9</span></div><div class="toc-entry toc-sec"><a href="#s-23-important-architectural-decisions"><span class="toc-text"><span class="toc-snum">2.3</span>Important architectural decisions</span></a><span class="leader"></span><span class="pn" data-t="s-23-important-architectural-decisions">11</span></div></div><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-3"><span class="toc-text"><span class="toc-num">Part 3</span>How the Project Works</span></a><span class="leader"></span><span class="pn" data-t="part-3">12</span></div><div class="toc-entry toc-sec"><a href="#s-31-one-complete-end-to-end-request-flow"><span class="toc-text"><span class="toc-snum">3.1</span>One complete end-to-end request flow</span></a><span class="leader"></span><span class="pn" data-t="s-31-one-complete-end-to-end-request-flow">12</span></div><div class="toc-entry toc-sec"><a href="#s-32-important-alternative-scenarios"><span class="toc-text"><span class="toc-snum">3.2</span>Important alternative scenarios</span></a><span class="leader"></span><span class="pn" data-t="s-32-important-alternative-scenarios">13</span></div><div class="toc-entry toc-sec"><a href="#s-33-important-guarantees-and-limitations"><span class="toc-text"><span class="toc-snum">3.3</span>Important guarantees and limitations</span></a><span class="leader"></span><span class="pn" data-t="s-33-important-guarantees-and-limitations">14</span></div></div><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-4"><span class="toc-text"><span class="toc-num">Part 4</span>Complete Interview Explanation</span></a><span class="leader"></span><span class="pn" data-t="part-4">15</span></div><div class="toc-entry toc-sec"><a href="#s-41-two-minute-explanation"><span class="toc-text"><span class="toc-snum">4.1</span>Two-minute explanation</span></a><span class="leader"></span><span class="pn" data-t="s-41-two-minute-explanation">15</span></div><div class="toc-entry toc-sec"><a href="#s-42-five-minute-explanation"><span class="toc-text"><span class="toc-snum">4.2</span>Five-minute explanation</span></a><span class="leader"></span><span class="pn" data-t="s-42-five-minute-explanation">15</span></div><div class="toc-entry toc-sec"><a href="#s-43-ten-minute-explanation"><span class="toc-text"><span class="toc-snum">4.3</span>Ten-minute explanation</span></a><span class="leader"></span><span class="pn" data-t="s-43-ten-minute-explanation">16</span></div></div><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-5"><span class="toc-text"><span class="toc-num">Part 5</span>Interview Questions and Answers</span></a><span class="leader"></span><span class="pn" data-t="part-5">17</span></div><div class="toc-entry toc-sec"><a href="#s-51-basic-understanding"><span class="toc-text"><span class="toc-snum">5.1</span>Basic understanding</span></a><span class="leader"></span><span class="pn" data-t="s-51-basic-understanding">17</span></div><div class="toc-entry toc-sec"><a href="#s-52-reliability-and-recovery"><span class="toc-text"><span class="toc-snum">5.2</span>Reliability and recovery</span></a><span class="leader"></span><span class="pn" data-t="s-52-reliability-and-recovery">20</span></div><div class="toc-entry toc-sec"><a href="#s-53-deeper-design-questions"><span class="toc-text"><span class="toc-snum">5.3</span>Deeper design questions</span></a><span class="leader"></span><span class="pn" data-t="s-53-deeper-design-questions">22</span></div></div><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-6"><span class="toc-text"><span class="toc-num">Part 6</span>Final Revision Sheet</span></a><span class="leader"></span><span class="pn" data-t="part-6">25</span></div></div></div>
+      <div class="cc-extra">16 fundamentals explained · 4 diagrams · 28 interview questions (18 easy, 9 medium, 1 hard) · one-page revision sheet</div></div>
+    <div class="cover-bottom"><div class="series-head">The series</div><ul class="series"><li class=""><span class="sq"></span>1. Payment &amp; Transaction Processing</li><li class=""><span class="sq"></span>2. Distributed Object Storage</li><li class="current"><span class="sq"></span>3. Real-Time Event Processing</li><li class=""><span class="sq"></span>4. LLM Gateway &amp; Inference Router</li></ul></div>
+  </div>
+</section>
+<div class="body">
+
+
+
+<div class="keephead"><div class="part-banner" id="part-1" data-part="1"><span class="part-kicker">Part 1</span><h1 class="part-title">Project Fundamentals</h1></div><div class="keephead"><h2 id="s-11-what-is-this-project"><span class="secnum">1.1</span>What is this project?</h2><p><strong>What it does.</strong> An e-commerce app emits a stream of user-activity events: product views, clicks, add-to-cart actions and purchases. This platform processes that stream continuously and produces two kinds of results within about a second:</p></div></div>
+
+
+<ol>
+<li><strong>Online user features</strong> for ML models, for example "how many products has this user viewed in the last 5 minutes?" or "how much has this user spent in the last hour?". A recommendation or fraud model reads them from Redis in single-digit milliseconds.</li>
+<li><strong>Real-time product analytics</strong>: views, clicks, cart-adds, purchases and revenue per product per minute, stored in PostgreSQL for dashboards and SQL queries.</li>
+</ol>
+<p><strong>The problem it solves.</strong> Batch jobs that run every hour are too slow for features a model needs right now. But streaming is hard: events arrive <strong>out of order</strong> (phones buffer while offline), are <strong>duplicated</strong> (producers retry), and come in <strong>bursts</strong>. Machines fail mid-computation. The platform must give correct counts despite all of that, without losing or double-counting events, at 10K+ events per second.</p>
+<p><strong>Who would use it.</strong> ML teams needing fresh features, product and growth teams watching live dashboards, and any backend that wants "what is happening right now" metrics.</p>
+<p><strong>What happens without it.</strong> Features are stale (computed hours ago), counts are wrong whenever events arrive late or twice, and a crash means either lost events or double counting.</p>
+<p><strong>What makes it technically interesting.</strong> Time semantics (event time versus arrival time), state that must survive failures, exactly-once state updates with external stores that are outside Flink's control, backpressure, and recovery in under 30 seconds.</p>
+<div class="box box-analogy keep"><div class="box-label">Analogy</div>
+<p>Think of a stadium turnstile counter. Fans (events) arrive at many gates (partitions), sometimes late or walking through twice. Counters at each gate (Flink tasks) keep tallies per section; every ten seconds everyone photographs their tally sheets and gate positions at the same moment (checkpoint), so if a counter faints, a replacement restores the photo and re-counts from that gate position. The scoreboard (Redis/PostgreSQL) is only ever overwritten with full totals, so re-sending a total never inflates it.</p>
+</div>
+<div class="box box-example keep"><div class="box-label">Example</div>
+<p>At 12:00:58 a user views product <code>p-55310</code> on a phone. The event reaches Kafka at 12:00:58.010, Flink processes it, and within ~250 ms Redis shows <code>views_5m = 14</code> for that user. Separately, the view is added to product <code>p-55310</code>'s minute window <code>[12:00, 12:01)</code>. When the watermark passes 12:01 (about 5 seconds later), Flink emits that minute's totals, and PostgreSQL gets one row. If the same event arrives again (a producer retry), dedup drops it; if a different view of that minute arrives at 12:02:10, the window is re-emitted with corrected totals.</p>
+</div>
+<p><strong>Scope boundary.</strong> No public ingestion API (producers write to Kafka directly), no ML model, no offline feature store, no dashboard UI, single AWS region.</p>
+<h2 id="s-12-fundamentals-required-for-this-project"><span class="secnum">1.2</span>Fundamentals required for this project</h2>
+<div class="table-block"><table>
+<thead>
+<tr>
+<th>Resume bullet</th>
+<th>Concepts you must be able to explain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Kafka + Flink pipelines, event-time windows, checkpointing, deduplication</td>
+<td>Kafka topics/partitions/offsets, Flink, event time, watermarks, tumbling/sliding windows, keyed state, dedup, checkpointing</td>
+</tr>
+<tr>
+<td>2. Consumer-group scaling, backpressure, 10K+ events/s, &lt; 1 s p95</td>
+<td>Consumer groups, backpressure, delivery semantics and idempotent sinks, Redis and PostgreSQL serving, throughput and latency metrics</td>
+</tr>
+<tr>
+<td>3. Checkpoint recovery and replay &lt; 30 s; partitioning and parallelism ~2×</td>
+<td>Recovery and replay, partitions versus parallelism</td>
+</tr>
+</tbody>
+</table></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">1</span><span class="concept-name">Kafka topics, partitions and offsets</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Kafka is a durable, append-only log. Producers add events to the end; consumers read at their own pace and can go back and re-read.</li>
+<li><span class="cl">Technical</span> A topic is split into partitions. An event's key (here <code>userId</code>) is hashed to pick its partition, so one user's events stay in order on one partition. Each event gets an increasing <strong>offset</strong>. Events are kept for the retention period (7 days on <code>user-events</code>) regardless of who read them, replicated 3 times with <code>acks=all</code> and <code>min.<wbr>insync.<wbr>replicas=<wbr>2</code>.</li>
+<li><span class="cl">Why it matters</span> Kafka is the buffer that absorbs bursts and slow consumers, and the source of truth for <strong>replay</strong>: any result can be recomputed from the raw events.</li>
+<li><span class="cl">In this project</span> Input topic <code>user-events</code> (24 partitions); output topics <code>user-features</code> and <code>product-metrics</code> (12 partitions each); a dead-letter topic for malformed events and a topic for very late events. The broker stamps each event's arrival time (<code>LogAppendTime</code>), used to measure latency.</li>
+<li><span class="cl">Interview angle</span> "Why not RabbitMQ?" It deletes messages on acknowledgement and has no partitioned replay; replay is central here.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">2</span><span class="concept-name">Consumer groups</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> A consumer group is a team of consumers sharing a topic; each partition is read by exactly one member at a time.</li>
+<li><span class="cl">Technical</span> Kafka's group coordinator assigns partitions to members and reassigns them (a <strong>rebalance</strong>) when members join or leave. Each member commits offsets after processing; a replacement resumes from the last committed offset. Maximum useful parallelism = number of partitions.</li>
+<li><span class="cl">Why it matters</span> Adding a pod adds throughput automatically; a crashed pod's partitions move to survivors.</li>
+<li><span class="cl">In this project</span> The <code>result-writer</code> application runs as two consumer groups: <code>features-<wbr>redis-<wbr>writer</code> reads <code>user-features</code> and writes Redis; <code>metrics-pg-writer</code> reads <code>product-metrics</code> and writes PostgreSQL. Offsets are committed only <strong>after</strong> the write succeeds. The cooperative-sticky assignor moves only the partitions that must move, so other writers keep working during a rebalance.</li>
+<li><span class="cl">Interview angle</span> "Does Flink use consumer-group rebalancing?" No: Flink's Kafka source assigns partitions to its own subtasks and stores offsets in checkpoints. Consumer-group scaling in this project is the writers.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">3</span><span class="concept-name">Apache Flink</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Flink is a distributed engine that runs a continuous data-processing program over a never-ending stream, keeping state and recovering from failures.</li>
+<li><span class="cl">Technical</span> A <strong>JobManager</strong> coordinates (scheduling, checkpoints, recovery); <strong>TaskManagers</strong> run the work in <strong>slots</strong>. A job is a graph of operators (source → parse → dedup → features / windows → sinks); each operator runs as several parallel <strong>subtasks</strong>. <code>keyBy(userId)</code> hash-partitions the stream so all events for one key reach the same subtask. Each subtask is single-threaded for its keys, so state needs no locks.</li>
+<li><span class="cl">Why it matters</span> It provides true event-time processing with watermarks, large keyed state on RocksDB, and exactly-once state through checkpoints.</li>
+<li><span class="cl">In this project</span> One job (<code>activity-pipeline</code>) at parallelism 12 on 3 TaskManagers × 4 slots, plus one idle spare TaskManager for fast recovery. Deployed with the Flink Kubernetes Operator on EKS.</li>
+<li><span class="cl">Interview angle</span> "Why not Kafka Streams or Spark?" Kafka Streams ties scaling to partitions and keeps state in changelog topics; Spark Structured Streaming is micro-batch with a higher latency floor.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">4</span><span class="concept-name">Event time versus processing time</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Event time is when something actually happened (on the user's phone). Processing time is when the server happens to handle it.</li>
+<li><span class="cl">Technical</span> Each event carries <code>eventTime</code>. Flink assigns it as the record's timestamp, and windows are defined in event time. Processing-time windows would count a view that happened at 12:00:59 but arrived at 12:01:03 in the wrong minute, and replaying the same events would give different answers.</li>
+<li><span class="cl">Why it matters</span> Event time gives deterministic, replayable results that match reality even when data is late or out of order.</li>
+<li><span class="cl">In this project</span> Analytics windows and feature panes use event time. Latency is measured with the Kafka append time instead, because event time includes delays the platform does not control (an offline phone).</li>
+<li><span class="cl">Interview angle</span> "Downside?" Results must wait for the watermark, and late data needs a policy.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">5</span><span class="concept-name">Watermarks</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> A watermark is Flink's running estimate of "event time has now reached t; I don't expect more events older than t".</li>
+<li><span class="cl">Technical</span> With bounded out-of-orderness B = 5 s, each source partition emits <code>watermark =<wbr> max event time seen − 5 s</code> every 200 ms. An operator's watermark is the <strong>minimum</strong> across its inputs. A window fires when the watermark passes its end. Partitions with no data for 30 s are marked idle so they do not hold the watermark back; alignment pauses partitions running more than 30 s ahead (important during replay).</li>
+<li><span class="cl">Why it matters</span> Watermarks decide when a window's result is complete enough to emit, trading latency (wait longer) against completeness (fewer late events).</li>
+<li><span class="cl">In this project</span> A minute window fires about 5 s after its end. Events up to 2 minutes late (<strong>allowed lateness</strong>) re-fire the window with corrected totals; later events go to the <code>user-events.late</code> topic instead of being silently dropped. Events stamped more than 10 minutes in the future are rejected, because one bad clock would otherwise push the watermark ahead and make everyone else late.</li>
+<li><span class="cl">Interview angle</span> "What stalls a watermark?" An idle or stuck partition, since the operator takes the minimum.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">6</span><span class="concept-name">Tumbling and sliding windows</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> A tumbling window is a fixed, non-overlapping bucket (12:00–12:01, 12:01–12:02). A sliding window is a moving range such as "the last 5 minutes".</li>
+<li><span class="cl">Technical</span> Product metrics use Flink <code>TumblingEventTimeWindows</code> of 1 minute keyed by <code>productId</code>, with an incremental aggregate (one accumulator update per event). User features need a fresh "last 5 minutes" on <strong>every</strong> event, so they use a pane-based sliding window in keyed state: ten 30-second panes; each event increments one pane, and the feature is the sum of the panes in range.</li>
+<li><span class="cl">Why it matters</span> Flink's native sliding window of 5 minutes sliding every 30 s puts each event into 10 windows and only emits every 30 s; features would be up to 30 s stale.</li>
+<li><span class="cl">In this project</span> Each window firing carries the <strong>full</strong> total (not a delta), so writing it twice is harmless. The pane approach means "last 5 minutes" is really 4.5–5 minutes, a documented approximation.</li>
+<li><span class="cl">Interview angle</span> "When would you use a session window?" For activity bursts separated by inactivity gaps, such as user sessions; not needed here.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">7</span><span class="concept-name">Keyed state and the RocksDB state backend</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Keyed state is a small per-key memory that Flink keeps for you, e.g. "the event ids I've seen for this user".</li>
+<li><span class="cl">Technical</span> After <code>keyBy</code>, each key belongs to one of 256 <strong>key groups</strong> (the max parallelism), and each key group is owned by exactly one subtask. Flink offers <code>ValueState</code>, <code>MapState</code> and timers per key. The RocksDB backend stores state on local SSD (larger than memory) and supports <strong>incremental checkpoints</strong> that upload only new files to S3.</li>
+<li><span class="cl">Why it matters</span> Counting, deduplication and windows all need memory across events, and that memory must survive failures.</li>
+<li><span class="cl">In this project</span> Per user: seen event ids, 5-minute and 1-hour panes, last activity; per product: open window accumulators. Illustratively about 1 GB for 500K active users. A timer clears a user's state 65 minutes after their last event.</li>
+<li><span class="cl">Interview angle</span> "Why 256 max parallelism?" It is the number of key groups and is fixed in the state; you can rescale up to 256 without migration.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">8</span><span class="concept-name">Deduplication</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Drop an event if the same event id has already been processed recently.</li>
+<li><span class="cl">Technical</span> Keyed by <code>userId</code>, each subtask keeps <code>MapState&lt;eventId,<wbr> eventTime&gt;</code> with a 15-minute TTL. If the id is present, drop the event and count a duplicate; otherwise store it and forward. Keying by user reuses the shuffle the features need anyway; duplicates always carry the same user, so they reach the same subtask.</li>
+<li><span class="cl">Why it matters</span> Producers retry sends after timeouts, reusing the same <code>eventId</code>; without dedup, counts and revenue would be inflated.</li>
+<li><span class="cl">In this project</span> Dedup state is checkpointed with the Kafka offsets, so after recovery a replayed event is treated exactly as the first time. Duplicates more than 15 minutes apart are not caught (documented limit). A Bloom filter was rejected: a false positive would drop a real purchase.</li>
+<li><span class="cl">Interview angle</span> "Isn't the idempotent Kafka producer enough?" It removes only broker-level duplicates from internal retries in one producer session, not application retries.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">9</span><span class="concept-name">Checkpointing</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Every 10 seconds Flink takes a consistent snapshot of all its state together with the exact Kafka positions it had read, and saves it to S3.</li>
+<li><span class="cl">Technical</span> The JobManager injects numbered <strong>barriers</strong> into every source. A barrier separates "before checkpoint n" from "after". Each operator snapshots its state when the barrier has arrived on all inputs (aligned), then forwards it. When every operator has acknowledged, the checkpoint is complete. It is a variant of the Chandy-Lamport snapshot algorithm. Unaligned checkpoints (used after a 5 s alignment timeout) also snapshot in-flight buffers so barriers do not wait behind backpressured data.</li>
+<li><span class="cl">Why it matters</span> State and input positions are consistent with each other: on recovery, rewinding Kafka to the saved offsets and restoring the saved state means every event affects state exactly once.</li>
+<li><span class="cl">In this project</span> Every 10 s, exactly-once mode, RocksDB incremental to S3, last 3 retained, up to 3 consecutive failures tolerated.</li>
+<li><span class="cl">Interview angle</span> "Does this make outputs exactly-once?" No; outputs emitted after the last checkpoint are re-emitted after recovery (Q18).</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">10</span><span class="concept-name">Delivery semantics and idempotent sinks</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> At-least-once means nothing is lost but something may arrive twice; exactly-once means each event has its effect once. Idempotent means applying something twice has the same effect as once.</li>
+<li><span class="cl">Technical</span> Kafka → Flink state is exactly-once (checkpoints). Flink → output topics is <strong>at-least-once</strong>. Writers → stores is at-least-once delivery made <strong>effectively-once</strong> by idempotent, monotonic writes: Redis features are written with a Lua compare-and-set that ignores updates older than the stored <code>as_<wbr>of_<wbr>event_<wbr>time_<wbr>ms</code>; PostgreSQL rows are upserted with absolute totals and a guard <code>WHERE new.<wbr>fire_<wbr>seq &gt;<wbr>=<wbr> old.<wbr>fire_<wbr>seq</code>.</li>
+<li><span class="cl">Why it matters</span> A transactional (exactly-once) Kafka sink only makes output visible when a checkpoint completes, which would add 10+ seconds and break the &lt; 1 s target.</li>
+<li><span class="cl">In this project</span> A crash between a write and its offset commit just causes the same values to be written again.</li>
+<li><span class="cl">Interview angle</span> "What is effectively-once?" At-least-once delivery plus idempotent processing, so stored state equals the exactly-once result.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">11</span><span class="concept-name">Backpressure</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> When a downstream step is slower than the input, it signals upstream to slow down instead of dropping data or running out of memory.</li>
+<li><span class="cl">Technical</span> Flink uses <strong>credit-based flow control</strong>: a receiving task grants credits (free network buffers) to its senders; with no credit, senders stop, their buffers fill, and pressure propagates back to the Kafka source, which simply reads more slowly. Kafka holds the difference as <strong>consumer lag</strong>. To diagnose, find the most downstream operator that is busy (near 1000 ms/s) but not itself backpressured.</li>
+<li><span class="cl">Why it matters</span> Bursts and slow stores are normal; the system must degrade into lag, not data loss or crashes.</li>
+<li><span class="cl">In this project</span> Flink writes to Kafka (fast), so a slow Redis or PostgreSQL shows up as <strong>writer lag</strong>, not Flink backpressure. Writers use bounded batches of 500 and scale up to 12 replicas; network buffer timeout lowered to 20 ms with buffer debloating keeps latency low.</li>
+<li><span class="cl">Interview angle</span> "What does backpressure do to checkpoints?" Aligned barriers queue behind full buffers; unaligned checkpoints avoid that.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">12</span><span class="concept-name">Failure recovery and event replay</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> After a crash, rewind to the last saved snapshot and re-process from there. Separately, operators can deliberately re-process past events to fix a bug.</li>
+<li><span class="cl">Technical</span> <strong>Recovery replay</strong> (automatic): restore the last completed checkpoint, seek sources to its offsets, re-process events since then and catch up the backlog. <strong>Operational replay</strong> (manual): deploy a job version from a savepoint, or with fresh state from Kafka offsets at a timestamp T (within the 7-day retention), and let it overwrite results.</li>
+<li><span class="cl">Why it matters</span> Correct results after failures and the ability to fix past mistakes without a separate batch system.</li>
+<li><span class="cl">In this project</span> Recovery time = detection + restart delay + slot allocation + state restore + backlog drain, with drain = backlog / (catch-up rate − input rate). A <strong>spare TaskManager</strong> removes 15–60 s of pod scheduling. For operational replay, start ~1 hour before the period of interest so dedup and feature state are warm.</li>
+<li><span class="cl">Interview angle</span> "Why is replay safe for Redis and PostgreSQL?" Overwrite semantics and monotonic guards.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">13</span><span class="concept-name">Partitions versus parallelism</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Partitions split the input; parallelism is how many copies of each operator run. They must be balanced.</li>
+<li><span class="cl">Technical</span> Each Kafka partition is read by exactly one source subtask. With 6 partitions over 4 subtasks, assignment is 2, 2, 1, 1, so two subtasks each carry a third of the load and cap the job. After <code>keyBy</code>, load depends on key groups, not partitions. Partition counts should be planned up front, because adding partitions remaps keys.</li>
+<li><span class="cl">Why it matters</span> A pipeline runs only as fast as its slowest subtask.</li>
+<li><span class="cl">In this project</span> Baseline 6 partitions at parallelism 4; optimised 24 partitions at parallelism 12 (2 each, even) with max parallelism 256. Plus removing Kryo serialisation, one redundant shuffle and per-record writes. This is the basis of the ~2× target.</li>
+<li><span class="cl">Interview angle</span> "Isn't that just more machines?" Partly: the baseline left slots idle on the same cluster, which must be disclosed (Q21).</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">14</span><span class="concept-name">Redis online features</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Redis is an in-memory key-value store; the ML model reads a user's latest features from it in about a millisecond.</li>
+<li><span class="cl">Technical</span> One hash per user, <code>feat:u:{userId}</code>, with fields such as <code>views_5m</code>, <code>purchase_<wbr>amount_<wbr>1h_<wbr>minor</code>, <code>last_event_type</code> and <code>as_<wbr>of_<wbr>event_<wbr>time_<wbr>ms</code>, TTL 2 hours refreshed on each write. Writers send pipelined Lua scripts (<code>EVALSHA</code>) in batches of 500; each script atomically compares event times and writes only if newer.</li>
+<li><span class="cl">Why it matters</span> Features must be served in single-digit milliseconds and must never move backwards in time, even during replays.</li>
+<li><span class="cl">In this project</span> Values are "as of the user's latest event time", not "as of now"; a consumer should treat them as stale if that time is more than 5 minutes ago. A missing key means no recent activity.</li>
+<li><span class="cl">Interview angle</span> "What if Redis fails over and loses recent writes?" The next update for that user rewrites the full feature set; TTL bounds staleness.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">15</span><span class="concept-name">PostgreSQL product analytics</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Per-minute product metrics are stored as rows in a relational table so dashboards can query them with SQL.</li>
+<li><span class="cl">Technical</span> Table <code>product_<wbr>metrics_<wbr>minute</code>, primary key <code>(<wbr>product_<wbr>id,<wbr> window_<wbr>start)</code>, daily partitions for retention. Writers batch 500 upserts per transaction: <code>INSERT … ON CONFLICT (<wbr>product_<wbr>id,<wbr> window_<wbr>start) DO UPDATE SET … WHERE EXCLUDED.<wbr>fire_<wbr>seq &gt;<wbr>=<wbr> t.<wbr>fire_<wbr>seq</code>.</li>
+<li><span class="cl">Why it matters</span> SQL gives ad-hoc queries (top products, conversion rates) and joins with the product catalogue.</li>
+<li><span class="cl">In this project</span> Absolute totals plus the <code>fire_seq</code> guard mean duplicates overwrite with the same values and an older firing can never overwrite a newer late correction.</li>
+<li><span class="cl">Interview angle</span> "Why not ClickHouse or Druid?" Minute-grain data is small; PostgreSQL is on the stack and supports upserts. A columnar store is the upgrade for heavy scans.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">16</span><span class="concept-name">Throughput and latency metrics</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Throughput is events processed per second; p95 latency is the delay that 95% of events beat.</li>
+<li><span class="cl">Technical</span> <strong>Processing</strong> throughput counts events Flink consumes and fully processes per second, valid only while consumer lag stays flat; <strong>ingestion</strong> throughput (events appended to Kafka) can be much higher. Processing latency = time the feature is visible in Redis − the event's Kafka append time. Recovery time (RTO) = failure until lag returns to its normal band and stays there for 30 s.</li>
+<li><span class="cl">Why it matters</span> These definitions are the resume numbers; vague definitions are easy to challenge.</li>
+<li><span class="cl">In this project</span> 10K events/s across 12 subtasks is about 830 events/s per subtask. A healthy event takes roughly 50–250 ms end to end (illustrative), leaving headroom under 1 s for checkpoint alignment and bursts.</li>
+<li><span class="cl">Interview angle</span> "Measured or target?" Targets with a documented method (Part 6).</li>
+</ul></div>
+<div class="box box-caution keep"><div class="box-label">Resume flag</div>
+<p>Say these precisely. (1) "Consumer-group scaling" applies to the result-writer services; Flink's Kafka source assigns partitions itself, and Flink scales by changing parallelism from a savepoint. (2) "10K+ events/sec under 1 sec p95" means <strong>processing</strong> throughput at stable lag and <strong>processing</strong> latency (Kafka append → Redis), not ingestion rate, not event-time latency, and not analytics, which by design wait for the minute window plus the watermark. (3) "&lt; 30 sec recovery" is defined for a TaskManager failure with a spare TaskManager; JobManager failover can take longer. (4) "~2×" compares against a disclosed baseline that left slots idle. (5) The design gives exactly-once <strong>state</strong> and effectively-once <strong>results</strong>, not end-to-end exactly-once delivery. All four numbers are benchmark targets, not measurements.</p>
+</div>
+<div class="keephead"><div class="part-banner" id="part-2" data-part="2"><span class="part-kicker">Part 2</span><h1 class="part-title">High-Level Design and Architecture</h1></div><h2 id="s-21-technology-stack"><span class="secnum">2.1</span>Technology stack</h2></div>
+
+<div class="table-block"><table>
+<thead>
+<tr>
+<th>Technology</th>
+<th>Purpose in the project</th>
+<th>Why it was selected</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Java 17</td>
+<td>Flink job, writers, event generator</td>
+<td>First-class Flink and Kafka APIs</td>
+</tr>
+<tr>
+<td>Apache Kafka (Amazon MSK)</td>
+<td>Input log, output topics, DLQ and late topics</td>
+<td>Durable, partitioned, replayable; consumer groups</td>
+</tr>
+<tr>
+<td>Apache Flink 1.20</td>
+<td>Parsing, event time, dedup, features, windows, checkpoints</td>
+<td>True event-time processing, RocksDB keyed state, barrier checkpoints, credit-based backpressure</td>
+</tr>
+<tr>
+<td>RocksDB state backend + S3</td>
+<td>Large keyed state; incremental checkpoints and savepoints</td>
+<td>State larger than memory; checkpoint time proportional to changes</td>
+</tr>
+<tr>
+<td>Redis (ElastiCache)</td>
+<td>Online user features</td>
+<td>Sub-millisecond hash reads, Lua for atomic compare-and-set, TTL</td>
+</tr>
+<tr>
+<td>PostgreSQL (RDS)</td>
+<td>Per-minute product analytics</td>
+<td>SQL, upserts, partitioning</td>
+</tr>
+<tr>
+<td>Kubernetes (EKS) + Flink Operator</td>
+<td>Runs Flink, writers and generator; savepoint-based upgrades</td>
+<td>Declarative deployments, HA, scaling</td>
+</tr>
+<tr>
+<td>Prometheus + Grafana</td>
+<td>Lag, busy/backpressure, checkpoint and latency metrics</td>
+<td>Flink and Kafka metrics in one place</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>How they work together.</strong> Producers append events to Kafka. Flink reads them, keeps per-user and per-product state in RocksDB, snapshots that state with the Kafka offsets to S3 every 10 seconds, and writes results to two Kafka output topics. Two consumer groups of a small Java writer service move those results into Redis and PostgreSQL with idempotent writes. Everything runs on EKS in one AWS region across three availability zones.</p>
+<div class="keephead"><h2 id="s-22-high-level-architecture"><span class="secnum">2.2</span>High-level architecture</h2><p><strong>In simple words.</strong> Events go into one Kafka topic. One Flink job cleans them, removes duplicates and computes two things from the same event: per-user features (updated on every event) and per-product minute totals (emitted when each minute closes). Flink writes both to Kafka, and small writer services copy them into Redis and PostgreSQL.</p></div>
+
+
+<figure class="diagram" id="fig-1"><img src="diagrams/figure-1.svg" alt="Figure 1" style="width:409.0px"><figcaption><span class="fig-num">Figure 1</span><span class="fig-sep"> — </span>The simple picture: Kafka in, Flink in the middle, Kafka out, writers to the stores</figcaption></figure>
+<p><strong>Component responsibilities</strong></p>
+<div class="table-block"><table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Producers / <code>event-generator</code></td>
+<td>Send JSON events keyed by <code>userId</code> with <code>acks=all</code>; the generator also injects duplicates, disorder and late events for tests and benchmarks</td>
+</tr>
+<tr>
+<td>Kafka <code>user-events</code></td>
+<td>Durable input log (24 partitions, RF 3, 7 days); replay source</td>
+</tr>
+<tr>
+<td>Flink <code>activity-pipeline</code></td>
+<td>Parse and validate (bad events to DLQ), assign event time and watermarks, dedup, user features, product windows, late-event routing, checkpoints</td>
+</tr>
+<tr>
+<td>Kafka <code>user-features</code>, <code>product-metrics</code></td>
+<td>Durable outputs (12 partitions each) that decouple processing from serving</td>
+</tr>
+<tr>
+<td><code>features-<wbr>redis-<wbr>writer</code> group</td>
+<td>Batch compare-and-set writes of features to Redis</td>
+</tr>
+<tr>
+<td><code>metrics-pg-writer</code> group</td>
+<td>Batch idempotent upserts of minute metrics to PostgreSQL</td>
+</tr>
+<tr>
+<td>S3</td>
+<td>Checkpoints, savepoints, JobManager HA metadata</td>
+</tr>
+<tr>
+<td>Redis / PostgreSQL</td>
+<td>Serving stores for models and dashboards</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>How components communicate.</strong> All pipeline links are asynchronous and pull-based. Producers to Kafka: Kafka producer with idempotence. Kafka to Flink: Flink's <code>KafkaSource</code>, offsets stored in checkpoints. Inside Flink: network shuffles on <code>keyBy</code> with credit-based flow control. Flink to output topics: <code>KafkaSink</code>, at-least-once. Writers: Kafka consumer groups with manual offset commits after each batch is written. Model services read Redis with <code>HGETALL</code>; dashboards query PostgreSQL.</p>
+
+<figure class="diagram" id="fig-2"><img src="diagrams/figure-2.svg" alt="Figure 2" style="width:529.4px"><figcaption><span class="fig-num">Figure 2</span><span class="fig-sep"> — </span>Detailed HLD: ingestion, the Flink job's operators, and the output and serving lane</figcaption></figure>
+<p><strong>Complete data flow and how one event feeds both outputs.</strong> After parsing and dedup (keyed by <code>userId</code>), the stream splits. <strong>Path 1, user features:</strong> on the same subtask (no extra shuffle), the event updates that user's panes and Flink immediately emits a <code>FeatureUpdate</code> with the full current feature set to <code>user-features</code>; the Redis writer applies it. <strong>Path 2, product analytics:</strong> the same event is re-shuffled by <code>productId</code> to the window operator and added to its minute's accumulator; when the watermark passes the minute's end, a <code>ProductMetric</code> with <code>fire_seq = 1</code> goes to <code>product-metrics</code>, and the PostgreSQL writer upserts it. Malformed events go to <code>user-events.dlq</code>; events later than the 2-minute allowed lateness go to <code>user-events.late</code>.</p>
+<p><strong>Where data is stored.</strong> Raw events: Kafka, 7 days (the replay source). Dedup sets, panes and open windows: Flink keyed state in RocksDB on local SSD, snapshotted to S3. Outputs: Kafka, 3 days. Serving copies: Redis (TTL 2 h) and PostgreSQL (daily partitions). Redis and PostgreSQL are derived and can be rebuilt by replay.</p>
+<p><strong>How it scales.</strong></p>
+<ul>
+<li><strong>Kafka:</strong> partitions are planned up front (24 input); increasing them later remaps keys.</li>
+<li><strong>Flink:</strong> change parallelism by restarting from a savepoint; source parallelism ≤ partitions; keyed parallelism ≤ 256.</li>
+<li><strong>Writers:</strong> add replicas to each consumer group, up to 12 (the output partition count).</li>
+<li><strong>Stores:</strong> scale Redis and PostgreSQL vertically; Redis cluster mode if needed.</li>
+</ul>
+<p><strong>What happens when a major component fails</strong></p>
+<div class="table-block"><table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>What happens</th>
+<th>Effect on results</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TaskManager crash</td>
+<td>JobManager restarts tasks on surviving + spare slots from the last checkpoint; sources rewind</td>
+<td>None for state; recent outputs re-emitted (idempotent)</td>
+</tr>
+<tr>
+<td>JobManager crash</td>
+<td>New leader reads the latest checkpoint pointer (Kubernetes HA + S3) and restores</td>
+<td>Same, but may exceed 30 s</td>
+</tr>
+<tr>
+<td>Kafka broker failure</td>
+<td>Leader election moves partitions; producers and consumers fail over</td>
+<td>None (RF 3, 2 in-sync)</td>
+</tr>
+<tr>
+<td>Redis or PostgreSQL down</td>
+<td>Writers retry with backoff and do not commit offsets; lag grows; Flink unaffected</td>
+<td>Stale reads during the outage; nothing lost</td>
+</tr>
+<tr>
+<td>Writer pod crash</td>
+<td>Group rebalance; uncommitted batch redelivered</td>
+<td>None (idempotent writes)</td>
+</tr>
+<tr>
+<td>Checkpoint failures (S3)</td>
+<td>Job continues; after 3 consecutive failures it fails and restarts</td>
+<td>More replay after recovery</td>
+</tr>
+</tbody>
+</table></div>
+<div class="keephead"><h2 id="s-23-important-architectural-decisions"><span class="secnum">2.3</span>Important architectural decisions</h2><p><strong>1. Flink for processing.</strong> <em>Chosen:</em> Flink. <em>Why:</em> event time with watermarks, large keyed state, barrier checkpoints, scaling independent of partitions. <em>Alternative:</em> Kafka Streams or Spark Structured Streaming. <em>Why not:</em> Kafka Streams couples scaling to partitions and keeps state in changelog topics; Spark is micro-batch with higher latency. <em>Trade-off:</em> operating a JobManager, checkpoints and the operator.</p></div>
+
+<p><strong>2. Event time with a 5 s watermark bound and 2 min allowed lateness.</strong> <em>Chosen:</em> event-time windows with late re-firing and a late topic. <em>Why:</em> deterministic, replayable results that tolerate moderate disorder. <em>Alternative:</em> processing-time windows. <em>Why not:</em> wrong buckets for late events and different results on replay. <em>Trade-off:</em> analytics wait about 5 s past each window end; very late events need a separate correction path.</p>
+<p><strong>3. A Kafka hop between Flink and the stores.</strong> <em>Chosen:</em> Flink → output topics → writer consumer groups → stores. <em>Why:</em> a slow database becomes writer lag instead of Flink backpressure and slow checkpoints; writers scale independently; stores can be rebuilt from the output topics. <em>Alternative:</em> Flink sinks writing directly to Redis and PostgreSQL. <em>Why not:</em> a slow store would stall the whole job. <em>Trade-off:</em> one extra hop (about 5–50 ms) and one more deployable.</p>
+<p><strong>4. At-least-once output with idempotent sinks.</strong> <em>Chosen:</em> at-least-once <code>KafkaSink</code>, absolute values and monotonic guards downstream. <em>Why:</em> sub-second latency. <em>Alternative:</em> exactly-once transactional Kafka sink. <em>Why not:</em> output becomes visible only after each checkpoint commits, adding 10+ s. <em>Trade-off:</em> every sink must be idempotent.</p>
+<p><strong>5. Pane-based sliding features in keyed state.</strong> <em>Chosen:</em> ten 30 s panes, updated per event. <em>Why:</em> per-event freshness with one pane update per event. <em>Alternative:</em> Flink's native sliding window. <em>Why not:</em> results only every 30 s, and each event updates 10 windows. <em>Trade-off:</em> "5 minutes" is 4.5–5 minutes; custom code to test.</p>
+<p><strong>6. 24 partitions, parallelism 12, a spare TaskManager.</strong> <em>Chosen:</em> even partition assignment with headroom, max parallelism fixed at 256, one idle TaskManager. <em>Why:</em> removes stragglers (~2× target) and pod scheduling from recovery (&lt; 30 s target). <em>Alternative:</em> 6 partitions at parallelism 4; rely on Kubernetes to reschedule. <em>Why not:</em> uneven load; 15–60 s to get a new pod. <em>Trade-off:</em> broker overhead and paying for idle capacity.</p>
+<div class="keephead"><div class="part-banner" id="part-3" data-part="3"><span class="part-kicker">Part 3</span><h1 class="part-title">How the Project Works</h1></div><div class="keephead"><h2 id="s-31-one-complete-end-to-end-request-flow"><span class="secnum">3.1</span>One complete end-to-end request flow</h2><p>A user views a product at 12:00:58. Figure 3 shows the two output paths.</p></div></div>
+
+
+
+<figure class="diagram" id="fig-3"><img src="diagrams/figure-3.svg" alt="Figure 3" style="width:657.6px"><figcaption><span class="fig-num">Figure 3</span><span class="fig-sep"> — </span>One event: a feature update reaches Redis within a second; the product window reaches PostgreSQL after the minute closes</figcaption></figure>
+<ol>
+<li><strong>Produce.</strong> The app sends the event keyed by <code>userId</code> with <code>acks=all</code>. The broker appends it to partition <code>hash(userId) % 24</code>, stamps the append time, replicates it to two in-sync followers and acknowledges.</li>
+<li><strong>Fetch.</strong> The Flink source subtask that owns that partition fetches a batch.</li>
+<li><strong>Validate.</strong> The event is parsed; malformed JSON, missing fields or a timestamp more than 10 minutes in the future go to the DLQ side output, and the stream continues.</li>
+<li><strong>Event time.</strong> The timestamp is set from <code>eventTime</code>; the partition's watermark tracker updates its maximum.</li>
+<li><strong>Shuffle by user.</strong> <code>keyBy(userId)</code> sends the event to the subtask that owns the user's key group.</li>
+<li><strong>Dedup.</strong> If the <code>eventId</code> is already in the user's 15-minute set, drop it; otherwise remember it and continue.</li>
+<li><strong>User features.</strong> On the same subtask, update the 30-second pane, recompute <code>views_5m</code> and the other features as of the user's latest event time, and emit a <code>FeatureUpdate</code> to <code>user-features</code>.</li>
+<li><strong>Product window.</strong> The deduplicated event is also shuffled by <code>productId</code> and added to the <code>[12:00, 12:01)</code> accumulator.</li>
+<li><strong>Serve features.</strong> The Redis writer polls a batch, runs the compare-and-set script for each user (write only if newer), then commits its offsets. The feature is visible about 50–250 ms after the Kafka append (illustrative).</li>
+<li><strong>Window fires.</strong> Once the operator's watermark (the minimum over its inputs) passes 12:01, at roughly 12:01:05, the window emits its full totals with <code>fire_seq = 1</code>.</li>
+<li><strong>Serve analytics.</strong> The PostgreSQL writer upserts the row in a batch transaction, then commits offsets.</li>
+<li><strong>Checkpoint (concurrently, every 10 s).</strong> Barriers capture source offsets and all state to S3.</li>
+</ol>
+<h2 id="s-32-important-alternative-scenarios"><span class="secnum">3.2</span>Important alternative scenarios</h2>
+<p><strong>Scenario A: A duplicate event.</strong> A producer times out waiting for an acknowledgement and resends the same event (same <code>eventId</code>). Both copies land on the same partition because they share the key. The first passes dedup and is processed; the second finds its id in the user's <code>MapState</code> and is dropped, incrementing a duplicates metric. If the copy arrived more than 15 minutes later, it would not be caught (documented limit).</p>
+<p><strong>Scenario B: A late event.</strong> The minute <code>[12:00, 12:01)</code> fired at watermark 12:01 with <code>fire_seq = 1</code>. An event with time 12:00:40 arrives when the watermark is 12:02:10, within the 2-minute allowed lateness: the accumulator is updated and the window re-fires with <code>fire_seq = 2</code> and full corrected totals, which the guarded upsert writes over the older row. Another event with time 12:00:50 arrives at watermark 12:03:30, beyond lateness: it goes to <code>user-events.late</code> for an optional correction job instead of being silently dropped. The feature path handles the same event independently: if it is within the user's 5-minute pane range it is counted, otherwise skipped.</p>
+<p><strong>Scenario C: A TaskManager dies (checkpoint recovery).</strong></p>
+
+<figure class="diagram" id="fig-4"><img src="diagrams/figure-4.svg" alt="Figure 4" style="width:625.1px"><figcaption><span class="fig-num">Figure 4</span><span class="fig-sep"> — </span>TaskManager failure: restart on spare slots, restore the checkpoint, rewind Kafka and catch up</figcaption></figure>
+<p>The JobManager notices the lost TaskManager through the broken connection (seconds) or the 10 s heartbeat timeout. Because <code>keyBy</code> connects every task to every other, the whole job restarts after a 1 s delay. The scheduler needs 12 slots: 8 from the healthy TaskManagers and 4 immediately from the spare (without it, Kubernetes would need 15–60 s to schedule and start a new pod). Subtasks restore their key groups from checkpoint <code>chk-1842</code> (local copies where possible, S3 otherwise), sources seek to the checkpoint's offsets, and the ~6 seconds of events since the checkpoint are reprocessed; outputs for them are re-emitted and absorbed by idempotent writes. Then the backlog that built up during the outage drains at the job's maximum rate. Recovery is declared when lag is back in its normal band for 30 s.</p>
+<h2 id="s-33-important-guarantees-and-limitations"><span class="secnum">3.3</span>Important guarantees and limitations</h2>
+<div class="table-block"><table>
+<thead>
+<tr>
+<th>Guarantee</th>
+<th>Holds?</th>
+<th>Where it comes from</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Each event affects Flink state exactly once</td>
+<td>Yes</td>
+<td>Checkpoint = offsets + state; rewind on recovery</td>
+</tr>
+<tr>
+<td>No acknowledged event lost</td>
+<td>Yes</td>
+<td>Kafka RF 3, <code>acks=all</code>, <code>min.<wbr>insync.<wbr>replicas=<wbr>2</code>, 7-day retention</td>
+</tr>
+<tr>
+<td>Output records delivered exactly once</td>
+<td>No</td>
+<td>At-least-once sink; duplicates after recovery</td>
+</tr>
+<tr>
+<td>Stored results equal exactly-once results</td>
+<td>Yes, after convergence</td>
+<td>Absolute values + monotonic guards (<code>as_<wbr>of_<wbr>event_<wbr>time_<wbr>ms</code>, <code>fire_seq</code>)</td>
+</tr>
+<tr>
+<td>Duplicates removed</td>
+<td>Within 15 min</td>
+<td>Keyed <code>MapState</code> with TTL</td>
+</tr>
+<tr>
+<td>Window results final at first firing</td>
+<td>No</td>
+<td>Late re-firings within 2 min can correct them</td>
+</tr>
+<tr>
+<td>Very late events counted in analytics</td>
+<td>No</td>
+<td>Routed to <code>user-events.late</code></td>
+</tr>
+<tr>
+<td>Redis and PostgreSQL agree at every instant</td>
+<td>No</td>
+<td>Independent outputs with different timing</td>
+</tr>
+<tr>
+<td>Per-user ordering</td>
+<td>Yes</td>
+<td>Same key → same partition → same subtask</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Where consistency comes from:</strong> checkpoints tie state to input positions, Kafka retention makes everything recomputable, and idempotent, monotonic sink writes make re-delivery harmless. <strong>Failures</strong> are handled by restoring and replaying (Flink), retrying without committing offsets (writers) and buffering as lag (Kafka). <strong>Accepted trade-offs:</strong> analytics wait for windows plus the watermark; a 15-minute dedup horizon; very late events excluded; approximate pane boundaries; JobManager failover may exceed 30 s.</p>
+<div class="keephead"><div class="part-banner" id="part-4" data-part="4"><span class="part-kicker">Part 4</span><h1 class="part-title">Complete Interview Explanation</h1></div><h2 id="s-41-two-minute-explanation"><span class="secnum">4.1</span>Two-minute explanation</h2></div>
+
+<div class="box box-say"><div class="box-label">Say it aloud</div>
+<p>"I built a real-time event processing platform on Kafka and Apache Flink. An e-commerce app sends user events like views, clicks and purchases, and the platform turns them, within about a second, into two things: per-user features in Redis that ML models read, like 'views in the last five minutes', and per-product, per-minute analytics in PostgreSQL for dashboards.</p>
+<p>Events go into a Kafka topic keyed by user. A single Flink job parses them, assigns event time with watermarks so late and out-of-order events land in the right window, removes duplicates using keyed state, updates sliding-window user features on every event, and computes one-minute tumbling windows per product. Flink writes results to Kafka output topics, and two consumer groups of writer services apply them to Redis and PostgreSQL with idempotent writes.</p>
+<p>For reliability, Flink checkpoints its state and Kafka offsets to S3 every ten seconds, so after a failure it rewinds and every event affects state exactly once; the sinks are idempotent, so re-sent results are harmless. A spare TaskManager makes recovery fast.</p>
+<p>The targets were 10K events per second at under one second p95 processing latency, under 30-second recovery, and about 2× throughput from rebalancing partitions and parallelism. Those are benchmark targets with a written method, not production measurements."</p>
+</div>
+<h2 id="s-42-five-minute-explanation"><span class="secnum">4.2</span>Five-minute explanation</h2>
+<div class="box box-say"><div class="box-label">Say it aloud</div>
+<p>"<strong>Problem.</strong> Two consumers need the same event stream processed in near real time: ML models need fresh per-user features, and analysts need per-product minute metrics. Events arrive out of order, sometimes twice, and in bursts, and machines fail. Results must still be correct.</p>
+<p><strong>Requirements.</strong> Ingest into Kafka; validate and route bad events aside; event time with five seconds of tolerated disorder; dedup within 15 minutes; per-user sliding features updated on every event; one-minute product windows with two minutes of allowed lateness; idempotent writes to Redis and PostgreSQL; automatic recovery; and replay from any time in the last seven days.</p>
+<p><strong>Technology.</strong> Kafka as the durable, replayable log. Flink because it has real event-time processing, large keyed state on RocksDB, and barrier-based checkpoints. Redis for millisecond feature reads, PostgreSQL for SQL analytics, all on EKS with S3 for checkpoints.</p>
+<p><strong>Architecture.</strong> [Draw Figure 2.] Producers write to <code>user-events</code>, 24 partitions keyed by user. The Flink job runs at parallelism 12: source and parse, event time and watermarks, dedup keyed by user, then the stream splits. User features stay on the same subtask; product metrics are re-keyed by product into tumbling windows. Both go to Kafka output topics, and two writer consumer groups apply them to the stores.</p>
+<p><strong>Key decisions.</strong> I put a Kafka hop before the stores so a slow database shows up as writer lag instead of backpressuring Flink. I chose at-least-once output with idempotent sinks over Flink's transactional sink, because the transactional one only publishes after each checkpoint, which would cost ten seconds of latency. For features I used 30-second panes in keyed state so 'last five minutes' updates on every event.</p>
+<p><strong>Reliability and performance.</strong> Checkpoints every ten seconds give exactly-once state; Redis writes use a Lua compare-and-set on event time and PostgreSQL upserts are guarded by a fire sequence, so duplicates and replays are harmless. Backpressure is Flink's credit-based flow control, with Kafka absorbing bursts as lag. For throughput, I moved from six partitions at parallelism four, which left two subtasks overloaded, to 24 at parallelism 12, and removed Kryo serialisation and a redundant shuffle. The 10K per second, sub-second p95, 30-second recovery and 2× numbers are targets I designed for."</p>
+</div>
+<h2 id="s-43-ten-minute-explanation"><span class="secnum">4.3</span>Ten-minute explanation</h2>
+<div class="box box-say"><div class="box-label">Say it aloud</div>
+<p>"<strong>Motivation.</strong> Stream processing is where time semantics, state, exactly-once, backpressure and recovery all meet. I scoped it to one realistic case, e-commerce activity, with two very different outputs: per-event features and per-minute analytics.</p>
+<p><strong>Architecture.</strong> [Draw Figure 2.] Kafka on MSK with <code>user-events</code> at 24 partitions, replication three, seven-day retention, keyed by user so one user's events stay ordered. The broker stamps append time, which I use for latency measurement. One Flink job, deployed by the Flink Kubernetes Operator, on three TaskManagers with four slots each, plus a spare.</p>
+<p><strong>Time.</strong> Each event carries its own event time. Watermarks are max event time seen minus five seconds, emitted per partition, and an operator's watermark is the minimum of its inputs. Idle partitions are excluded after 30 seconds so they don't freeze the watermark, and I reject events more than ten minutes in the future, because one bad clock would push the watermark ahead and make everyone else late. A minute window fires about five seconds after it ends. Up to two minutes late, it re-fires with corrected totals; beyond that, events go to a late topic rather than being silently dropped.</p>
+<p><strong>State.</strong> After <code>keyBy(userId)</code>, each user lives in one of 256 key groups owned by exactly one subtask, so state needs no locks. Dedup is a MapState of event ids with a 15-minute TTL. Features use ten 30-second panes for five minutes and twelve five-minute panes for one hour of purchases. Each event updates one pane, and the feature is the sum, emitted immediately. Product metrics are a standard tumbling window with an incremental aggregate. State lives in RocksDB on local SSD, around a gigabyte for half a million active users, illustratively.</p>
+<p><strong>Checkpoints.</strong> Every ten seconds the JobManager injects barriers at the sources. Each operator snapshots when the barrier has arrived on all inputs, so the checkpoint is a consistent cut of offsets plus state. If backpressure delays alignment for more than five seconds, Flink switches to unaligned checkpoints. RocksDB checkpoints are incremental, so only new files go to S3.</p>
+<p><strong>Outputs and exactly-once.</strong> State is exactly-once, but output to Kafka is at-least-once: anything emitted after the last checkpoint is emitted again after recovery. I made that harmless downstream. Feature updates carry the full feature set and an as-of event time, and the Redis writer uses a Lua script that ignores anything older than what's stored. Window results carry full totals and a fire sequence, and the PostgreSQL upsert only overwrites when the sequence is the same or newer. Writers commit Kafka offsets only after the write succeeds, so a crash in between just rewrites the same values. That's effectively-once.</p>
+<p><strong>Scaling and backpressure.</strong> Writers are consumer groups, so I scale them by adding pods up to 12, and the cooperative-sticky assignor keeps rebalances small. Inside Flink, credit-based flow control propagates pressure back to the source, and Kafka holds the backlog as lag. To diagnose I look for the most downstream operator that is busy but not backpressured. I also lowered the network buffer timeout to 20 milliseconds so shuffles don't add 100 milliseconds each.</p>
+<p><strong>Recovery.</strong> If a TaskManager dies, detection takes a few seconds, up to the ten-second heartbeat timeout; the job restarts after one second on the surviving slots plus the spare, restores state from the last checkpoint, rewinds Kafka, replays the few seconds since the checkpoint and then drains the backlog. Recovery time is detection plus restart plus restore plus drain, and drain depends on headroom: backlog divided by catch-up rate minus input rate. That's why the throughput work matters for recovery too. Operational replay is a separate tool: start a job from a timestamp, an hour early to warm state, and let it overwrite results.</p>
+<p><strong>Performance and numbers.</strong> The baseline had six partitions at parallelism four, so two source subtasks each carried a third of the input, and Kryo serialisation plus a redundant shuffle added per-record cost. The optimised version has 24 partitions at parallelism 12, POJO serialisation, one fewer shuffle and batched writes. I'd measure max sustainable throughput with a step ramp where lag stays flat and p95 stays under a second, three runs, plus an ablation. All four numbers are targets, and I'd disclose that part of the 2× is using slots the baseline left idle.</p>
+<p><strong>Limitations.</strong> Late events beyond two minutes are excluded from analytics, dedup only covers 15 minutes, hot keys concentrate on one subtask, partition counts are fixed up front, JobManager failover can exceed 30 seconds, and it's single-region. Next I'd add a correction job for the late topic, two-phase aggregation for hot keys, a schema registry with Avro, and autoscaling."</p>
+</div>
+<div class="keephead"><div class="part-banner" id="part-5" data-part="5"><span class="part-kicker">Part 5</span><h1 class="part-title">Interview Questions and Answers</h1></div><div class="keephead"><h2 id="s-51-basic-understanding"><span class="secnum">5.1</span>Basic understanding</h2><h4 class="question" id="q1"><span class="qnum">Q1</span><span class="qtext">What does your real-time event processing platform do?</span><span class="qlevel q-easy">Easy</span></h4></div></div>
+
+
+<p>It consumes a stream of user-activity events (views, clicks, add-to-cart, purchases) from Kafka and, with an Apache Flink job, turns them into two continuously updated results. First, online user features in Redis, such as views, clicks and purchases in the last 5 minutes and spend in the last hour, updated on every event and read by ML models in milliseconds. Second, per-product, per-minute analytics in PostgreSQL for dashboards. The job handles out-of-order events with event time and watermarks, removes duplicates with keyed state, and checkpoints its state with the Kafka offsets every 10 seconds so it can recover without losing or double-counting events. Results go through Kafka output topics to writer consumer groups that write the stores idempotently. Targets: 10K+ events/s, under 1 s p95 processing latency, under 30 s recovery.</p>
+<h4 class="question" id="q2"><span class="qnum">Q2</span><span class="qtext">Why put Kafka in front of Flink?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Kafka is a durable, replicated, append-only log that decouples producers from processing. Producers write at their own rate; Flink reads at its own rate; bursts and slow periods become consumer lag rather than data loss. Events are retained for 7 days, so Kafka is the source of truth for replay: after a failure, Flink rewinds to checkpointed offsets, and after a bug fix, operators can reprocess from any point in the retention window. Partitioning by <code>userId</code> gives per-user ordering and lets Flink read partitions in parallel. Replication factor 3 with <code>acks=all</code> and <code>min.<wbr>insync.<wbr>replicas=<wbr>2</code> means an acknowledged event survives a broker failure. A traditional queue such as RabbitMQ deletes messages on acknowledgement and has no partitioned replay, which would make recovery and backfills much harder.</p>
+<h4 class="question" id="q3"><span class="qnum">Q3</span><span class="qtext">Explain Kafka topics, partitions and offsets as used here.</span><span class="qlevel q-easy">Easy</span></h4>
+<p>A topic is a named log; this project has <code>user-events</code> (input), <code>user-features</code> and <code>product-metrics</code> (outputs), plus a dead-letter and a late-events topic. Each topic is divided into partitions, which are the unit of parallelism and ordering: <code>user-events</code> has 24. The producer hashes the key (<code>userId</code>) to choose the partition, so all of one user's events go to one partition and stay in order. Each event in a partition gets a sequential offset, and a consumer's position is just "the next offset to read" per partition. Flink stores those offsets inside its checkpoints; the writer services commit them to Kafka after writing. Order is guaranteed only within a partition, not across partitions. Partition counts are chosen up front because adding partitions later changes which partition a key maps to, which breaks per-key ordering across the change.</p>
+<h4 class="question" id="q4"><span class="qnum">Q4</span><span class="qtext">What are consumer groups and how did you use them for scaling?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>A consumer group is a set of consumers sharing a topic, where Kafka assigns each partition to exactly one member. Adding members spreads partitions across more consumers; if one dies, its partitions are reassigned in a rebalance, and the replacement resumes from the last committed offset. In this project the <code>result-writer</code> service runs as two groups: <code>features-<wbr>redis-<wbr>writer</code> on <code>user-features</code> and <code>metrics-pg-writer</code> on <code>product-metrics</code>. Each writer polls up to 500 records, writes them as a batch (pipelined Lua scripts to Redis or one PostgreSQL transaction) and only then commits offsets. To scale, I add replicas up to the 12 partitions per output topic; beyond that, extra replicas sit idle. The cooperative-sticky assignor moves only the partitions that need to move, and a revocation hook flushes and commits the current batch before giving a partition up.</p>
+<p class="followup"><strong>Related follow-up:</strong> "Does Flink scale the same way?" No; Flink assigns Kafka partitions to its own source subtasks and scales by changing parallelism from a savepoint.</p>
+<h4 class="question" id="q5"><span class="qnum">Q5</span><span class="qtext">What is Apache Flink and why did you choose it?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Flink is a distributed stream-processing engine. You write a program as a graph of operators; Flink runs many parallel copies of each operator across TaskManagers, routes records between them (for example by key), keeps per-key state, and coordinates consistent checkpoints so the job can recover after failures. I chose it for three features this project depends on: true <strong>event-time</strong> processing with watermarks and allowed lateness; large <strong>keyed state</strong> on RocksDB with incremental checkpoints; and <strong>barrier checkpoints</strong> that give exactly-once state with low overhead. It also has credit-based backpressure and scales independently of Kafka partition counts. Kafka Streams is a lighter alternative, but its parallelism is tied to partitions and its state is backed by changelog topics. Spark Structured Streaming processes micro-batches, which raises the latency floor. The cost of Flink is operational: a JobManager, checkpoints and an operator to manage.</p>
+<h4 class="question" id="q6"><span class="qnum">Q6</span><span class="qtext">What is the difference between event time and processing time?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Event time is when the event actually happened, recorded by the client in <code>eventTime</code>. Processing time is the wall-clock time of the machine handling it. They differ because phones buffer while offline, networks delay, and Kafka partitions are read at different speeds. If windows used processing time, a view at 12:00:59 that arrived at 12:01:03 would be counted in the 12:01 minute, and replaying the same events tomorrow would give different results. With event time, the event goes into its true minute, and results are deterministic and replayable. The cost is waiting: Flink must decide when a minute is complete, which is what watermarks are for. Latency, by contrast, is measured from Kafka append time, because event time includes delays the platform cannot control, such as a phone that was offline for four minutes.</p>
+<h4 class="question" id="q7"><span class="qnum">Q7</span><span class="qtext">What is a watermark?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>A watermark is a special marker flowing with the data that says "event time has progressed to t; no more events with timestamps at or before t are expected". Here the sources use a bounded out-of-orderness strategy: watermark = largest event time seen on that partition minus 5 seconds, emitted every 200 ms. Each operator's watermark is the minimum of its input watermarks, because the slowest input determines what is safe. When the watermark passes a window's end, the window fires. So a minute window <code>[12:00, 12:01)</code> emits at roughly 12:01:05 in event time. Watermarks are a heuristic, so some events can still arrive later; allowed lateness (2 minutes) handles those by re-firing the window, and anything later goes to a late topic. Idle partitions are excluded after 30 seconds so they cannot stall the minimum.</p>
+<h4 class="question" id="q8"><span class="qnum">Q8</span><span class="qtext">Explain tumbling versus sliding windows in your design.</span><span class="qlevel q-easy">Easy</span></h4>
+<p>A tumbling window divides time into fixed, non-overlapping intervals, such as each minute. Product analytics use 1-minute tumbling event-time windows keyed by <code>productId</code>, with an incremental aggregate that updates one accumulator (views, clicks, cart-adds, purchases, revenue) per event and emits once when the watermark passes the end, plus late corrections. A sliding window covers a moving range, such as "the last 5 minutes". Online features need that value fresh on every event, so I built a pane-based sliding window in keyed state: the 5 minutes are ten 30-second panes; each event increments its pane, and the feature is the sum of panes in range relative to the user's latest event time. Flink's built-in sliding window (5 minutes, sliding every 30 s) would put each event in 10 windows and only emit every 30 seconds, making features up to 30 s stale. The cost is pane-aligned boundaries: "5 minutes" is really 4.5 to 5.</p>
+<h4 class="question" id="q9"><span class="qnum">Q9</span><span class="qtext">How do you deduplicate events?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Producers retry sends after timeouts and reuse the same <code>eventId</code>, so the same event can appear twice in Kafka. After <code>keyBy(userId)</code>, a dedup operator keeps, for each user, a <code>MapState</code> of event ids seen in the last 15 minutes (with a state TTL). For each event it checks <code>contains(eventId)</code>: if present, the event is dropped and a duplicates counter increments; if not, the id is stored and the event continues. Keying by user rather than by event id reuses the shuffle the feature operator needs, and duplicates always share the same user, so they reach the same subtask. Because dedup state is part of the checkpoint, after a recovery the replayed events see exactly the state they saw the first time. Duplicates more than 15 minutes apart are not removed; a Bloom filter was rejected because its false positives would drop real events, such as a purchase.</p>
+<h4 class="question" id="q10"><span class="qnum">Q10</span><span class="qtext">What is checkpointing, in simple terms?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Every 10 seconds, Flink saves a consistent snapshot of the whole job: the Kafka offset each source had reached, and all operator state (dedup sets, feature panes, open windows), as of the same logical point in the stream. It does this without stopping processing by sending barrier markers through the data; each operator snapshots its state when the barrier passes it. The snapshot goes to S3, incrementally for RocksDB so only new files upload. If anything fails, Flink restores the last complete snapshot and rewinds Kafka to its offsets, so every event after that point is processed again against exactly the state that existed before it. That is why the state is exactly-once even though some events are processed twice physically. The last three checkpoints are retained, and three consecutive checkpoint failures fail the job rather than letting it run without protection.</p>
+<h4 class="question" id="q11"><span class="qnum">Q11</span><span class="qtext">How does one event contribute to both user features and product analytics?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>After parsing, timestamping and dedup (keyed by user), the deduplicated stream feeds two branches. The <strong>feature branch</strong> stays on the same subtask without another shuffle (the stream is re-interpreted as already keyed by user): it updates that user's 30-second pane and 1-hour purchase pane, recomputes the features as of the user's latest event time and immediately emits a <code>FeatureUpdate</code> to the <code>user-features</code> topic, so Redis reflects it within about a second. The <strong>analytics branch</strong> re-shuffles the same event by <code>productId</code> to the window operator, which adds it to that product's current-minute accumulator; the result is emitted only when the watermark passes the minute's end, then written to PostgreSQL. So one event changes a per-user value immediately and a per-product value about a minute later, through independent outputs with different timing.</p>
+<h4 class="question" id="q12"><span class="qnum">Q12</span><span class="qtext">What is backpressure and how does your pipeline handle it?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Backpressure is what happens when a downstream step cannot keep up with the input. Flink handles it with credit-based flow control: each receiving task tells its senders how many free network buffers it has (credits); a sender only transmits with credit. When a receiver slows, credits run out, the sender's output buffers fill, the sender blocks, and the pressure propagates upstream until the Kafka source simply reads more slowly. Nothing is dropped and memory stays bounded; the backlog waits in Kafka as consumer lag. In this design Flink writes to Kafka output topics, which rarely slow down, so a slow Redis or PostgreSQL shows up as lag in the writer consumer groups instead, and I can scale those groups independently. To find the bottleneck inside Flink, look for the most downstream operator that is busy but not itself backpressured, then raise its parallelism, fix skew or reduce per-record cost.</p>
+<div class="keephead"><h2 id="s-52-reliability-and-recovery"><span class="secnum">5.2</span>Reliability and recovery</h2><h4 class="question" id="q13"><span class="qnum">Q13</span><span class="qtext">What happens when a TaskManager fails?</span><span class="qlevel q-easy">Easy</span></h4></div>
+
+<p>The JobManager detects the lost TaskManager within seconds through the broken connection, or at most the 10-second heartbeat timeout. Because the job's <code>keyBy</code> shuffles connect every task to every other, the whole job is cancelled and restarted after a 1-second delay. The scheduler needs 12 slots: 8 come from the two healthy TaskManagers and 4 immediately from the spare TaskManager, avoiding 15–60 seconds of waiting for Kubernetes to schedule a new pod. Each subtask restores its key groups' state from the last completed checkpoint (from local disk if it ran there before, otherwise from S3); sources seek back to the checkpointed offsets; events since the checkpoint are reprocessed and their outputs re-emitted, which idempotent sinks absorb. Finally the backlog accumulated during the outage drains at maximum throughput. Recovery is complete when lag is back in its normal band for 30 seconds; the target is under 30 s.</p>
+<h4 class="question" id="q14"><span class="qnum">Q14</span><span class="qtext">What is event replay, and how is it different from checkpoint recovery?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Checkpoint recovery is automatic replay after a failure: Flink restores the latest checkpoint and re-reads Kafka from the offsets stored in it, usually just seconds of data. Operational replay is a deliberate re-processing of history, for example after fixing a bug that undercounted add-to-cart events for three hours. The operator deploys the corrected job either from a savepoint or with fresh state starting at Kafka offsets for a timestamp T, writing to the same output topics. T is chosen about an hour before the period of interest so dedup and feature state are warm. Watermark alignment keeps partitions in step while reading history fast. Because window outputs are full totals and feature writes are guarded by event time, the recomputed results simply overwrite the wrong ones. Replay is only possible within Kafka's 7-day retention, and each run is recorded in a <code>replay_runs</code> table for auditability.</p>
+<h4 class="question" id="q15"><span class="qnum">Q15</span><span class="qtext">Why is there a Kafka hop between Flink and Redis/PostgreSQL?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>If Flink wrote directly to the stores, a slow or failing database would backpressure the entire job, slow down checkpoints and delay every result, and scaling the sinks would mean rescaling Flink. With Flink writing to Kafka output topics and separate writer consumer groups applying them, a database problem becomes writer lag only; Flink keeps processing and checkpointing normally. Writers scale independently by adding pods. The output topics are also a durable buffer: Redis or PostgreSQL can be rebuilt by replaying the topic into them without re-running Flink. And Redis or PostgreSQL failures never fail Flink checkpoints. The cost is one extra hop, about 5–50 ms, against a 1-second budget, plus one more service to deploy and monitor.</p>
+<h4 class="question" id="q16"><span class="qnum">Q16</span><span class="qtext">What happens if Redis goes down for a minute?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Flink is unaffected because it writes to the <code>user-features</code> Kafka topic, not to Redis. The Redis writers' batch writes fail; they retry with exponential backoff (100 ms up to 5 s) and do <strong>not</strong> commit their Kafka offsets, so no update is lost. Lag on <code>user-features</code> grows and an alert fires; after 60 seconds without a successful write the writer's readiness turns false (an alert, not a restart loop). Model services reading Redis see stale or failed reads during the outage. When Redis returns, writers drain the backlog with large batches; the Lua compare-and-set ensures updates are applied monotonically by event time, so a delayed older update can never overwrite a newer one. If ElastiCache failed over to a replica that missed the last few writes, the next update for each affected user rewrites its full feature set.</p>
+<h4 class="question" id="q17"><span class="qnum">Q17</span><span class="qtext">What are the main limitations, and what would you improve?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Correctness limits: events later than 2 minutes are excluded from analytics; dedup covers only 15 minutes; sliding features use pane-aligned boundaries; outputs are at-least-once (made safe by idempotent sinks). Scalability: partition counts are fixed up front; hot keys (a bot user or a flash-sale product) concentrate on one subtask. Reliability: JobManager failover can exceed 30 s; single region. Data quality: JSON without a schema registry; producers are trusted. Operations: rescaling is manual. Improvements: a batch correction job reading the late topic, HyperLogLog for distinct counts, two-phase (salted) aggregation for hot keys, Avro or Protobuf with a schema registry, the Flink autoscaler and KEDA for writers, a standby JobManager, MirrorMaker for a second region, and an offline feature sink to S3 for training. And run the benchmarks to turn targets into measured results.</p>
+<div class="keephead"><h2 id="s-53-deeper-design-questions"><span class="secnum">5.3</span>Deeper design questions</h2><h4 class="question" id="q18"><span class="qnum">Q18</span><span class="qtext">Your state is exactly-once but output is at-least-once. Why not use Flink's exactly-once Kafka sink?</span><span class="qlevel q-medium">Medium</span></h4></div>
+
+<p>Flink's exactly-once <code>KafkaSink</code> writes output inside Kafka transactions that commit only when a checkpoint completes. Downstream consumers reading with <code>read_committed</code> therefore see results only after each checkpoint, so output latency is at least the 10-second checkpoint interval and typically around 15 seconds, which breaks the under-1-second target. Instead, the sink is at-least-once: results appear immediately, and after a recovery any results emitted since the last checkpoint are emitted again. That duplication is harmless because every downstream write is idempotent and monotonic: feature updates carry the full feature set and an as-of event time, and window results carry full totals and a fire sequence, so writing them twice produces the same stored state. The combination is often called effectively-once: at-least-once delivery plus idempotent application equals the exactly-once result in the stores. The trade-off is that every sink must be designed that way.</p>
+<h4 class="question" id="q19"><span class="qnum">Q19</span><span class="qtext">How exactly are the Redis and PostgreSQL writes idempotent?</span><span class="qlevel q-medium">Medium</span></h4>
+<p><strong>Redis:</strong> each <code>FeatureUpdate</code> contains the user's full feature set and <code>as_<wbr>of_<wbr>event_<wbr>time_<wbr>ms</code>. The writer runs a Lua script atomically per key: read the stored <code>as_<wbr>of_<wbr>event_<wbr>time_<wbr>ms</code>; if the incoming value is older, ignore it; otherwise <code>HSET</code> all fields and refresh the 2-hour TTL. Redis executes scripts one at a time, so there is no race between writers, and equal times are accepted, so a replayed identical update is a harmless overwrite. <strong>PostgreSQL:</strong> each <code>ProductMetric</code> carries absolute window totals and a <code>fire_seq</code> (1 for the on-time firing, 2+ for late re-firings). The writer upserts <code>ON CONFLICT (<wbr>product_<wbr>id,<wbr> window_<wbr>start) DO UPDATE … WHERE EXCLUDED.<wbr>fire_<wbr>seq &gt;<wbr>=<wbr> t.<wbr>fire_<wbr>seq</code>. Applying the same row twice writes the same values; an older firing arriving after a newer correction is rejected. In both stores the writer commits Kafka offsets only after the write succeeds, so the only failure mode is re-applying, which these rules make safe.</p>
+<h4 class="question" id="q20"><span class="qnum">Q20</span><span class="qtext">How are late events handled?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>There are three layers. First, the watermark itself tolerates 5 seconds of disorder: a minute window waits until the watermark (max event time minus 5 s) passes its end, so moderately out-of-order events are counted in the first firing. Second, <strong>allowed lateness</strong> of 2 minutes keeps the window's state after it fires; a late event within that period updates the accumulator and the window re-fires with full corrected totals and an incremented <code>fire_seq</code>, which the guarded upsert writes over the earlier row. Third, events later than the window end plus 2 minutes are sent to a side output, the <code>user-events.late</code> topic, instead of being silently dropped, so an optional batch job can correct history. The feature path is separate: a late event is counted if it falls inside the user's current 5-minute pane range, otherwise skipped. The trade-off is state size (windows kept 2 extra minutes) versus completeness.</p>
+<h4 class="question" id="q21"><span class="qnum">Q21</span><span class="qtext">How did partitioning and parallelism changes improve throughput about 2×?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>The baseline had 6 input partitions and job parallelism 4. Each partition is read by one source subtask, so assignment was 2, 2, 1, 1: two subtasks each carried a third of all input and capped the whole pipeline, and keyed operators at parallelism 4 saturated. The optimised job uses 24 partitions at parallelism 12, two partitions per subtask, evenly, with headroom to grow to 24, and max parallelism fixed at 256 so state can be rescaled later. Per-record cost also fell: flat POJOs replaced Kryo fallback serialisation, a redundant second <code>keyBy</code> was removed (the stream is re-interpreted as keyed after dedup), and writers batch instead of writing per record. Illustratively, if one subtask handles ~2,000 events/s, a subtask carrying a third of the input caps the job at ~6,000/s; balancing removes that cap. To be honest: part of the gain is using slots the baseline left idle on the same cluster, which I would disclose, and an ablation would separate partitioning from per-record savings. It is a target, not a measurement.</p>
+<h4 class="question" id="q22"><span class="qnum">Q22</span><span class="qtext">What do "10K+ events/sec" and "under 1 sec p95" mean, and how would you measure them?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>10K events/s is <strong>processing</strong> throughput: events the Flink job consumes and fully processes (parse, dedup, features, windows, outputs) per second, summed over source subtasks, and it only counts while consumer lag stays flat. Kafka can ingest far more; if ingestion exceeds processing, lag grows without bound and the claim is false. Measure over 30 minutes after a 5-minute warm-up and check that the lag trend is flat. The p95 is <strong>processing latency</strong> for features: time the update is acknowledged by Redis minus the event's Kafka append timestamp (stamped by the broker, so client clocks don't matter), carried through the pipeline. It excludes event-time delay (a phone offline for minutes) and does not apply to analytics, which by design wait for the minute plus the watermark. Report p95 and p99 from merged histograms, never averaged percentiles, with writer throughput reported separately. Both are benchmark targets.</p>
+<h4 class="question" id="q23"><span class="qnum">Q23</span><span class="qtext">What goes into the under-30-second recovery, and why the spare TaskManager?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>Recovery time = detection + restart delay + slot allocation + state restore + backlog drain. Illustratively: detection 2–5 s through connection loss (at most 10 s heartbeat timeout); restart delay 1 s; slot allocation about 1 s with a spare TaskManager versus 15–60 s for Kubernetes to schedule a pod, pull the image and start a JVM; state restore a few seconds with incremental RocksDB checkpoints and local recovery; and drain = backlog ÷ (catch-up rate − input rate). At 10K events/s, 15 seconds down creates ~150K events of backlog; with a catch-up rate of 20K/s, draining takes about 15 s. That shows why throughput headroom from the 2× work is part of recovery, and why the spare matters most: without it, slot allocation alone can exceed 30 s. "Recovered" means lag back in its pre-failure band for 30 seconds, not merely "job running". The target applies to TaskManager failures; JobManager failover is reported separately.</p>
+<h4 class="question" id="q24"><span class="qnum">Q24</span><span class="qtext">How does keyed state work, and why the RocksDB backend?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>After <code>keyBy</code>, Flink hashes each key into one of 256 key groups (the max parallelism), and each subtask owns a contiguous range of key groups. All events for one user therefore reach the same subtask, which processes them on one thread, so per-key state needs no locks and has no races. State types used: <code>MapState</code> for dedup ids, <code>ValueState</code> for pane rings and last activity, window accumulators, and event-time timers to clear a user's state 65 minutes after their last event. The RocksDB backend stores state on local SSD rather than the JVM heap, so it can exceed memory (about a gigabyte here) without garbage-collection pressure, and it supports incremental checkpoints that upload only newly created files. The heap backend is faster per access but limited by memory and does full snapshots. On rescaling, key groups are reassigned to the new subtasks from a savepoint; max parallelism cannot change without state migration, which is why it is chosen before the first deployment.</p>
+<h4 class="question" id="q25"><span class="qnum">Q25</span><span class="qtext">What can make watermarks go wrong, and how do you guard against it?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>Two classic problems. <strong>Stalled watermarks:</strong> an operator's watermark is the minimum over its inputs, so one idle partition (no events) or one stuck source subtask holds back every window, and analytics stop firing. The guard is idleness detection: a partition with no data for 30 seconds is excluded from the minimum until it receives data again. <strong>Runaway watermarks:</strong> a producer with a clock an hour ahead sends events whose timestamps push the watermark far forward; suddenly everyone else's correct events are "late" and diverted. The guard is validation: events more than 10 minutes ahead of their Kafka append time go to the DLQ with reason <code>FUTURE_TIMESTAMP</code>. A third issue arises during replay: partitions read at different speeds can spread far apart in event time, making window state explode; watermark alignment pauses partitions more than 30 seconds ahead of the slowest. Monitor the watermark lag metric to catch these.</p>
+<h4 class="question" id="q26"><span class="qnum">Q26</span><span class="qtext">Input traffic doubles to 20K events/s. What do you do?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>First, find the bottleneck with metrics: busy versus backpressured time per operator, source lag, writer lag, checkpoint durations. If Flink is the limit, raise parallelism by taking a savepoint and restarting at a higher value, for example from 12 to 24, which matches the 24 partitions (source parallelism cannot usefully exceed partitions) and stays within max parallelism 256 for keyed operators; add TaskManagers for the extra slots and keep a spare. If a few hot keys are the limit, parallelism will not help; use pre-aggregation or key salting. If writers lag, add replicas up to 12 per output topic, or increase output partitions. Check Redis and PostgreSQL write capacity, since batching may need tuning. Check that checkpoints still complete well within the interval with larger state. And re-run the recovery test: with less headroom, backlog drain takes longer, so the 30-second target must be re-verified at the new rate.</p>
+<h4 class="question" id="q27"><span class="qnum">Q27</span><span class="qtext">How do checkpoint barriers produce a consistent snapshot, and what are aligned versus unaligned checkpoints?</span><span class="qlevel q-hard">Hard</span></h4>
+<p>The checkpoint coordinator tells every source to record its current Kafka offsets and inject barrier n into its output. Barriers flow in order with the records, so on every channel everything before barrier n belongs to the checkpoint and everything after does not. An operator with several inputs <strong>aligns</strong>: when barrier n arrives on one input, it buffers further records from that input until barrier n arrives on all inputs; then it snapshots its state (RocksDB flushes and hard-links files, then uploads asynchronously) and forwards the barrier. When all sinks acknowledge, the checkpoint is complete. The result is a consistent cut: state reflects exactly the records before the recorded offsets, the Chandy-Lamport idea applied to dataflows. Under backpressure, barriers queue behind full buffers and alignment can take long, delaying checkpoints. <strong>Unaligned</strong> checkpoints let the barrier overtake buffered records and include those in-flight buffers in the snapshot, so checkpoints finish quickly at the cost of larger snapshots. This project starts aligned and switches to unaligned if alignment exceeds 5 seconds.</p>
+<h4 class="question" id="q28"><span class="qnum">Q28</span><span class="qtext">What did you design, and what is not yet verified?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>The design and intended implementation cover: the Kafka topic layout and partitioning; the Flink topology (validation with DLQ, event time and watermarks with idleness and alignment, keyed dedup, pane-based features, tumbling windows with allowed lateness and a late topic); checkpoint and recovery configuration including the spare TaskManager; the writer consumer groups with idempotent Redis and PostgreSQL writes; the replay procedure; Kubernetes and AWS deployment; and a benchmark plan with a load generator that injects duplicates, disorder and late events. None of the four numbers (10K events/s, under 1 s p95, under 30 s recovery, ~2×) has a recorded run; they are benchmark targets with defined measurement methods. If an interviewer probes, say so plainly: "Those are the targets I designed and wrote the test procedure for; I wouldn't present them as production measurements." That precision usually earns more trust than the number itself.</p>
+<div class="page-break"></div>
+<div class="part-banner" id="part-6" data-part="6"><span class="part-kicker">Part 6</span><h1 class="part-title">Final Revision Sheet</h1></div>
+<div class="rev2">
+<h3>1. Project in one paragraph</h3>
+<p>Kafka <code>user-events</code> (24 partitions, keyed by user) feeds one Flink job (parallelism 12): parse and validate, event time with a 5 s watermark, dedup by user (15 min), pane-based sliding user features updated per event, and 1-minute tumbling product windows with 2 min allowed lateness. Results go to Kafka output topics; two writer consumer groups apply them idempotently to Redis (features) and PostgreSQL (analytics). Checkpoints every 10 s to S3 give exactly-once state; a spare TaskManager speeds recovery. EKS on AWS.</p>
+<h3>2. Architecture in one diagram</h3>
+<p class="flowline"><b>Pipeline:</b> Apps → Kafka user-events (24 partitions) → Flink [parse → watermark → dedup] → user features | product windows → Kafka user-features / product-metrics → writer groups → Redis / PostgreSQL</p>
+<p class="flowline"><b>Side paths:</b> checkpoints → S3 every 10 s · malformed → DLQ · later than 2 min → late topic</p>
+<h3>3. Stack and responsibilities</h3>
+<ul>
+<li><strong>Kafka:</strong> durable, replayable log; consumer groups</li>
+<li><strong>Flink:</strong> event time, state, windows, checkpoints</li>
+<li><strong>RocksDB + S3:</strong> large state, incremental snapshots</li>
+<li><strong>Redis:</strong> per-user features, Lua CAS, TTL 2 h</li>
+<li><strong>PostgreSQL:</strong> minute analytics, guarded upsert</li>
+<li><strong>EKS + Flink Operator:</strong> deploy, savepoints, HA</li>
+</ul>
+<h3>4. Five most important concepts</h3>
+<ol>
+<li>Event time + watermarks + allowed lateness</li>
+<li>Keyed state (key groups, one thread per key)</li>
+<li>Checkpoint barriers = consistent cut</li>
+<li>Exactly-once state, effectively-once results</li>
+<li>Credit-based backpressure; Kafka holds lag</li>
+</ol>
+<h3>5. Five key decisions</h3>
+<ol>
+<li>Flink over Kafka Streams / Spark</li>
+<li>Kafka hop before the stores</li>
+<li>At-least-once sink + idempotent writes</li>
+<li>Pane-based sliding features</li>
+<li>24 partitions / parallelism 12 / spare TM</li>
+</ol>
+<h3>6. Five likely questions</h3>
+<ol>
+<li>Event time vs processing time? Watermarks?</li>
+<li>How is dedup done? Limits?</li>
+<li>What is checkpointing; what happens on failure?</li>
+<li>Why not exactly-once sink?</li>
+<li>What do 10K/s, &lt; 1 s, &lt; 30 s, 2× mean?</li>
+</ol>
+<h3>7. Main limitations</h3>
+<p>Events &gt; 2 min late excluded; dedup only 15 min; pane approximation; hot keys; fixed partition counts; JobManager failover may exceed 30 s; single region; numbers unmeasured.</p>
+<h3>8. Numerical claims and evidence status</h3>
+<div class="table-block keep"><table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Meaning</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10K+ events/s</td>
+<td>Processing throughput, flat lag, 30 min</td>
+<td>Target, unverified</td>
+</tr>
+<tr>
+<td>&lt; 1 s p95</td>
+<td>Redis ack − Kafka append time</td>
+<td>Target, unverified</td>
+</tr>
+<tr>
+<td>&lt; 30 s recovery</td>
+<td>TaskManager kill → lag normal for 30 s</td>
+<td>Target, unverified</td>
+</tr>
+<tr>
+<td>~2× throughput</td>
+<td>Max sustainable, 6/p4 vs 24/p12</td>
+<td>Target, unverified</td>
+</tr>
+</tbody>
+</table></div>
+<h3>9. Ten things to remember</h3>
+<ol>
+<li>Kafka key = <code>userId</code> → per-user order.</li>
+<li>Watermark = max event time − 5 s; operator takes the minimum.</li>
+<li>Window fires ~5 s after end; re-fires ≤ 2 min; later → late topic.</li>
+<li>Dedup: <code>MapState</code> of event ids per user, TTL 15 min.</li>
+<li>Features: ten 30 s panes, emitted on every event.</li>
+<li>Checkpoint every 10 s; unaligned after 5 s alignment.</li>
+<li>Redis CAS on <code>as_<wbr>of_<wbr>event_<wbr>time_<wbr>ms</code>; PG guard <code>fire_seq &gt;=</code>.</li>
+<li>Writers commit offsets <strong>after</strong> writing.</li>
+<li>Consumer-group scaling = writers (≤ 12); Flink scales by parallelism.</li>
+<li>RTO = detect + restart + slots + restore + drain.</li>
+</ol>
+</div>
+</div>
+</body></html>

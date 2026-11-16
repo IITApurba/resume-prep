@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>LLM Gateway &amp; Inference Router — Interview Playbook</title>
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-serif-4/400.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-serif-4/400-italic.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-serif-4/600.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-serif-4/700.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-sans-3/400.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-sans-3/400-italic.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-sans-3/600.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-sans-3/700.css">
+<link rel="stylesheet" href="../../../styles/playbook.css">
+<style>
+:root { --accent: #47404F; --tint: #F0EEF4; }
+@page { @top-left { content: "Book 4 · LLM Gateway & Inference Router"; } }
+</style>
+</head>
+<body class="book-4">
+
+<section class="cover">
+  <div class="cover-bar"></div>
+  <div class="cover-inner">
+    <div class="cover-top"><span>SDE Project Interview Playbook</span><span>Book 4 of 4</span></div>
+    <div class="cover-motif"><svg class="motif" viewBox="0 0 600 190" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="100" y="69" width="100" height="52" rx="8" stroke="#6E6E6E" fill="none" stroke-width="1.4"/><line x1="20" y1="95" x2="100" y2="95" stroke="#6E6E6E" fill="none" stroke-width="1.4"/><path d="M90 89 L100 95 L90 101" stroke="#6E6E6E" fill="none" stroke-width="1.4"/><path d="M200 95 C290 95, 290 22, 390 22" stroke="#9A9A9A" fill="none" stroke-width="1.1" stroke-dasharray="5 4"/><rect x="392" y="9" width="120" height="26" rx="5" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><line x1="404" y1="22" x2="418" y2="22" stroke="#9A9A9A" stroke-width="3" stroke-linecap="round"/><line x1="430" y1="22" x2="444" y2="22" stroke="#9A9A9A" stroke-width="3" stroke-linecap="round"/><line x1="456" y1="22" x2="470" y2="22" stroke="#9A9A9A" stroke-width="3" stroke-linecap="round"/><line x1="482" y1="22" x2="496" y2="22" stroke="#9A9A9A" stroke-width="3" stroke-linecap="round"/><path d="M200 95 C290 95, 290 59, 390 59" stroke="#6E6E6E" fill="none" stroke-width="1.4" /><rect x="392" y="46" width="120" height="26" rx="5" stroke="#6E6E6E" fill="none" stroke-width="1.4"/><line x1="404" y1="59" x2="418" y2="59" stroke="#9A9A9A" stroke-width="3" stroke-linecap="round"/><line x1="430" y1="59" x2="444" y2="59" stroke="#9A9A9A" stroke-width="3" stroke-linecap="round"/><line x1="456" y1="59" x2="470" y2="59" stroke="#9A9A9A" stroke-width="3" stroke-linecap="round"/><line x1="482" y1="59" x2="496" y2="59" stroke="#9A9A9A" stroke-width="3" stroke-linecap="round"/><path d="M200 95 C290 95, 290 95, 390 95" stroke="#9A9A9A" fill="none" stroke-width="1.1" stroke-dasharray="5 4"/><rect x="392" y="82" width="120" height="26" rx="5" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><line x1="404" y1="95" x2="418" y2="95" stroke="#9A9A9A" stroke-width="3" stroke-linecap="round"/><line x1="430" y1="95" x2="444" y2="95" stroke="#9A9A9A" stroke-width="3" stroke-linecap="round"/><line x1="456" y1="95" x2="470" y2="95" stroke="#9A9A9A" stroke-width="3" stroke-linecap="round"/><line x1="482" y1="95" x2="496" y2="95" stroke="#9A9A9A" stroke-width="3" stroke-linecap="round"/><path d="M200 95 C290 95, 290 131, 390 131" stroke="#9A9A9A" fill="none" stroke-width="1.1" stroke-dasharray="5 4"/><rect x="392" y="118" width="120" height="26" rx="5" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><line x1="404" y1="131" x2="418" y2="131" stroke="#9A9A9A" stroke-width="3" stroke-linecap="round"/><line x1="430" y1="131" x2="444" y2="131" stroke="#9A9A9A" stroke-width="3" stroke-linecap="round"/><line x1="456" y1="131" x2="470" y2="131" stroke="#9A9A9A" stroke-width="3" stroke-linecap="round"/><line x1="482" y1="131" x2="496" y2="131" stroke="#9A9A9A" stroke-width="3" stroke-linecap="round"/><path d="M200 95 C290 95, 290 168, 390 168" stroke="#9A9A9A" fill="none" stroke-width="1.1" stroke-dasharray="5 4"/><rect x="392" y="155" width="120" height="26" rx="5" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><line x1="404" y1="168" x2="418" y2="168" stroke="#9A9A9A" stroke-width="3" stroke-linecap="round"/><line x1="430" y1="168" x2="444" y2="168" stroke="#9A9A9A" stroke-width="3" stroke-linecap="round"/><line x1="456" y1="168" x2="470" y2="168" stroke="#9A9A9A" stroke-width="3" stroke-linecap="round"/><line x1="482" y1="168" x2="496" y2="168" stroke="#9A9A9A" stroke-width="3" stroke-linecap="round"/><circle cx="150" cy="95" r="9" stroke="#6E6E6E" fill="none" stroke-width="1.4"/><circle cx="150" cy="95" r="3" fill="#6E6E6E"/></svg></div>
+    <div class="cover-theme">AI inference · Request routing</div>
+    <h1 class="cover-title">LLM Gateway &amp; Inference Router</h1>
+    <div class="cover-sub">Interview Playbook</div>
+    <div class="cover-rule"></div>
+    <p class="cover-desc"><em>A Spring Boot gateway that gives internal applications one authenticated, rate-limited, observable API for chat completions across several LLM backends. It routes each request to a healthy backend, streams tokens, protects backends with concurrency scheduling and circuit breakers, caches eligible responses in Redis, and tracks tokens and cost through Kafka. Java, Spring Boot, Redis, Kafka, Kubernetes and AWS. Everything you need for a 30–45 minute interview.</em></p>
+    <div class="cover-extra"><p><strong>Resume bullets this booklet defends</strong></p><ol>
+<li>Built unified LLM API with authentication, rate limiting, model routing, streaming and circuit breakers, supporting multiple inference backends.</li>
+<li>Implemented Redis caching and concurrent scheduling, improving throughput ~2x &amp; reducing p95 latency ~25% under 50+ concurrent clients.</li>
+<li>Added token/cost tracking &amp; Prometheus/Grafana observability; deployed on Kubernetes with autoscaling, benchmarking p99 latency and error (wording as on the resume; see the flag in 1.2).</li>
+</ol></div>
+    <div class="cover-contents"><div class="cc-head">Contents</div><div class="toc"><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-1"><span class="toc-text"><span class="toc-num">Part 1</span>Project Fundamentals</span></a><span class="leader"></span><span class="pn" data-t="part-1">2</span></div><div class="toc-entry toc-sec"><a href="#s-11-what-is-this-project"><span class="toc-text"><span class="toc-snum">1.1</span>What is this project?</span></a><span class="leader"></span><span class="pn" data-t="s-11-what-is-this-project">2</span></div><div class="toc-entry toc-sec"><a href="#s-12-fundamentals-required-for-this-project"><span class="toc-text"><span class="toc-snum">1.2</span>Fundamentals required for this project</span></a><span class="leader"></span><span class="pn" data-t="s-12-fundamentals-required-for-this-project">3</span></div></div><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-2"><span class="toc-text"><span class="toc-num">Part 2</span>High-Level Design and Architecture</span></a><span class="leader"></span><span class="pn" data-t="part-2">9</span></div><div class="toc-entry toc-sec"><a href="#s-21-technology-stack"><span class="toc-text"><span class="toc-snum">2.1</span>Technology stack</span></a><span class="leader"></span><span class="pn" data-t="s-21-technology-stack">9</span></div><div class="toc-entry toc-sec"><a href="#s-22-high-level-architecture"><span class="toc-text"><span class="toc-snum">2.2</span>High-level architecture</span></a><span class="leader"></span><span class="pn" data-t="s-22-high-level-architecture">9</span></div><div class="toc-entry toc-sec"><a href="#s-23-important-architectural-decisions"><span class="toc-text"><span class="toc-snum">2.3</span>Important architectural decisions</span></a><span class="leader"></span><span class="pn" data-t="s-23-important-architectural-decisions">12</span></div></div><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-3"><span class="toc-text"><span class="toc-num">Part 3</span>How the Project Works</span></a><span class="leader"></span><span class="pn" data-t="part-3">12</span></div><div class="toc-entry toc-sec"><a href="#s-31-one-complete-end-to-end-request-flow"><span class="toc-text"><span class="toc-snum">3.1</span>One complete end-to-end request flow</span></a><span class="leader"></span><span class="pn" data-t="s-31-one-complete-end-to-end-request-flow">12</span></div><div class="toc-entry toc-sec"><a href="#s-32-important-alternative-scenarios"><span class="toc-text"><span class="toc-snum">3.2</span>Important alternative scenarios</span></a><span class="leader"></span><span class="pn" data-t="s-32-important-alternative-scenarios">14</span></div><div class="toc-entry toc-sec"><a href="#s-33-important-guarantees-and-limitations"><span class="toc-text"><span class="toc-snum">3.3</span>Important guarantees and limitations</span></a><span class="leader"></span><span class="pn" data-t="s-33-important-guarantees-and-limitations">15</span></div></div><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-4"><span class="toc-text"><span class="toc-num">Part 4</span>Complete Interview Explanation</span></a><span class="leader"></span><span class="pn" data-t="part-4">15</span></div><div class="toc-entry toc-sec"><a href="#s-41-two-minute-explanation"><span class="toc-text"><span class="toc-snum">4.1</span>Two-minute explanation</span></a><span class="leader"></span><span class="pn" data-t="s-41-two-minute-explanation">15</span></div><div class="toc-entry toc-sec"><a href="#s-42-five-minute-explanation"><span class="toc-text"><span class="toc-snum">4.2</span>Five-minute explanation</span></a><span class="leader"></span><span class="pn" data-t="s-42-five-minute-explanation">16</span></div><div class="toc-entry toc-sec"><a href="#s-43-ten-minute-explanation"><span class="toc-text"><span class="toc-snum">4.3</span>Ten-minute explanation</span></a><span class="leader"></span><span class="pn" data-t="s-43-ten-minute-explanation">16</span></div></div><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-5"><span class="toc-text"><span class="toc-num">Part 5</span>Interview Questions and Answers</span></a><span class="leader"></span><span class="pn" data-t="part-5">17</span></div><div class="toc-entry toc-sec"><a href="#s-51-basic-understanding"><span class="toc-text"><span class="toc-snum">5.1</span>Basic understanding</span></a><span class="leader"></span><span class="pn" data-t="s-51-basic-understanding">18</span></div><div class="toc-entry toc-sec"><a href="#s-52-deeper-design-questions"><span class="toc-text"><span class="toc-snum">5.2</span>Deeper design questions</span></a><span class="leader"></span><span class="pn" data-t="s-52-deeper-design-questions">22</span></div></div><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-6"><span class="toc-text"><span class="toc-num">Part 6</span>Final Revision Sheet</span></a><span class="leader"></span><span class="pn" data-t="part-6">25</span></div></div></div>
+      <div class="cc-extra">17 fundamentals explained · 4 diagrams · 28 interview questions (18 easy, 9 medium, 1 hard) · one-page revision sheet</div></div>
+    <div class="cover-bottom"><div class="series-head">The series</div><ul class="series"><li class=""><span class="sq"></span>1. Payment &amp; Transaction Processing</li><li class=""><span class="sq"></span>2. Distributed Object Storage</li><li class=""><span class="sq"></span>3. Real-Time Event Processing</li><li class="current"><span class="sq"></span>4. LLM Gateway &amp; Inference Router</li></ul></div>
+  </div>
+</section>
+<div class="body">
+
+
+
+<div class="keephead"><div class="part-banner" id="part-1" data-part="1"><span class="part-kicker">Part 1</span><h1 class="part-title">Project Fundamentals</h1></div><h2 id="s-11-what-is-this-project"><span class="secnum">1.1</span>What is this project?</h2></div>
+
+<p><strong>What it does.</strong> Applications inside a company send chat requests to one endpoint, <code>POST /<wbr>v1/<wbr>chat/<wbr>completions</code>, with a logical model name such as <code>chat-smart</code>. The gateway authenticates the caller, applies rate limits, checks a cache, picks a healthy backend (a hosted Anthropic model, a hosted OpenAI-compatible model, or a self-hosted vLLM server), translates the request into that provider's API, streams the answer back in one consistent format, and records how many tokens were used and what they cost.</p>
+<p><strong>The problem it solves.</strong> Without a gateway, every team calls providers directly. Each re-implements API keys, retries, timeouts, streaming parsers and cost tracking. Nobody knows total spend per team. One team's burst exhausts a shared provider limit for everyone. When a provider has an outage, every application fails at once. Switching models means code changes in every service.</p>
+<p><strong>Why LLM traffic is special.</strong> Requests last seconds to minutes and stream; cost is per token, not per request; providers throttle on tokens per minute; failures are frequent and partial (overloaded, stalled, cut mid-stream); and the true token count is known only at the end of a response.</p>
+<p><strong>Who would use it.</strong> Internal product teams building chatbots, summarisation, classification or extraction features, plus the platform team that owns provider contracts and budgets.</p>
+<p><strong>What makes it technically interesting.</strong> Concurrency control for long-lived requests, resilience patterns (timeouts, retries, circuit breakers, fallback), streaming I/O, cache correctness for non-deterministic outputs, and accurate usage accounting, all in one service.</p>
+<div class="box box-analogy keep"><div class="box-label">Analogy</div>
+<p>The gateway is like a hotel concierge desk for taxis. Guests (applications) show their room key (API key) at one desk. The concierge limits how many rides each guest books per hour (rate limiting), knows which taxi companies are running and how busy each is (routing and health), never sends more cars to one company than it can handle (bulkheads), switches company if one stops answering (circuit breaker and fallback), reuses a booking if the same trip was just booked (cache), and keeps a ledger of every fare charged to each room (usage and cost).</p>
+</div>
+<div class="box box-example keep"><div class="box-label">Example</div>
+<p>A support-tool team sends a streaming request with <code>model: chat-smart</code>. The gateway verifies the key, reserves 1,800 tokens from the team's per-minute budget, sees the request is not cacheable (temperature 0.7), routes it to the Anthropic deployment (the primary, currently healthy and lightly loaded), acquires one of that deployment's concurrency slots, and streams tokens back as they arrive. At the end it reports 412 prompt and 48 completion tokens and an estimated cost, refunds the unused token reservation, and publishes a usage event to Kafka; an aggregator adds it to the team's daily totals.</p>
+</div>
+<p><strong>Scope boundary.</strong> Chat completions only; no model hosting, embeddings, content moderation, tool execution or invoicing; single region. Benchmarks use a mock provider because real providers are rate-limited, costly and non-deterministic.</p>
+<h2 id="s-12-fundamentals-required-for-this-project"><span class="secnum">1.2</span>Fundamentals required for this project</h2>
+<div class="table-block"><table>
+<thead>
+<tr>
+<th>Resume bullet</th>
+<th>Concepts you must be able to explain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Unified LLM API with authentication, rate limiting, model routing, streaming, circuit breakers, multiple backends</td>
+<td>Gateway pattern, provider adapters, API-key auth, token bucket, TPM reserve-and-settle, routing, SSE streaming, circuit breakers, timeouts/retries/fallback</td>
+</tr>
+<tr>
+<td>2. Redis caching and concurrent scheduling, ~2× throughput, ~25% lower p95, 50+ concurrent clients</td>
+<td>Response caching, bulkheads, fair queuing, benchmark metrics</td>
+</tr>
+<tr>
+<td>3. Token/cost tracking, Prometheus/Grafana, Kubernetes autoscaling, p99 and error rates</td>
+<td>Usage and cost accounting, Kafka usage pipeline, observability, autoscaling</td>
+</tr>
+</tbody>
+</table></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">1</span><span class="concept-name">LLM gateway and unified API</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> One front door for all LLM calls, so applications talk to one API and the gateway handles the providers.</li>
+<li><span class="cl">Technical</span> A reverse proxy specialised for LLM traffic. Clients send a Chat-Completions-style request with a logical <strong>alias</strong> (<code>chat-smart</code>); the gateway centralises auth, quotas, routing, normalisation, streaming, resilience, caching and accounting. Two deployables, one codebase: the stateless <code>llm-gateway</code> and the <code>usage-aggregator</code>.</li>
+<li><span class="cl">Why it matters</span> Cross-cutting concerns are implemented once; providers become interchangeable configuration; spend and reliability become visible.</li>
+<li><span class="cl">In this project</span> Existing OpenAI-style client libraries work by changing the base URL. Auth, rate limiting and routing are modules inside the gateway, not separate services, to avoid extra network hops on every request.</li>
+<li><span class="cl">Interview angle</span> "Isn't the gateway a single point of failure?" It is stateless and horizontally scaled behind a load balancer; shared state lives in Redis and Kafka.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">2</span><span class="concept-name">Provider abstraction and adapters</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Each provider speaks a slightly different language; an adapter translates between the gateway's standard format and that provider's API.</li>
+<li><span class="cl">Technical</span> The <strong>Adapter pattern</strong> with a canonical model. The controller builds a canonical request; an adapter (<code>AnthropicAdapter</code>, <code>OpenAiCompatibleAdapter</code> for the hosted model and vLLM, <code>MockAdapter</code>) maps it to provider JSON and headers, parses the response or stream events, and maps finish reasons, usage fields and errors back to canonical form. Unknown stream event types are ignored for forward compatibility.</li>
+<li><span class="cl">Why it matters</span> Routing, retries, caching and billing only ever see the canonical form, so adding a provider is one new adapter.</li>
+<li><span class="cl">In this project</span> Adapters use the JDK <code>HttpClient</code> directly rather than each provider's SDK, giving one consistent model for connection pooling, timeouts, streaming and cancellation.</li>
+<li><span class="cl">Interview angle</span> "Downside?" Lowest common denominator: provider-specific features (e.g. Anthropic prompt-caching controls) need explicit extension fields.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">3</span><span class="concept-name">Authentication with API keys</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Each application gets a secret key; the gateway checks it on every request and knows which team (tenant) is calling.</li>
+<li><span class="cl">Technical</span> Keys look like <code>gk_<wbr>live_<wbr>&lt;keyId&gt;<wbr>_<wbr>&lt;secret&gt;</code>. The gateway looks up the record by <code>keyId</code> in an in-memory table (loaded from a Kubernetes Secret synced from AWS Secrets Manager), compares <code>SHA-256(secret)</code> with the stored hash in constant time, checks status and scope, and attaches a principal: tenant, scopes, allowed aliases and limits.</li>
+<li><span class="cl">Why it matters</span> Identity is needed for quotas, isolation (cache and usage per tenant) and cost attribution. Provider credentials never leave the gateway.</li>
+<li><span class="cl">In this project</span> No database or Redis lookup per request; keys are hashed so a leaked table does not reveal secrets; constant-time comparison avoids timing attacks.</li>
+<li><span class="cl">Interview angle</span> "Why not OAuth2/JWT?" Callers are internal services; static keys are simpler. OAuth2 client credentials and key rotation are listed improvements.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">4</span><span class="concept-name">Rate limiting with a token bucket</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Each key has a bucket of tokens that refills at a steady rate; each request takes a token; an empty bucket means "slow down" (HTTP 429).</li>
+<li><span class="cl">Technical</span> Bucket state <code>{tokens,<wbr> last_<wbr>refill_<wbr>ts}</code> lives in a Redis hash per API key. A Lua script, which Redis runs atomically, refills <code>tokens =<wbr> min(<wbr>capacity,<wbr> tokens + elapsed × rate)</code>, consumes if enough remain, and returns allowed or not. Capacity allows short bursts; the rate sets the sustained limit.</li>
+<li><span class="cl">Why it matters</span> One tenant must not exhaust a shared provider quota. Redis makes the limit cluster-wide across all gateway pods; the atomic script prevents two pods from both spending the last token.</li>
+<li><span class="cl">In this project</span> Requests-per-minute (RPM) uses this bucket directly. A 429 includes <code>Retry-After</code> computed from the refill rate. If Redis is down, each pod falls back to a local limiter at <code>limit / replicas</code> (fail-soft rather than fail-open).</li>
+<li><span class="cl">Interview angle</span> "Why not a fixed window counter?" It allows double bursts at window boundaries; a sliding log stores every request. The token bucket is smooth and O(1).</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">5</span><span class="concept-name">Tokens-per-minute limits: reserve and settle</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> LLM providers limit tokens, not just requests, but you only know how many tokens a request used after it finishes. So the gateway reserves a worst-case amount first and refunds the difference later.</li>
+<li><span class="cl">Technical</span> Before the call: <code>estimate =<wbr> estimated prompt tokens + max_<wbr>tokens</code>; reserve it from a second token bucket (<code>rl:tpm:{keyId}</code>) or reject with 429. After the call: <code>actual =<wbr> prompt + completion tokens</code> from the provider; refund <code>estimate − actual</code>. If the estimate was too low, charge the difference and let the bucket go slightly negative so the next requests wait.</li>
+<li><span class="cl">Why it matters</span> A request asking for 4,000 output tokens costs far more provider capacity than one asking for 50; RPM alone cannot express that.</li>
+<li><span class="cl">In this project</span> The prompt estimate uses a tokenizer where available, else about 4 characters per token, calibrated from history; it is used only for admission, never for billing. If a pod crashes between reserve and settle, the reservation is simply lost and refills over time.</li>
+<li><span class="cl">Interview angle</span> "What if estimates are wrong?" The settle step corrects the bucket; the error is bounded by one request.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">6</span><span class="concept-name">Model routing</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Choose which backend serves this request: prefer the primary, avoid unhealthy or overloaded ones, and keep a list of fallbacks.</li>
+<li><span class="cl">Technical</span> An alias maps to deployments with priorities. Filter out deployments that are disabled, not allowed for the tenant, missing a needed capability (streaming, tools, JSON mode), whose context window is too small, whose circuit is open, or that are in a 429 cooldown. Take the best priority tier; if it has several candidates, use <strong>power of two choices</strong>: sample two (weighted) and pick the lower score <code>EWMA time-<wbr>to-<wbr>first-<wbr>token × (<wbr>in-<wbr>flight + queued + 1) /<wbr> max concurrency</code>. Return the chosen one followed by ordered fallbacks.</li>
+<li><span class="cl">Why it matters</span> Traffic flows toward healthy, fast, lightly loaded backends without every pod herding onto the same "best" one.</li>
+<li><span class="cl">In this project</span> Time to first token reflects provider queueing and health; total latency mostly reflects how many tokens were requested. Errors feed the circuit breaker, not the latency average, so a fast-failing backend is removed, not favoured.</li>
+<li><span class="cl">Interview angle</span> "Why not least-loaded globally?" Every pod's view lags, so all pods pick the same backend at once; P2C avoids that herd effect.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">7</span><span class="concept-name">Concurrency limits and bulkheads</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Give each backend a fixed number of request "slots". When the slots are full, new requests wait in the gateway instead of overloading the backend.</li>
+<li><span class="cl">Technical</span> A <strong>bulkhead</strong> (named after ship compartments) is a per-deployment concurrency limit. Each pod holds <code>cluster limit /<wbr> replicas</code> permits per deployment. A request acquires a permit before calling the provider and releases it on every path (success, error, client disconnect). Throughput of a backend is at most <code>concurrency /<wbr> service time</code> (Little's law); past its "knee", more concurrency only adds latency and provider errors.</li>
+<li><span class="cl">Why it matters</span> Overloaded backends collapse (provider 429/529s, GPU memory pressure in vLLM, retry storms); one slow provider must not consume capacity meant for others.</li>
+<li><span class="cl">In this project</span> The limit per backend is set at its measured knee. Waiting happens in the gateway, where it is cheap and fair; after 2 seconds the request falls back to the next candidate or gets <code>503 PROVIDER_<wbr>SATURATED</code> with <code>Retry-After</code>.</li>
+<li><span class="cl">Interview angle</span> "Does autoscaling the gateway help when a backend is saturated?" No; the limit is the provider's capacity, not the gateway's.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">8</span><span class="concept-name">Fair queuing</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> When requests must wait for a backend slot, serve tenants in turn, so one busy team cannot starve the others.</li>
+<li><span class="cl">Technical</span> Each deployment's wait queue is bounded and organised per tenant, served by <strong>deficit round-robin (DRR)</strong>: each tenant's queue gets a quantum of service per round, and leftover credit carries over. A tenant sending 1,000 requests and another sending 10 both make progress.</li>
+<li><span class="cl">Why it matters</span> A plain FIFO queue gives capacity to whoever sends the most, which is exactly the noisy-neighbour problem the gateway exists to solve.</li>
+<li><span class="cl">In this project</span> Fairness at the moment of contention complements rate limits, which give fairness over time. Queue full or wait timeout means fast rejection instead of a slow timeout.</li>
+<li><span class="cl">Interview angle</span> "Is it fair for request size?" Counting requests is approximate; token-weighted scheduling would be fairer for mixed sizes but more complex.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">9</span><span class="concept-name">Circuit breakers</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> If a backend keeps failing, stop calling it for a while so you fail fast and give it time to recover, then test it with a few requests.</li>
+<li><span class="cl">Technical</span> Resilience4j breaker per deployment per pod. <strong>CLOSED</strong>: calls flow and outcomes are recorded in a sliding window of the last 50 calls. If at least 20 calls were made and ≥ 50% failed (or ≥ 80% were slow, first byte &gt; 15 s), it goes <strong>OPEN</strong>: calls are rejected immediately for 30 s. Then <strong>HALF-OPEN</strong>: 5 probe calls; success closes it, failure re-opens it. Connect errors, timeouts, 5xx and 529 count as failures; client errors (400, 401, 404) do not.</li>
+<li><span class="cl">Why it matters</span> Without it, every request waits for timeouts against a dead provider, holding slots and threads, and retries pile more load on it.</li>
+<li><span class="cl">In this project</span> A provider 429 is treated as a capacity signal, not a health failure: it puts the deployment in a cooldown for <code>Retry-After</code> seconds instead of opening the breaker. Routing skips open deployments, so traffic falls back automatically.</li>
+<li><span class="cl">Interview angle</span> "Breaker state is per pod. Is that a problem?" Pods may briefly disagree; each converges from its own traffic, and no shared state is needed on the request path.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">10</span><span class="concept-name">Timeouts, retries and fallback</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Give up on slow calls quickly enough to try somewhere else, retry only when it is safe, and never let retries multiply load during an outage.</li>
+<li><span class="cl">Technical</span> Timeouts: connect 2 s, first byte (time to first token) 20 s, idle gap between chunks 30 s, plus a total deadline. Retries go to the <strong>next candidate</strong> (fallback), not the same deployment; at most 2 attempts in total; only before the first byte has been streamed to the client. A <strong>retry budget</strong> (each request deposits 0.1 tokens, each retry spends 1) caps retries at about 10% of traffic.</li>
+<li><span class="cl">Why it matters</span> Unlimited retries cause <strong>retry amplification</strong>: during an outage, gateway retries × client retries can multiply load several times on the remaining providers at the worst moment.</li>
+<li><span class="cl">In this project</span> The first-byte timeout is what makes fallback useful: a stalled provider is abandoned while there is still time to try another. 4xx errors and content-filter results are never retried.</li>
+<li><span class="cl">Interview angle</span> "Why not exponential backoff on the same provider?" During overload that adds load to the struggling backend; fallback uses spare capacity elsewhere.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">11</span><span class="concept-name">Streaming with Server-Sent Events (SSE)</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Instead of waiting for the whole answer, the client receives tokens as they are generated, over one long-lived HTTP response.</li>
+<li><span class="cl">Technical</span> SSE is a one-way stream of <code>data:</code> lines over HTTP with <code>Content-<wbr>Type:<wbr> text/<wbr>event-<wbr>stream</code>. The gateway reads the provider's stream line by line, translates each provider event into a canonical chunk and writes it to the client immediately, ending with a final chunk carrying usage and cost and a <code>[DONE]</code> marker. If the client reads slowly, writes block and the upstream read pauses, so TCP/HTTP2 flow control pushes back to the provider and memory stays bounded.</li>
+<li><span class="cl">Why it matters</span> Users see the first token in hundreds of milliseconds instead of waiting seconds for the full answer.</li>
+<li><span class="cl">In this project</span> If the client disconnects, the gateway closes the upstream stream to stop generation (and billing) and records partial usage. The AWS load balancer idle timeout is raised to 300 s so long streams are not cut. Each request runs on a Java 21 virtual thread, so thousands of open streams are cheap.</li>
+<li><span class="cl">Interview angle</span> "Why SSE rather than WebSockets?" One-way server-to-client streaming over plain HTTP is all that is needed, and it is what providers and OpenAI-style clients use.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">12</span><span class="concept-name">Response caching in Redis</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> If exactly the same request was answered recently, return the stored answer instead of calling the model again.</li>
+<li><span class="cl">Technical</span> Exact-match cache. Key = SHA-256 of the canonical JSON of tenant, deployment, provider model, adapter version, messages and all generation parameters (sorted keys). Value = gzip-compressed normalised response with usage, TTL 1 hour by default. Only <strong>eligible</strong> requests are cached: temperature 0 (or an explicit opt-in), finish reason <code>stop</code> or <code>tool_calls</code>, a complete stream, ≤ 256 KB, and an alias that allows caching. <strong>Single-flight</strong> makes concurrent identical misses within one pod share one provider call.</li>
+<li><span class="cl">Why it matters</span> A hit takes a few milliseconds instead of seconds, costs nothing and frees a backend slot for a miss.</li>
+<li><span class="cl">In this project</span> The tenant id is inside the key, so tenants never see each other's entries. Cache hits are reported with cost 0. The hit rate depends entirely on the workload: templated, deterministic prompts hit often; conversational traffic rarely.</li>
+<li><span class="cl">Interview angle</span> "Why is caching LLM output risky?" Non-determinism, hidden time or user context, model updates and privacy (Q22).</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">13</span><span class="concept-name">Token usage and cost accounting</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> For every request, record how many input and output tokens were used and what that cost, per team and per model.</li>
+<li><span class="cl">Technical</span> Token counts come from the provider's usage fields (for streams: Anthropic's <code>message_start</code> and final <code>message_delta</code>; OpenAI-compatible final chunk with usage enabled). For interrupted streams, the gateway estimates completion tokens from the text actually streamed and marks <code>estimated: true</code>. Cost = Σ tokens × price, with prices in integer <strong>micro-dollars per million tokens</strong> from a versioned price table with effective dates; cache-read and cache-write tokens use their own prices.</li>
+<li><span class="cl">Why it matters</span> Cost is per token, prices change, and attribution per team drives budgets.</li>
+<li><span class="cl">In this project</span> Integer arithmetic avoids floating-point drift over millions of requests; each event records the price version, so price changes never rewrite history. Illustratively, 412 prompt tokens at 3,000,000 µ$/MTok plus 48 completion tokens at 15,000,000 µ$/MTok is 1,956 µ$ (placeholder prices). It is an estimate for attribution, not an invoice.</li>
+<li><span class="cl">Interview angle</span> "Why compute cost in the gateway?" The event becomes self-describing; re-aggregation never needs historical configuration.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">14</span><span class="concept-name">Kafka-based asynchronous usage processing</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> After each response, the gateway drops a usage record onto Kafka and moves on; a separate service adds up the records.</li>
+<li><span class="cl">Technical</span> Topic <code>llm.usage.v1</code>: 6 partitions, replication 3, keyed by tenant, 7-day retention; producer with <code>acks=all</code>, idempotence, batching and <code>max.block.ms=0</code> so a full buffer never blocks a request thread. The <code>usage-aggregator</code> consumer group runs a Redis Lua script per event: <code>SET usage:<wbr>dedup:<wbr>{requestId} NX</code> and, only if that succeeded, increment the tenant's daily and monthly totals. It also batches raw events to S3 every 5 minutes or 10,000 events, and commits offsets after both writes.</li>
+<li><span class="cl">Why it matters</span> Accounting never adds latency to responses and never makes them fail; events are durable and replayable for re-aggregation.</li>
+<li><span class="cl">In this project</span> Delivery is at-least-once, and the dedup key makes aggregates count each request once within 48 hours. If Kafka is down, events are written as structured log lines and re-published later; dedup makes that safe.</li>
+<li><span class="cl">Interview angle</span> "Why not write usage to a database per request?" That couples every response to database latency and availability.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">15</span><span class="concept-name">Observability, p99 and error rates</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Measure what the gateway is doing (latency, errors, tokens, cost, cache hits, breaker states) and show it on dashboards with alerts.</li>
+<li><span class="cl">Technical</span> Micrometer metrics scraped by Prometheus and shown in Grafana (latency and time-to-first-token histograms, errors, tokens, cost, cache, breakers, queue wait). p99 is the latency 99% of requests beat; error rate = (non-2xx + in-band stream errors + incomplete streams) / total. Percentiles across pods come from merged histograms, never averages.</li>
+<li><span class="cl">Why it matters</span> For an LLM gateway, the tail (timeouts, fallbacks, overloaded backends) is where problems show; averages hide it.</li>
+<li><span class="cl">In this project</span> Benchmarks also report <strong>retry amplification</strong> = upstream attempts / client requests, because retries can lower the error rate while overloading providers.</li>
+<li><span class="cl">Interview angle</span> "Why p99 as well as p95?" p95 shows what most users see; p99 shows timeouts and fallback behaviour.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">16</span><span class="concept-name">Kubernetes deployment and autoscaling</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Run several identical gateway pods and add more automatically when load rises.</li>
+<li><span class="cl">Technical</span> EKS behind an ALB (idle timeout 300 s for streams). The HPA scales gateway pods 3–12 on <strong>in-flight requests per pod</strong> (custom metric via the Prometheus Adapter) plus CPU. Pods are stateless and drain open streams before terminating.</li>
+<li><span class="cl">Why it matters</span> Pods are I/O-bound, so CPU stays low even when a pod is full of open streams; CPU alone scales too late.</li>
+<li><span class="cl">In this project</span> Per-deployment concurrency limits are divided by the replica count and recomputed on scaling; the aggregator scales as a consumer group (≤ 6 partitions).</li>
+<li><span class="cl">Interview angle</span> "What does autoscaling not fix?" Provider capacity; if a backend is saturated, more gateway pods just queue more.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">17</span><span class="concept-name">Benchmark metrics: throughput, p95 and 50 concurrent clients</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> The test keeps 50 clients busy sending requests back to back, and compares a naive gateway with the optimised one.</li>
+<li><span class="cl">Technical</span> k6 closed loop: 50 virtual users, zero think time, so ~50 requests in flight. By Little's law throughput = N / mean latency, so 2× throughput at fixed N means mean latency halves. Cache hits shift p95 to a lower quantile of the misses, so p95 improves less than the mean.</li>
+<li><span class="cl">Why it matters</span> These definitions are what the resume numbers mean.</li>
+<li><span class="cl">In this project</span> Mock providers with a fixed capacity model; 30% cacheable templated prompts; 2-minute warm-up, 10-minute window. Targets, not measurements (Q24).</li>
+<li><span class="cl">Interview angle</span> "How much came from the cache?" Show an ablation: scheduling and routing alone, then plus cache.</li>
+</ul></div>
+<div class="box box-caution keep"><div class="box-label">Resume flag</div>
+<p>Say these precisely. (1) "Production LLM Gateway" is a production-grade design benchmarked against mock providers, not a system that served real production traffic. (2) "~2× throughput and ~25% lower p95 under 50+ concurrent clients" are A/B targets against a naive baseline gateway, with a workload in which 30% of requests are cacheable; real gains depend on how repetitive the traffic is. (3) "Authentication" is per-tenant API keys, not OAuth. (4) "Streaming and circuit breakers" include a hard rule: no transparent fallback once tokens have been streamed. (5) The third bullet on the resume ends with "error"; it should read "error rates". (6) Cost is an estimate for attribution, not an invoice. None of the numbers is a recorded measurement.</p>
+</div>
+<div class="keephead"><div class="part-banner" id="part-2" data-part="2"><span class="part-kicker">Part 2</span><h1 class="part-title">High-Level Design and Architecture</h1></div><h2 id="s-21-technology-stack"><span class="secnum">2.1</span>Technology stack</h2></div>
+
+<div class="table-block"><table>
+<thead>
+<tr>
+<th>Technology</th>
+<th>Purpose in the project</th>
+<th>Why it was selected</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Java 21 + Spring Boot (Web MVC on virtual threads)</td>
+<td>Gateway and aggregator services; SSE streaming; Actuator</td>
+<td>Blocking-style code for adapters and streaming that still holds thousands of concurrent requests cheaply</td>
+</tr>
+<tr>
+<td>JDK <code>HttpClient</code></td>
+<td>Upstream provider calls, streaming bodies, HTTP/2</td>
+<td>One connection, timeout and cancellation model for every provider</td>
+</tr>
+<tr>
+<td>Resilience4j</td>
+<td>Circuit breakers per deployment</td>
+<td>Standard, thread-safe, exports metrics</td>
+</tr>
+<tr>
+<td>Redis (ElastiCache)</td>
+<td>Rate-limit buckets, response cache, usage aggregates, dedup keys</td>
+<td>Atomic Lua scripts, sub-ms reads, TTLs</td>
+</tr>
+<tr>
+<td>Kafka (MSK)</td>
+<td>Asynchronous usage events</td>
+<td>Durable, decoupled, replayable for re-aggregation</td>
+</tr>
+<tr>
+<td>Amazon S3</td>
+<td>Long-term raw usage archive</td>
+<td>Cheap, durable; queried with Athena</td>
+</tr>
+<tr>
+<td>Micrometer → Prometheus → Grafana</td>
+<td>Metrics, dashboards, alerts</td>
+<td>Histograms for percentiles; counters for tokens and cost</td>
+</tr>
+<tr>
+<td>Kubernetes (EKS), HPA, ALB</td>
+<td>Deployment, autoscaling, ingress for long streams</td>
+<td>In-flight-based autoscaling; configurable idle timeouts</td>
+</tr>
+<tr>
+<td>k6 + mock provider</td>
+<td>Benchmarks</td>
+<td>Repeatable, free, controllable latency and capacity</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>How they work together.</strong> Spring Boot hosts the request path. Redis is consulted twice per request (rate limits, cache) through atomic scripts. The JDK client talks to providers through adapters, guarded by Resilience4j breakers and the gateway's own bulkheads. After the response, a usage event goes to Kafka; the aggregator updates Redis totals and archives to S3. Prometheus scrapes every pod; the HPA reads the in-flight metric to scale pods.</p>
+<h2 id="s-22-high-level-architecture"><span class="secnum">2.2</span>High-level architecture</h2>
+<p><strong>In simple words.</strong> Every request passes through a fixed pipeline inside one stateless pod: check who you are and whether you are within limits, see if the answer is already cached, pick a backend, wait for a slot on that backend, call it through its adapter with timeouts and a circuit breaker, stream the answer back, and finally publish a usage record. Accounting happens afterwards, in a different service, through Kafka.</p>
+
+<figure class="diagram" id="fig-1"><img src="diagrams/figure-1.svg" alt="Figure 1" style="width:408.5px"><figcaption><span class="fig-num">Figure 1</span><span class="fig-sep"> — </span>The simple picture: one gateway in front of three LLM backends (Anthropic, a hosted OpenAI-compatible model, self-hosted vLLM)</figcaption></figure>
+<p><strong>Component responsibilities</strong></p>
+<div class="table-block"><table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Filters (correlation, auth, rate limit)</td>
+<td>Request id; API-key verification and tenant principal; RPM bucket and TPM reservation in Redis</td>
+</tr>
+<tr>
+<td>Chat controller</td>
+<td>Validate, normalise, coordinate cache → route → execute → respond (JSON or SSE)</td>
+</tr>
+<tr>
+<td>Response cache</td>
+<td>Eligibility, canonical key, Redis get/put, per-pod single-flight</td>
+</tr>
+<tr>
+<td>Model router</td>
+<td>Alias → eligible deployments → priority tier → P2C choice + ordered fallbacks</td>
+</tr>
+<tr>
+<td>Concurrency scheduler</td>
+<td>Per-deployment bulkhead permits; bounded DRR fair queue per tenant</td>
+</tr>
+<tr>
+<td>Resilience executor</td>
+<td>Circuit breaker per deployment; connect/first-byte/idle/total timeouts; fallback-first retry with budget</td>
+</tr>
+<tr>
+<td>Provider adapters</td>
+<td>Translate canonical ↔ Anthropic / OpenAI-compatible / mock; parse streams; map usage and errors</td>
+</tr>
+<tr>
+<td>Usage recorder</td>
+<td>Settle TPM, compute cost, publish <code>UsageEvent</code> to Kafka asynchronously</td>
+</tr>
+<tr>
+<td><code>usage-aggregator</code></td>
+<td>Consumer group: dedup by request id, increment Redis totals, archive to S3</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>How components communicate.</strong> Client to gateway: HTTPS through the ALB, JSON or SSE, synchronous and long-lived for streams. Gateway to providers: HTTPS (HTTP/2 where supported) with keep-alive connection reuse, one client per provider. Gateway to Redis: atomic Lua scripts and simple commands, sub-millisecond. Gateway to Kafka: asynchronous producer, fired after the response completes. Kafka to aggregator: consumer group, at-least-once. Prometheus scrapes pods every 15 s.</p>
+<p><strong>Complete data flow.</strong></p>
+<ol>
+<li><strong>Admission:</strong> authenticate key → RPM bucket → TPM reservation (estimate) → monthly budget check.</li>
+<li><strong>Cache:</strong> if eligible, look up the tenant-scoped key; a hit returns immediately with cost 0.</li>
+<li><strong>Execution:</strong> route (filter + P2C) → acquire a bulkhead permit (fair queue up to 2 s) → breaker check → adapter builds the provider request → stream or receive the response → normalise.</li>
+<li><strong>Completion:</strong> final chunk with usage and cost → release permit → record breaker success and time to first token.</li>
+<li><strong>After the response:</strong> TPM settle (refund), cache write if eligible, usage event to Kafka.</li>
+<li><strong>Aggregation (other service):</strong> dedup by request id → Redis daily/monthly totals → S3 archive.</li>
+</ol>
+
+<figure class="diagram" id="fig-2"><img src="diagrams/figure-2.svg" alt="Figure 2" style="width:535.7px"><figcaption><span class="fig-num">Figure 2</span><span class="fig-sep"> — </span>Detailed HLD: the synchronous request pipeline (two rows) and the asynchronous usage pipeline</figcaption></figure>
+<p><strong>Where data is stored.</strong> API keys, routing and pricing: configuration (Secrets Manager / ConfigMap, versioned in git). Rate-limit buckets, cache entries, dedup keys and usage aggregates: Redis (with TTLs). Usage events: Kafka for 7 days and S3 long-term; the S3 archive is the durable usage record. Circuit-breaker and health state: in each pod's memory. There is no relational database.</p>
+<p><strong>How it scales.</strong></p>
+<ul>
+<li><strong>Gateway pods:</strong> stateless; HPA 3–12 on in-flight requests per pod plus CPU.</li>
+<li><strong>Provider limits:</strong> each pod gets <code>cluster limit /<wbr> replicas</code> permits per deployment, an approximation that avoids a distributed semaphore on every request.</li>
+<li><strong>Shared limits and cache:</strong> cluster-wide through Redis.</li>
+<li><strong>Aggregator:</strong> consumer group up to 6 partitions.</li>
+</ul>
+<p><strong>What happens when a major component fails</strong></p>
+<div class="table-block"><table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>What the gateway does</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One provider down or overloaded</td>
+<td>Breaker opens per pod; routing skips it; fallback to next tier</td>
+<td>Higher latency on the remaining backend, few errors</td>
+</tr>
+<tr>
+<td>Provider fails mid-stream</td>
+<td>In-band SSE error, partial usage recorded; no transparent retry</td>
+<td>Client decides whether to retry</td>
+</tr>
+<tr>
+<td>Redis down</td>
+<td>Local per-pod limiter at <code>limit / replicas</code>; cache bypassed</td>
+<td>Requests continue; limits approximate</td>
+</tr>
+<tr>
+<td>Kafka down</td>
+<td>Producer buffer, then structured-log fallback records; re-published later</td>
+<td>Responses unaffected; usage delayed</td>
+</tr>
+<tr>
+<td>Gateway pod crash</td>
+<td>ALB health checks remove it; its open streams are cut</td>
+<td>Clients retry; no shared state lost</td>
+</tr>
+<tr>
+<td>All candidates saturated</td>
+<td><code>503 PROVIDER_<wbr>SATURATED</code> with <code>Retry-After</code> after 2 s queue wait</td>
+<td>Fast, explicit rejection</td>
+</tr>
+</tbody>
+</table></div>
+<div class="keephead"><h2 id="s-23-important-architectural-decisions"><span class="secnum">2.3</span>Important architectural decisions</h2><p><strong>1. Gateway with adapters over raw HTTP, not per-provider SDKs or a pass-through proxy.</strong> <em>Why:</em> one canonical model lets routing, fallback, caching and billing work across providers; one HTTP/streaming/timeout model. <em>Alternative:</em> SDK per provider, or a proxy per provider. <em>Why not:</em> inconsistent timeouts and streaming; no normalisation. <em>Trade-off:</em> must track provider API changes; lowest-common-denominator API.</p></div>
+
+<p><strong>2. Priority tiers with power-of-two-choices routing.</strong> <em>Why:</em> load- and health-aware without herding. <em>Alternative:</em> round-robin or global least-outstanding. <em>Why not:</em> round-robin overloads the weaker backend; global least-loaded herds because every pod's view lags. <em>Trade-off:</em> each pod has a partial, slightly delayed view.</p>
+<p><strong>3. Bulkheads with fair queuing in the gateway.</strong> <em>Why:</em> keeps each backend at its most efficient concurrency, isolates providers from each other and tenants from each other, and turns overload into fast explicit rejections. <em>Alternative:</em> let providers queue or reject. <em>Why not:</em> provider overload collapses goodput and triggers retry storms. <em>Trade-off:</em> each backend's knee must be measured; per-pod limits are approximate.</p>
+<p><strong>4. Fallback-first retries with a budget; no retries after the first streamed byte.</strong> <em>Why:</em> avoids retry amplification and never splices two different generations together. <em>Alternative:</em> generic retries with backoff on the same backend. <em>Why not:</em> adds load to the failing backend at the worst moment. <em>Trade-off:</em> some transient errors surface to clients.</p>
+<p><strong>5. Exact-match, tenant-scoped, eligibility-gated cache.</strong> <em>Why:</em> correct by construction for deterministic requests; cheap hits. <em>Alternative:</em> semantic (embedding-similarity) cache, or no cache. <em>Why not:</em> semantic matches can answer a different question. <em>Trade-off:</em> low hit rate on conversational traffic; cached data is a privacy surface.</p>
+<p><strong>6. Asynchronous usage pipeline through Kafka.</strong> <em>Why:</em> accounting adds no latency and cannot fail a response; events are replayable. <em>Alternative:</em> synchronous database write per request. <em>Why not:</em> couples availability and latency to a database. <em>Trade-off:</em> usage totals are eventually consistent (seconds); budgets are soft.</p>
+<div class="keephead"><div class="part-banner" id="part-3" data-part="3"><span class="part-kicker">Part 3</span><h1 class="part-title">How the Project Works</h1></div><div class="keephead"><h2 id="s-31-one-complete-end-to-end-request-flow"><span class="secnum">3.1</span>One complete end-to-end request flow</h2><p>A streaming request with <code>model: chat-smart</code> and a cache miss. Figure 3 shows the sequence.</p></div></div>
+
+
+
+<figure class="diagram" id="fig-3"><img src="diagrams/figure-3.svg" alt="Figure 3" style="width:657.6px"><figcaption><span class="fig-num">Figure 3</span><span class="fig-sep"> — </span>Streaming chat completion, cache miss: admission in Redis, provider stream relayed, usage published after completion</figcaption></figure>
+<ol>
+<li><strong>Arrival.</strong> The ALB forwards the request to a gateway pod; it runs on its own virtual thread.</li>
+<li><strong>Correlation.</strong> A request id is accepted or generated and attached to logs and response headers.</li>
+<li><strong>Authentication.</strong> The key's <code>keyId</code> locates the record; <code>SHA-256(secret)</code> is compared in constant time; status and scope are checked; the tenant principal is attached.</li>
+<li><strong>Validation.</strong> Schema checks, alias allowed for this tenant, defaults applied, canonical request built.</li>
+<li><strong>Rate limiting.</strong> RPM bucket consume and TPM reservation (<code>estimated prompt + max_<wbr>tokens</code>) in Redis; monthly budget check. A failure returns <code>429</code> with <code>Retry-After</code>.</li>
+<li><strong>Cache.</strong> Not eligible here (sampling enabled), so skipped; an eligible miss would continue the same way.</li>
+<li><strong>Routing.</strong> Filter the alias's deployments, choose the primary by power of two choices, keep ordered fallbacks.</li>
+<li><strong>Scheduling.</strong> Acquire a permit from that deployment's bulkhead, immediately or after a fair-queue wait of up to 2 s.</li>
+<li><strong>Resilience.</strong> The breaker permits the call; the deadline is computed.</li>
+<li><strong>Provider call.</strong> The adapter builds the provider request (for Anthropic: the system field, <code>max_tokens</code>, <code>stream: true</code>, auth headers) and opens the stream.</li>
+<li><strong>Streaming.</strong> Each provider event is translated; text deltas go to the client as SSE chunks immediately; usage fields are captured.</li>
+<li><strong>Completion.</strong> A final chunk with finish reason, usage and cost, then <code>[DONE]</code>; the permit is released; the breaker records success; the time-to-first-token average is updated.</li>
+<li><strong>After the response.</strong> TPM settle refunds unused tokens; the response is cached if eligible; a <code>UsageEvent</code> is sent to Kafka.</li>
+<li><strong>Aggregation.</strong> The aggregator dedups by request id, increments the tenant's daily and monthly totals in Redis and buffers the event for S3.</li>
+</ol>
+<div class="keephead"><h2 id="s-32-important-alternative-scenarios"><span class="secnum">3.2</span>Important alternative scenarios</h2><p><strong>Scenario A: The primary provider fails before the first token (fallback).</strong></p></div>
+
+
+<figure class="diagram" id="fig-4"><img src="diagrams/figure-4.svg" alt="Figure 4" style="width:583.9px"><figcaption><span class="fig-num">Figure 4</span><span class="fig-sep"> — </span>Provider fails before any byte is sent: the breaker records it and the request falls back</figcaption></figure>
+<p>The primary returns 529 overloaded (or times out at 20 s waiting for its first byte, or refuses the connection). No bytes have reached the client, so the gateway may switch: the breaker records a failure, the retry budget allows one fallback, and the next candidate serves the request. The client sees one successful stream whose <code>provider</code> field names the fallback; the usage event records <code>attempts:<wbr> 2,<wbr> fallbackUsed:<wbr> true</code>. If failures continue, the primary's breaker opens and routing skips it until probes succeed.</p>
+<p><strong>Scenario B: The provider fails mid-stream.</strong> Forty chunks have been sent when the provider connection resets (or the 30 s idle-gap timeout fires). The bytes are already with the client, so the gateway does <strong>not</strong> silently restart on another provider: that would splice a different continuation onto text the user already saw. It sends an in-band SSE error event (<code>PROVIDER_<wbr>STREAM_<wbr>INTERRUPTED</code>) with partial usage (completion tokens counted from the streamed text, marked estimated), records a breaker failure and a usage event with outcome <code>PARTIAL</code>. The client has the partial text and decides whether to retry.</p>
+<p><strong>Scenario C: A tenant exceeds limits, or every backend is saturated.</strong> If the TPM reservation does not fit (for example, 1,800 estimated tokens but 1,200 remaining), the gateway returns <code>429 RATE_LIMITED</code> with <code>Retry-After</code> computed from the refill rate and remaining-token headers; no provider call is made and the usage event has outcome <code>REJECTED</code>. If the tenant is within limits but the primary's bulkhead queue wait exceeds 2 s and the fallback's queue is full, the gateway returns <code>503 PROVIDER_<wbr>SATURATED</code> with <code>Retry-After: 2</code>. Scaling the gateway would not help: the limit is the providers' capacity, so the alert points to provider limits.</p>
+<h2 id="s-33-important-guarantees-and-limitations"><span class="secnum">3.3</span>Important guarantees and limitations</h2>
+<div class="table-block"><table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Guarantee</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rate limits</td>
+<td>Cluster-wide and atomic per key (single Redis primary); approximate in Redis-down fallback mode</td>
+</tr>
+<tr>
+<td>Provider protection</td>
+<td>In-flight per backend ≤ sum of per-pod permits ≈ cluster limit</td>
+</tr>
+<tr>
+<td>Streaming</td>
+<td>Chunks delivered in provider order; no transparent retry after the first byte</td>
+</tr>
+<tr>
+<td>Fallback</td>
+<td>At most 2 attempts, only before the first byte, within a ~10% retry budget</td>
+</tr>
+<tr>
+<td>Cache</td>
+<td>Tenant-isolated, TTL-bounded, only complete eligible responses; entries immutable</td>
+</tr>
+<tr>
+<td>Usage aggregates</td>
+<td>Eventually consistent (seconds); each request counted once within the 48 h dedup window</td>
+</tr>
+<tr>
+<td>Usage archive</td>
+<td>At-least-once records in S3; deduplicated by request id downstream</td>
+</tr>
+<tr>
+<td>Budgets</td>
+<td>Soft: checked against aggregates that lag by seconds</td>
+</tr>
+<tr>
+<td>Client retry after timeout</td>
+<td>Not deduplicated (no idempotency key in v1); cost may double</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Where consistency comes from:</strong> atomic Redis scripts for limits and aggregates, deterministic cache keys, and idempotent aggregation by request id. <strong>Failures</strong> are handled by timeouts, breakers and fallback (providers), fail-soft local limits and cache bypass (Redis), buffering and log fallback (Kafka), and health-check removal (pods). <strong>Accepted trade-offs:</strong> per-pod breaker and load views, approximate per-pod limits, soft budgets, possible usage loss only under a documented Kafka-plus-logging failure, and low cache hit rates on conversational traffic.</p>
+<div class="keephead"><div class="part-banner" id="part-4" data-part="4"><span class="part-kicker">Part 4</span><h1 class="part-title">Complete Interview Explanation</h1></div><h2 id="s-41-two-minute-explanation"><span class="secnum">4.1</span>Two-minute explanation</h2></div>
+
+<div class="box box-say"><div class="box-label">Say it aloud</div>
+<p>"I built an LLM gateway in Java and Spring Boot. Teams in a company were calling several LLM providers directly, each re-implementing keys, retries and streaming, with no view of cost, and one provider outage broke everyone. The gateway gives them one API, chat completions with a logical model name, in front of a hosted Anthropic model, a hosted OpenAI-compatible model and a self-hosted vLLM server.</p>
+<p>Each request is authenticated with a per-team API key and checked against token-bucket rate limits in Redis, both requests per minute and tokens per minute. Eligible deterministic requests can be served from a Redis cache. Otherwise a router picks a healthy, lightly loaded backend, a scheduler gives each backend a fixed number of concurrent slots with fair queuing between teams, and circuit breakers and first-byte timeouts let it fall back to another provider when one fails. Adapters translate between our standard format and each provider, and responses stream back as server-sent events.</p>
+<p>After each response, a usage event with tokens and cost goes to Kafka, and an aggregator keeps per-team totals. It runs on Kubernetes with autoscaling on in-flight requests and Prometheus and Grafana dashboards. Against a naive gateway with mock providers, the targets were about 2× throughput and 25% lower p95 at 50 concurrent clients; those are benchmark targets, not production numbers."</p>
+</div>
+<h2 id="s-42-five-minute-explanation"><span class="secnum">4.2</span>Five-minute explanation</h2>
+<div class="box box-say"><div class="box-label">Say it aloud</div>
+<p>"<strong>Problem.</strong> LLM traffic has unusual properties: requests last seconds and stream, cost is per token, providers throttle on tokens per minute, and failures are frequent and partial. Without a gateway every team handles that separately, nobody knows the spend, and one noisy team or one provider outage hurts everyone.</p>
+<p><strong>Requirements.</strong> One unified API with streaming; per-tenant authentication and limits; routing by logical model name with fallback; protection of backends under concurrency; a safe response cache; exact token and cost accounting; metrics; autoscaling on Kubernetes.</p>
+<p><strong>Technology.</strong> Spring Boot on Java 21 virtual threads so thousands of long requests are cheap with simple blocking code; Redis for atomic rate-limit scripts, the cache and usage totals; Kafka for usage events; Resilience4j for breakers; Prometheus and Grafana; EKS with an ALB.</p>
+<p><strong>Architecture.</strong> [Draw Figure 2.] Inside one stateless pod: auth and rate limit, cache, router, scheduler, resilience layer, adapters, then the providers. After the response, a usage recorder publishes to Kafka and a separate aggregator service updates Redis totals and archives to S3.</p>
+<p><strong>Request flow.</strong> Verify the hashed key, consume a request token and reserve the estimated tokens from the tenant's buckets, check the cache, route with power of two choices on time-to-first-token times load, wait for a bulkhead slot in a fair queue, call through the adapter, stream normalised chunks, then settle the token reservation and publish usage.</p>
+<p><strong>Key decisions.</strong> Bulkheads in the gateway, because pushing a backend past its knee only adds latency and errors. Fallback-first retries with a budget, never after the first streamed byte. An exact-match, tenant-scoped cache, because semantic caching can answer a different question. Usage through Kafka so accounting never slows or fails a response.</p>
+<p><strong>Reliability and performance.</strong> Breakers open per deployment and routing skips them; Redis outages fall back to local limits; Kafka outages fall back to log records that are re-published, with dedup by request id. The throughput gain comes from removing hidden queues, sending traffic to the faster backend, keeping backends at their efficient concurrency, and cache hits for the repetitive share of traffic. Those 2× and 25% figures are A/B targets against mock providers."</p>
+</div>
+<h2 id="s-43-ten-minute-explanation"><span class="secnum">4.3</span>Ten-minute explanation</h2>
+<div class="box box-say"><div class="box-label">Say it aloud</div>
+<p>"<strong>Motivation.</strong> I wanted a project where concurrency control, resilience, streaming, caching and accounting all matter at once, and LLM traffic is exactly that. Requests are long and streamed, cost is per token, and providers fail partially.</p>
+<p><strong>Architecture.</strong> [Draw Figure 2.] Two services from one codebase. The gateway is stateless and does the whole request path; the usage aggregator consumes Kafka. Redis holds rate-limit buckets, the cache and aggregates. Config holds keys, routing and prices. No relational database.</p>
+<p><strong>Abstraction.</strong> Clients send a Chat-Completions-style request with an alias. Adapters translate to Anthropic's Messages API or to OpenAI-compatible APIs for the hosted model and vLLM, and translate responses, stream events, finish reasons, usage fields and errors back to one canonical form. Everything downstream only sees that canonical form, so adding a provider is one adapter.</p>
+<p><strong>Limits.</strong> Authentication is a per-team API key, hashed, compared in constant time, from an in-memory table. Rate limiting is two token buckets in Redis, updated by an atomic Lua script so pods can't double-spend: requests per minute, and tokens per minute. Tokens are tricky because the real count is only known at the end, so I reserve the estimated prompt plus max tokens before the call and refund the difference after. If Redis is down, each pod enforces its share locally.</p>
+<p><strong>Routing and scheduling.</strong> An alias maps to deployments with priorities. I filter by health, capability and context window, take the best tier, and pick between two random candidates by time-to-first-token times load, which avoids herding. Each deployment has a concurrency limit per pod, set at its throughput knee, because past that a backend just gets slower and starts returning 429s. Waiting requests sit in a deficit-round-robin queue per tenant, so a team sending a thousand requests can't starve a team sending ten. After two seconds a request falls back or gets a fast 503.</p>
+<p><strong>Resilience.</strong> Timeouts are layered: connect, first byte, idle gap and total. The first-byte timeout matters most, because it abandons a stalled provider while there's still time to try another. Retries go to the next candidate, at most two attempts, within a budget of about 10% of traffic, to prevent retry amplification during outages. Breakers open at 50% failures over the last 50 calls and probe after 30 seconds. A provider 429 is treated as a capacity signal with a cooldown, not a failure. And once any token has been streamed, I never fall back silently: the client gets an in-band error with partial usage, because splicing two different generations would corrupt the answer.</p>
+<p><strong>Caching.</strong> Exact matches only, eligible requests only, with the tenant and every parameter in the key and single-flight per pod. It's opt-in by alias and TTL-bounded, because outputs aren't deterministic even at temperature zero, prompts can depend on hidden context, models change, and cached data is user data.</p>
+<p><strong>Accounting.</strong> Token counts come from the provider's usage fields; only interrupted streams are estimated. Cost is integer micro-dollars from a versioned price table, computed in the gateway so each event is self-describing. Events go to Kafka keyed by tenant; the aggregator deduplicates by request id inside a Lua script and increments daily and monthly totals, and archives to S3.</p>
+<p><strong>Operations and numbers.</strong> Prometheus histograms for latency and time to first token, error rates including in-band errors, retry amplification; Grafana dashboards; HPA on in-flight requests. The benchmark is k6 with 50 closed-loop clients against mock providers, naive gateway versus optimised. Doubling throughput at fixed concurrency means halving mean latency; p95 improves less because cache hits only shift which part of the miss distribution sets it. Both figures are targets.</p>
+<p><strong>Limitations.</strong> Breaker and load views are per pod; budgets are soft; client retries can double cost because there's no idempotency key yet; the exact-match cache hits rarely on chat traffic; single region. Next: idempotency keys, OAuth2 client credentials, OpenTelemetry tracing, strict distributed limits for providers that need them, and per-tenant cache encryption."</p>
+</div>
+<div class="keephead"><div class="part-banner" id="part-5" data-part="5"><span class="part-kicker">Part 5</span><h1 class="part-title">Interview Questions and Answers</h1></div><div class="keephead"><h2 id="s-51-basic-understanding"><span class="secnum">5.1</span>Basic understanding</h2><h4 class="question" id="q1"><span class="qnum">Q1</span><span class="qtext">What is your LLM gateway, and why does a company need one?</span><span class="qlevel q-easy">Easy</span></h4></div></div>
+
+
+<p>It is a stateless Spring Boot service that sits between internal applications and several LLM providers, exposing one Chat-Completions-style API with logical model names. Without it, every team integrates each provider directly: separate keys, retry logic, timeout settings, streaming parsers and cost tracking, no central view of spend, one team's burst consuming a shared provider quota, and a provider outage breaking every application at once. The gateway centralises those concerns: per-tenant authentication, request and token rate limits, routing to a healthy backend with fallback, consistent streaming, backend protection through concurrency limits and circuit breakers, a safe response cache, and token and cost accounting through Kafka. Providers become configuration: switching a team from one model to another is a routing change, not a code change. The trade-off is one more hop (kept to milliseconds) and a critical service that must be highly available, which is why it is stateless and horizontally scaled.</p>
+<h4 class="question" id="q2"><span class="qnum">Q2</span><span class="qtext">Walk me through a normal streaming request.</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Auth filter: verify the hashed API key, attach the tenant. Rate-limit filter: one Redis Lua call takes a request token and reserves estimated tokens. Controller: cache lookup if eligible; on a miss, the router picks a deployment, the scheduler grants a permit, the breaker allows the call and the adapter sends the provider-format request. Provider events are translated and streamed to the client as SSE chunks. At the end: a final chunk with usage and cost, permit released, unused tokens refunded, cache write if eligible, usage event to Kafka. (Full steps in 3.1.)</p>
+<h4 class="question" id="q3"><span class="qnum">Q3</span><span class="qtext">How does the provider abstraction work?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>The gateway defines a canonical request and response model: messages, system prompt, generation parameters, tools, a canonical streamed chunk, finish reason and usage. Each provider has an adapter implementing the same interface. The Anthropic adapter, for example, moves the system prompt into Anthropic's <code>system</code> field, requires <code>max_tokens</code>, sets <code>x-api-key</code> and <code>anthropic-version</code> headers, and parses events such as <code>message_start</code>, <code>content_<wbr>block_<wbr>delta</code> and <code>message_delta</code>, mapping <code>stop_reason</code> and usage into canonical fields. The OpenAI-compatible adapter serves both the hosted model and the self-hosted vLLM server, enabling usage reporting in the final stream chunk. Adapters drop unsupported sampling parameters, reject unsupported features (routing pre-filters by capability) and ignore unknown stream event types for forward compatibility. Routing, retries, caching and billing never see provider-specific formats.</p>
+<p class="followup"><strong>Related follow-up:</strong> "How do you support a provider-only feature?" Explicit extension fields, accepting that it breaks pure interchangeability.</p>
+<h4 class="question" id="q4"><span class="qnum">Q4</span><span class="qtext">How does authentication work?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Each calling application gets an API key of the form <code>gk_<wbr>live_<wbr>&lt;keyId&gt;<wbr>_<wbr>&lt;secret&gt;</code>. Key records (key id, SHA-256 hash of the secret, tenant, scopes, allowed aliases, limits, status) are stored in AWS Secrets Manager, synced into a Kubernetes Secret and loaded into memory in every pod, with periodic reload and "keep the last good table" if reload fails. On each request the filter parses the key, finds the record by key id, hashes the presented secret and compares it with the stored hash using a constant-time comparison so response timing reveals nothing. It checks status and scope and attaches a principal used by every later step: limits, allowed aliases, cache scoping and cost attribution. Storing only hashes means a leaked table does not expose usable keys; keeping it in memory means no per-request lookup. Provider credentials are separate and never leave the gateway.</p>
+<h4 class="question" id="q5"><span class="qnum">Q5</span><span class="qtext">How does your token-bucket rate limiter work?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Each API key has a bucket in Redis: a capacity (maximum burst) and a refill rate (sustained limit), stored as <code>{tokens,<wbr> last_<wbr>timestamp}</code>. A Lua script, atomic inside Redis, adds <code>elapsed × rate</code> tokens (capped at capacity), then takes one if available and returns allowed; otherwise the gateway replies <code>429</code> with <code>Retry-After</code> from the refill rate. Atomicity means two pods cannot both spend the last token, and Redis makes the limit cluster-wide. Idle keys expire after 2 minutes. Unlike a fixed-window counter there is no double burst at window edges; unlike a sliding log, memory is O(1) per key.</p>
+<h4 class="question" id="q6"><span class="qnum">Q6</span><span class="qtext">Why limit tokens per minute as well as requests, and how do you do it before you know the token count?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Providers meter and throttle on tokens, and requests vary enormously: one asking for 4,000 output tokens uses far more capacity and money than one asking for 50. Requests-per-minute alone would let a tenant exhaust a shared token quota with a few huge requests. The difficulty is that the true count is known only after the response. So the gateway uses <strong>reserve and settle</strong>. Before the call it estimates <code>prompt tokens + max_<wbr>tokens</code> (a tokenizer where available, else about four characters per token, calibrated from history) and takes that amount from a second token bucket; if it does not fit, the request is rejected with <code>429</code>. After the call it reads the actual usage from the provider and refunds the difference; if the estimate was low, it charges the extra and the bucket can briefly go negative. A crash between reserve and settle just loses one reservation, which the bucket refills over time.</p>
+<h4 class="question" id="q7"><span class="qnum">Q7</span><span class="qtext">How does model routing work?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>A client asks for an alias such as <code>chat-smart</code>, configured with several deployments and priorities, for example Anthropic as priority 1 and an OpenAI-compatible model as priority 2. The router first filters out deployments that are disabled, not allowed for this tenant, missing a needed capability (streaming, tools, JSON mode), whose context window is smaller than the prompt plus <code>max_tokens</code>, whose circuit breaker is open, or which are cooling down after a provider 429. It takes the best remaining priority tier. If that tier has several deployments, it samples two at random (weighted) and picks the one with the lower score: average time to first token multiplied by current load relative to capacity. The output is an ordered list: the chosen deployment, then the rest of the tier, then lower tiers, used for fallback.</p>
+<p class="followup"><strong>Related follow-up:</strong> "Why power of two choices?" It captures most of the benefit of picking the least-loaded backend while avoiding all pods herding onto the same one.</p>
+<h4 class="question" id="q8"><span class="qnum">Q8</span><span class="qtext">What is a circuit breaker and how is yours configured?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>A circuit breaker wraps calls to a dependency and stops calling it when it is clearly failing, so requests fail fast instead of waiting for timeouts, and the dependency gets time to recover. It has three states. <strong>Closed:</strong> calls go through and outcomes are recorded in a sliding window. <strong>Open:</strong> calls are rejected immediately. <strong>Half-open:</strong> a few trial calls test recovery. Here there is one Resilience4j breaker per deployment in each pod: a window of the last 50 calls, at least 20 calls before deciding, opening at 50% failures or 80% slow calls (first byte over 15 s), staying open 30 s, then 5 probe calls. Connect errors, timeouts, 5xx and 529 count as failures; client errors such as 400 or 401 do not, so a bad request cannot open the circuit for everyone. A 429 triggers a cooldown instead. When a breaker opens, routing skips that deployment and traffic falls back.</p>
+<h4 class="question" id="q9"><span class="qnum">Q9</span><span class="qtext">What are bulkheads, and why does the gateway need concurrency limits?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>A bulkhead isolates resources so one failing part cannot sink the whole system. Here each backend deployment gets a fixed number of concurrent request permits per pod (its cluster-wide limit divided by the number of gateway pods). A request must acquire a permit before calling that backend and releases it on every exit path. The reason is that LLM backends degrade sharply past a certain concurrency: a self-hosted vLLM server's GPU memory and batch scheduler saturate, and hosted providers return 429 or 529 errors that trigger retries. By Little's law a backend with service time S and C slots completes at most C/S requests per second; beyond its knee, more concurrency adds only latency. Keeping each backend at its knee maximises useful throughput, and separate bulkheads mean a slow provider cannot consume capacity meant for the others. Excess requests wait in the gateway's fair queue or get a fast <code>503</code>.</p>
+<h4 class="question" id="q10"><span class="qnum">Q10</span><span class="qtext">How does streaming work through the gateway?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>With <code>stream: true</code> the client gets a Server-Sent Events response, a long-lived HTTP response of <code>data:</code> lines. On the request's virtual thread, the gateway reads provider events one at a time, translates each into a canonical chunk and writes it to the client immediately, capturing usage from the provider's first and last events. The stream ends with a chunk carrying usage and cost, then <code>[DONE]</code>. A slow client blocks the write, which pauses the upstream read, so flow control pushes back to the provider and memory stays bounded. A client disconnect closes the upstream connection (stopping generation and billing) and records partial usage. The ALB idle timeout is 300 s so long generations are not cut.</p>
+<h4 class="question" id="q11"><span class="qnum">Q11</span><span class="qtext">How does response caching work, and when is a response cacheable?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>An exact-match Redis cache. The key is a SHA-256 of canonical JSON (sorted keys) of everything that affects the answer: tenant, deployment, provider model, adapter version, messages and all generation parameters; with the tenant inside, teams never share entries. A response is stored only if eligible: temperature 0 or an explicit alias opt-in, no client bypass, normal finish (<code>stop</code> or <code>tool_calls</code>), a completed stream, under 256 KB, and an alias that allows caching (off for time-sensitive or personalised ones). Entries are gzipped with a 1-hour default TTL; a hit returns in milliseconds with cost 0. Single-flight makes identical concurrent misses in a pod share one provider call.</p>
+<h4 class="question" id="q12"><span class="qnum">Q12</span><span class="qtext">How do you track tokens and cost?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>From the provider: the usage object for normal responses; for Anthropic streams, input tokens from the first event and output tokens from the final <code>message_delta</code>; for OpenAI-compatible streams, the final chunk with usage enabled. Only interrupted streams are estimated (from the text actually streamed) and marked <code>estimated: true</code>. Cost = tokens × price per million, in integer micro-dollars, with separate input, cache-read, cache-write and output prices from a table versioned by effective date; each event records its price version. Example: 412 prompt tokens at a placeholder $3/M plus 48 output tokens at $15/M = 1,956 µ$. Cache hits bill zero. It is an estimate for attribution and budgets, not an invoice.</p>
+<h4 class="question" id="q13"><span class="qnum">Q13</span><span class="qtext">Why send usage through Kafka instead of writing it directly?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>A synchronous write would put a database or Redis call on every response's critical path, adding latency and failing responses when the store is slow or down. Instead the gateway publishes a self-describing <code>UsageEvent</code> (request id, tenant, alias, provider, tokens, cost, price version, outcome, latencies) after the response completes, with a producer that never blocks a request thread. Kafka keeps events 7 days, replicated, keyed by tenant. The <code>usage-aggregator</code> consumer group updates per-tenant totals in Redis and archives to S3; because the log is replayable, aggregates can be rebuilt after a bug fix. If Kafka is down, events go to structured logs and are re-published later.</p>
+<h4 class="question" id="q14"><span class="qnum">Q14</span><span class="qtext">What exactly does Redis do in this system?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Four jobs: <strong>rate limiting</strong> (RPM and TPM token buckets per key, atomic Lua, consistent across pods); the <strong>response cache</strong> (tenant-scoped, TTL); <strong>usage aggregation</strong> (48-hour dedup keys per request id plus per-tenant daily and monthly totals); and <strong>budgets and flags</strong> (monthly spend for soft budget checks, deployment enable flags polled by pods). It is not a durable source of truth: the S3 archive is the durable usage record and configuration lives in Secrets and ConfigMaps. If Redis fails, requests continue with local per-pod limits and no cache, and aggregation catches up from Kafka (Q27).</p>
+<h4 class="question" id="q15"><span class="qnum">Q15</span><span class="qtext">How is it deployed and autoscaled on Kubernetes?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>On EKS: an ALB with a 300-second idle timeout for long streams, gateway pods (3–12), two aggregator pods, vLLM on a GPU node group, and managed Redis (ElastiCache), Kafka (MSK), S3 and Secrets Manager. The HPA scales on <strong>in-flight requests per pod</strong> plus CPU, because pods mostly wait on providers and CPU stays low even when a pod is full of streams. On scaling, each pod recomputes its share of each provider's concurrency limit; on scale-in or rollout, it stops taking new requests and drains open streams. Autoscaling adds gateway capacity, not provider capacity.</p>
+<h4 class="question" id="q16"><span class="qnum">Q16</span><span class="qtext">What do you monitor, and why p99 and error rate?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Prometheus scrapes Micrometer metrics every 15 s: total-latency and time-to-first-token histograms by alias and deployment, errors by reason (including in-band stream errors), tokens and cost per tenant, cache hit/miss/ineligible, breaker state, bulkhead queue wait and Kafka publish failures. Grafana shows percentiles, error rate, spend per hour and provider health; alerts fire on error spikes, open breakers, saturation and publish failures. p95 is what most users see; p99 exposes timeouts, fallbacks and overloaded backends. Error rate counts non-2xx responses plus streams that errored or never completed, and benchmarks report retry amplification so a low error rate cannot hide excessive retries.</p>
+<h4 class="question" id="q17"><span class="qnum">Q17</span><span class="qtext">What are the main limitations, and what would you improve?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Functional: chat only; no idempotency key (a client retry after a timeout can pay twice); no moderation or PII redaction. Correctness: per-pod breaker and load views; soft budgets; approximate per-pod provider limits. Accounting: usage lost only if a pod crashes before publishing, or Kafka and the log pipeline both fail. Caching: exact-match, so low hit rates on chat; cached data sits in Redis. Security: static API keys. Operations: single region, no tracing. Improvements: idempotency keys, OAuth2 client credentials and rotation, budget reservation in Redis, leased distributed permits where strict limits matter, per-tenant cache encryption, OpenTelemetry, multi-region active-passive.</p>
+<h4 class="question" id="q18"><span class="qnum">Q18</span><span class="qtext">What did you build, and what is not yet verified?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>The design and intended implementation include: the unified API and canonical model; adapters for Anthropic, a hosted OpenAI-compatible API and self-hosted vLLM; hashed API-key auth; Redis RPM and TPM buckets with reserve-and-settle; routing with priority tiers and power of two choices; per-deployment bulkheads with deficit round-robin fair queues; Resilience4j breakers, layered timeouts and a fallback-first retry budget; SSE streaming with cancellation; the eligibility-gated cache with single-flight; cost accounting and the Kafka usage pipeline; Prometheus metrics and Grafana dashboards; EKS deployment with HPA on in-flight requests; and a k6 benchmark against mock providers. Not verified: the ~2× throughput and ~25% p95 figures have no recorded run; they are A/B targets. The p99 and error-rate benchmarks are designed scenarios without numeric results. Also, the system has not served real production traffic, so present "production" as "production-grade design".</p>
+<div class="keephead"><h2 id="s-52-deeper-design-questions"><span class="secnum">5.2</span>Deeper design questions</h2><h4 class="question" id="q19"><span class="qnum">Q19</span><span class="qtext">Why don't you retry or fall back once streaming has started?</span><span class="qlevel q-medium">Medium</span></h4></div>
+
+<p>Because the client already holds part of the answer. LLM generation is not deterministic: if the gateway silently restarted the request on another provider after 40 chunks, the second provider would generate a different text from the beginning, and the gateway would either have to resend from the start (duplicating what the user saw) or splice the new provider's continuation onto the old text, producing an incoherent answer that looks valid. Neither is acceptable. So the rule is: fallback is allowed only before the first byte is committed to the client. Before that point, connection errors, 5xx, 529 and first-byte timeouts can safely move to the next candidate. After it, a provider disconnect or a 30-second idle gap produces an in-band SSE error event (<code>PROVIDER_<wbr>STREAM_<wbr>INTERRUPTED</code>) with partial usage, the breaker records a failure, and the client, which has the partial text, decides whether to retry. The 20-second first-byte timeout is what makes early fallback practical.</p>
+<h4 class="question" id="q20"><span class="qnum">Q20</span><span class="qtext">Explain your retry strategy and the retry budget. What is retry amplification?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>Retry amplification is when retries multiply load during an outage. If a backend fails 30% of requests and the gateway retries twice on the same backend, upstream attempts become about 1 + 0.3 + 0.09 = 1.39 per request, adding nearly 40% load to a backend that is already failing; if clients also retry three times, the total multiplies further (gateway 2× × client 3× = 6× in the worst case). The gateway limits this three ways. Retries go to the <strong>next candidate</strong>, not the same deployment, so they use spare capacity elsewhere. There are at most <strong>two attempts</strong> in total, and only before the first streamed byte. And a <strong>retry budget</strong> caps retries globally: every request deposits 0.1 tokens into a bucket (capped at 100) and every retry spends one, so retries cannot exceed about 10% of traffic; when the budget is empty, requests fail fast. Meanwhile breakers stop traffic to the failing backend entirely. Benchmarks report <code>upstream attempts /<wbr> client requests</code> to show amplification stays near 1.1.</p>
+<h4 class="question" id="q21"><span class="qnum">Q21</span><span class="qtext">Why fair queuing? Isn't rate limiting enough?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>They work on different time scales. Rate limits enforce fairness over a minute: each key gets its RPM and TPM. But at any given moment a backend has, say, 16 free slots per pod, and requests from many tenants are waiting for them. With a plain FIFO queue, a tenant that just sent a burst of 500 requests, all within its own generous limit, fills the queue, and a tenant sending 5 requests waits behind all 500. Deficit round-robin keeps a sub-queue per tenant and serves them in rounds: each tenant gets a quantum per round and unused credit carries over, so a small tenant's request is served within one round no matter how much a large tenant has queued. The queue is bounded, and a waiter that exceeds 2 seconds falls back to another deployment or gets <code>503</code>. The limitation is that it counts requests, not tokens; token-weighted scheduling would be fairer for mixed request sizes but is more complex.</p>
+<h4 class="question" id="q22"><span class="qnum">Q22</span><span class="qtext">Why is caching LLM responses risky, and how did you make it safe?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>Several reasons. <strong>Non-determinism:</strong> even at temperature 0, providers do not guarantee identical outputs, so caching freezes one sample as "the" answer; fine for classification or extraction, wrong for creative or conversational tasks. <strong>Hidden context:</strong> an answer that depends on today's date, external data or the user is wrong when replayed, and the key cannot see that dependency. <strong>Model changes:</strong> a provider may update the model behind the same name. <strong>Privacy:</strong> prompts and answers may contain personal data, and caching stores it. <strong>Poisoning:</strong> shared keys would let one tenant seed answers another receives. Mitigations: strict eligibility (temperature 0 or explicit opt-in, normal finish, complete stream, size limit), per-alias opt-in that is off for time-sensitive or personalised aliases, the tenant and exact model inside the key, a TTL, encryption in transit and at rest, no content logging, and client bypass. Semantic (similarity-based) caching was rejected because it can answer a different question.</p>
+<h4 class="question" id="q23"><span class="qnum">Q23</span><span class="qtext">How do usage aggregates avoid double counting?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>Kafka delivery to the aggregator is at-least-once: if the aggregator crashes after updating Redis but before committing its offset, the same events are delivered again; re-publishing log-fallback records after a Kafka outage can also duplicate events. So aggregation is idempotent per request id. For each event, a single Lua script runs atomically in Redis: <code>SET usage:<wbr>dedup:<wbr>{requestId} 1 NX EX 172800</code> (set only if absent, expire after 48 hours); only if that set succeeded does it <code>HINCRBY</code> the tenant's daily hash fields (requests, cache hits, prompt tokens, completion tokens, cost in micro-dollars) and the monthly total. A duplicate finds the key already present and changes nothing. Offsets are committed after the Redis updates and after the S3 batch containing those records is written; a crash after the S3 write can produce a duplicate archive file, which is identifiable by its offset range, and downstream queries dedupe on request id.</p>
+<h4 class="question" id="q24"><span class="qnum">Q24</span><span class="qtext">How would you explain the ~2× throughput and ~25% p95 claims?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>Both are A/B targets at 50 concurrent clients in a closed loop (each client sends its next request as soon as the previous completes) against mock providers with a fixed capacity model. The baseline is a naive gateway: 200 platform threads, a small per-route connection pool, round-robin routing, no bulkheads, no cache, and two retries on the same backend. The optimised gateway adds virtual threads and sized pools (no hidden queues), load-aware routing (more traffic to the faster backend), bulkheads at each backend's knee, the cache with single-flight, and the retry budget. In a closed loop, throughput = clients / mean latency, so 2× throughput at 50 clients means mean latency halves. p95 improves less, about 25%, because the slowest requests are long generations that no routing or cache can shorten; cache hits remove requests from the fast end and shift the 95th percentile to a lower quantile of the misses. With 30% of the workload cacheable, the cache contributes significantly, so an ablation must show scheduling-only versus cache gains.</p>
+<h4 class="question" id="q25"><span class="qnum">Q25</span><span class="qtext">Per-pod limits and per-pod breakers: how do they relate to cluster-wide provider limits?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>A provider may allow, say, 64 concurrent requests in total. Enforcing that exactly would require a distributed semaphore, a Redis round trip on every acquire and release, plus lease handling for crashed pods. Instead each pod holds <code>64 / replicas</code> permits per deployment, recomputed when the HPA changes the replica count (pods read the count from configuration). The total in-flight is then at most the sum of pod limits, approximately the cluster limit; the approximation is that one pod can be full while another has free permits. Breakers are also per pod: each pod judges a provider from its own traffic, so pods may briefly disagree about health, but each converges quickly, and there is no shared state on the hot path. Rate limits and the cache, by contrast, are shared through Redis because fairness and cache hits must be cluster-wide. Strict distributed limits with leased permits in Redis are an option for providers that punish overshoot.</p>
+<h4 class="question" id="q26"><span class="qnum">Q26</span><span class="qtext">Why power of two choices instead of round-robin or least-loaded?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>Round-robin ignores both load and speed: if one backend is fast with high capacity and another is slow with low capacity, round-robin sends each half the traffic, and the weak backend becomes the bottleneck for half of all requests. Picking the globally least-loaded backend sounds ideal, but each pod's view of load is local and delayed; every pod sees the same backend as "least loaded" at the same moment and sends everything there, overloading it (herding), and then all switch together. Power of two choices samples two candidates at random (weighted) and picks the better of those two by score: average time to first token × (in-flight + queued + 1) / capacity. Research and practice show this captures most of the benefit of least-loaded selection while the randomness prevents herding. Time to first token is used rather than total latency because total latency mostly reflects how many tokens the client requested, while time to first token reflects provider queueing and health.</p>
+<h4 class="question" id="q27"><span class="qnum">Q27</span><span class="qtext">What happens if Redis goes down?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>Redis holds rate-limit buckets, the cache and aggregates, so each degrades separately without stopping requests. <strong>Rate limiting</strong> switches to a local in-memory limiter in each pod at <code>limit / replicas</code>, an approximation that remains protective (fail-soft) instead of disabling limits (fail-open), which could let one tenant exhaust a provider quota during the outage. <strong>Cache</strong> lookups are bypassed and writes skipped, so every request goes to providers; latency and cost rise for the cacheable share. <strong>TPM settle</strong> cannot run; when Redis returns, buckets refill naturally. <strong>Budget checks</strong> use the last known values or are skipped, since budgets are soft anyway. <strong>Aggregation</strong> pauses: the aggregator cannot update totals, so it stops committing Kafka offsets, and events wait in Kafka (7-day retention) until Redis returns, then drain with dedup preventing double counts. Alerts fire on Redis errors. Requests keep flowing throughout.</p>
+<h4 class="question" id="q28"><span class="qnum">Q28</span><span class="qtext">How would you make budget and provider-limit enforcement strict across all pods?</span><span class="qlevel q-hard">Hard</span></h4>
+<p>Today both are approximate: budgets are checked against aggregates that lag by seconds, and provider concurrency is divided per pod. For <strong>strict budgets</strong>, treat spend like TPM: before each call, reserve the estimated maximum cost (prompt estimate plus <code>max_tokens</code> at current prices) against the tenant's remaining monthly budget with an atomic Redis script, rejecting if it would exceed; after the call, settle with the actual cost. Reservations need a TTL so a crashed pod's reservation expires, and the authoritative monthly total must be reconciled from the S3 archive. For <strong>strict provider concurrency</strong>, use a distributed semaphore in Redis: a sorted set of leased permits keyed by request id with expiry timestamps; acquire = remove expired leases and add one if the count is below the limit, atomically in Lua; release = remove. Leases bound the damage from crashed pods. The costs: an extra Redis round trip on every request, Redis becoming a harder dependency (a fallback mode is still needed), and lease-tuning edge cases. I would apply it only to providers or tenants where overshoot is expensive, keeping the per-pod approximation elsewhere.</p>
+<div class="page-break"></div>
+<div class="part-banner" id="part-6" data-part="6"><span class="part-kicker">Part 6</span><h1 class="part-title">Final Revision Sheet</h1></div>
+<div class="rev2">
+<h3>1. Project in one paragraph</h3>
+<p>A stateless Spring Boot gateway giving internal apps one Chat-Completions-style API across Anthropic, a hosted OpenAI-compatible model and self-hosted vLLM. Per request: hashed API-key auth, Redis RPM + TPM token buckets (reserve and settle), exact-match tenant-scoped cache, P2C routing on TTFT × load, per-deployment bulkheads with DRR fair queues, breakers + first-byte timeouts + fallback within a retry budget, adapters, SSE streaming. Usage and cost go to Kafka; an aggregator dedups and totals in Redis, archives to S3. EKS with HPA on in-flight requests; Prometheus/Grafana.</p>
+<h3>2. Architecture in one diagram</h3>
+<p class="flowline"><b>Request:</b> Client → auth + rate limit (Redis) → cache → router (P2C) → scheduler (bulkhead, fair queue) → breaker + timeouts → adapter → provider → SSE back</p>
+<p class="flowline"><b>After the response:</b> usage recorder → Kafka llm.usage.v1 → aggregator (dedup) → Redis totals + S3 archive</p>
+<h3>3. Stack and responsibilities</h3>
+<ul>
+<li><strong>Spring Boot / Java 21:</strong> request path, SSE, virtual threads</li>
+<li><strong>Redis:</strong> buckets, cache, aggregates, dedup</li>
+<li><strong>Kafka:</strong> async usage events</li>
+<li><strong>Resilience4j:</strong> circuit breakers</li>
+<li><strong>Prometheus/Grafana:</strong> p95/p99, errors, cost</li>
+<li><strong>EKS + HPA + ALB:</strong> scale on in-flight; 300 s idle</li>
+</ul>
+<h3>4. Five most important concepts</h3>
+<ol>
+<li>Token bucket + TPM reserve/settle</li>
+<li>Bulkheads + fair queuing (Little's law knee)</li>
+<li>Circuit breaker states; 429 = cooldown</li>
+<li>Fallback only before the first byte; retry budget</li>
+<li>Exact-match cache eligibility and its risks</li>
+</ol>
+<h3>5. Five key decisions</h3>
+<ol>
+<li>Adapters over raw HTTP, canonical model</li>
+<li>P2C routing, not round-robin / global least-loaded</li>
+<li>Queue in the gateway, not at providers</li>
+<li>Exact, tenant-scoped cache; no semantic cache</li>
+<li>Usage through Kafka, not synchronous writes</li>
+</ol>
+<h3>6. Five likely questions</h3>
+<ol>
+<li>Why a gateway? What happens on a request?</li>
+<li>How do rate limiting and TPM work?</li>
+<li>What happens when a provider fails (before / mid-stream)?</li>
+<li>Why is caching LLM output risky?</li>
+<li>What do 2× and 25% under 50 clients mean?</li>
+</ol>
+<h3>7. Main limitations</h3>
+<p>Per-pod breaker/limit views; soft budgets; no idempotency key; low cache hit rate on chat; static keys; single region; mock-provider benchmarks; numbers unmeasured.</p>
+<h3>8. Numerical claims and evidence status</h3>
+<div class="table-block keep"><table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Meaning</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>50+ concurrent clients</td>
+<td>k6 closed loop, 50 VUs, zero think time</td>
+<td>Target, unverified</td>
+</tr>
+<tr>
+<td>~2× throughput</td>
+<td>Completions/s, optimised vs naive, mock providers</td>
+<td>Target, unverified</td>
+</tr>
+<tr>
+<td>~25% p95 drop</td>
+<td>Same load, non-streaming end-to-end</td>
+<td>Target, unverified</td>
+</tr>
+<tr>
+<td>p99 and error rates</td>
+<td>Reported under normal, fault, outage, scaling runs</td>
+<td>Method defined, no numbers</td>
+</tr>
+</tbody>
+</table></div>
+<h3>9. Ten things to remember</h3>
+<ol>
+<li>API key: hashed, in memory, constant-time compare.</li>
+<li>RPM and TPM are Redis token buckets via atomic Lua.</li>
+<li>TPM: reserve prompt estimate + <code>max_tokens</code>, refund after.</li>
+<li>Route: filter → best tier → P2C on TTFT × load.</li>
+<li>Bulkhead per deployment per pod = cluster limit / replicas.</li>
+<li>Breaker: 50-call window, ≥ 20 calls, 50% → open 30 s → 5 probes.</li>
+<li>Timeouts: connect 2 s, first byte 20 s, idle 30 s.</li>
+<li>≤ 2 attempts, next candidate, ~10% budget, never after first byte.</li>
+<li>Cost in integer micro-dollars, versioned prices; cache hit = 0.</li>
+<li>Aggregator Lua: <code>SET dedup NX</code> then <code>HINCRBY</code>.</li>
+</ol>
+</div>
+</div>
+</body></html>

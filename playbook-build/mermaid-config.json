@@ -1,0 +1,20 @@
+{
+  "theme": "neutral",
+  "themeVariables": {
+    "fontFamily": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontSize": "16px",
+    "primaryTextColor": "#1e1e1e",
+    "lineColor": "#444444",
+    "noteBkgColor": "#F2F2F2",
+    "noteTextColor": "#1E1E1E",
+    "noteBorderColor": "#666666"
+  },
+  "flowchart": {
+    "htmlLabels": true,
+    "padding": 12
+  },
+  "sequence": {
+    "useMaxWidth": false
+  },
+  "securityLevel": "loose"
+}

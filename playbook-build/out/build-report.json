@@ -1,0 +1,182 @@
+[
+  {
+    "series": "DATA",
+    "book": "01-risk-aware-process-reward-modeling",
+    "pages": 20,
+    "partPages": {
+      "1": 2,
+      "2": 3,
+      "3": 9,
+      "4": 11,
+      "5": 11,
+      "6": 13,
+      "7": 20
+    },
+    "concepts": 12,
+    "figures": 2,
+    "Easy": 15,
+    "Medium": 9,
+    "Hard": 1,
+    "questions": 25
+  },
+  {
+    "series": "DATA",
+    "book": "02-llm-post-training-sft-dpo",
+    "pages": 19,
+    "partPages": {
+      "1": 2,
+      "2": 3,
+      "3": 8,
+      "4": 10,
+      "5": 10,
+      "6": 12,
+      "7": 19
+    },
+    "concepts": 12,
+    "figures": 2,
+    "Easy": 15,
+    "Medium": 9,
+    "Hard": 1,
+    "questions": 25
+  },
+  {
+    "series": "DATA",
+    "book": "03-fraud-detection-risk-analysis",
+    "pages": 21,
+    "partPages": {
+      "1": 2,
+      "2": 3,
+      "3": 9,
+      "4": 11,
+      "5": 12,
+      "6": 13,
+      "7": 21
+    },
+    "concepts": 12,
+    "figures": 2,
+    "Easy": 15,
+    "Medium": 10,
+    "Hard": 1,
+    "questions": 26
+  },
+  {
+    "series": "DATA",
+    "book": "04-leakage-safe-time-series-forecasting",
+    "pages": 20,
+    "partPages": {
+      "1": 2,
+      "2": 3,
+      "3": 9,
+      "4": 11,
+      "5": 11,
+      "6": 13,
+      "7": 20
+    },
+    "concepts": 14,
+    "figures": 2,
+    "Easy": 16,
+    "Medium": 9,
+    "Hard": 1,
+    "questions": 26
+  },
+  {
+    "series": "QUANT",
+    "book": "02-cross-sectional-alpha-discovery",
+    "pages": 20,
+    "partPages": {
+      "1": 2,
+      "2": 3,
+      "3": 9,
+      "4": 10,
+      "5": 11,
+      "6": 13,
+      "7": 20
+    },
+    "concepts": 12,
+    "figures": 1,
+    "Easy": 16,
+    "Medium": 9,
+    "Hard": 1,
+    "questions": 26
+  },
+  {
+    "series": "QUANT",
+    "book": "03-market-impact-optimal-execution",
+    "pages": 19,
+    "partPages": {
+      "1": 2,
+      "2": 3,
+      "3": 8,
+      "4": 9,
+      "5": 10,
+      "6": 12,
+      "7": 19
+    },
+    "concepts": 11,
+    "figures": 1,
+    "Easy": 16,
+    "Medium": 9,
+    "Hard": 1,
+    "questions": 26
+  },
+  {
+    "series": "QUANT",
+    "book": "04-portfolio-risk-stress-testing",
+    "pages": 20,
+    "partPages": {
+      "1": 2,
+      "2": 3,
+      "3": 9,
+      "4": 10,
+      "5": 11,
+      "6": 13,
+      "7": 20
+    },
+    "concepts": 13,
+    "figures": 1,
+    "Easy": 16,
+    "Medium": 9,
+    "Hard": 1,
+    "questions": 26
+  },
+  {
+    "series": "QUANT",
+    "book": "05-fraud-detection-risk-analysis",
+    "pages": 19,
+    "partPages": {
+      "1": 2,
+      "2": 3,
+      "3": 8,
+      "4": 10,
+      "5": 10,
+      "6": 12,
+      "7": 19
+    },
+    "concepts": 13,
+    "figures": 1,
+    "Easy": 16,
+    "Medium": 9,
+    "Hard": 1,
+    "questions": 26
+  },
+  {
+    "series": "QUANT",
+    "book": "01-limit-order-book-alpha-research",
+    "pages": 20,
+    "partPages": {
+      "1": 2,
+      "2": 3,
+      "3": 9,
+      "4": 10,
+      "5": 11,
+      "6": 13,
+      "7": 20
+    },
+    "concepts": 13,
+    "figures": 1,
+    "Easy": 16,
+    "Medium": 9,
+    "Hard": 1,
+    "questions": 26
+  }
+]

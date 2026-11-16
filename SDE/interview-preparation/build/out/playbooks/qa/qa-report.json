@@ -1,0 +1,158 @@
+{
+  "01-payment-transaction-processing": {
+    "pages": 25,
+    "fonts_embedded": true,
+    "raster_images": 0,
+    "blank_pages": [],
+    "overflow": [],
+    "bad_links": [],
+    "cover_links": 22,
+    "figures_in_pdf": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "mermaid_blocks": 4,
+    "questions": {
+      "Easy": 18,
+      "Medium": 9,
+      "Hard": 1
+    },
+    "concepts": 15,
+    "coverage": {
+      "Bullet 1": {
+        "terms": 8,
+        "missing": []
+      },
+      "Bullet 2": {
+        "terms": 7,
+        "missing": []
+      },
+      "Bullet 3": {
+        "terms": 7,
+        "missing": []
+      }
+    },
+    "words": 11852,
+    "status": "PASS",
+    "stranded_headings": []
+  },
+  "02-distributed-object-storage": {
+    "pages": 25,
+    "fonts_embedded": true,
+    "raster_images": 0,
+    "blank_pages": [],
+    "overflow": [],
+    "bad_links": [],
+    "cover_links": 21,
+    "figures_in_pdf": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "mermaid_blocks": 4,
+    "questions": {
+      "Easy": 18,
+      "Medium": 9,
+      "Hard": 1
+    },
+    "concepts": 16,
+    "coverage": {
+      "Bullet 1": {
+        "terms": 7,
+        "missing": []
+      },
+      "Bullet 2": {
+        "terms": 8,
+        "missing": []
+      },
+      "Bullet 3": {
+        "terms": 10,
+        "missing": []
+      }
+    },
+    "words": 12176,
+    "status": "PASS",
+    "stranded_headings": []
+  },
+  "03-real-time-event-processing": {
+    "pages": 25,
+    "fonts_embedded": true,
+    "raster_images": 0,
+    "blank_pages": [],
+    "overflow": [],
+    "bad_links": [],
+    "cover_links": 20,
+    "figures_in_pdf": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "mermaid_blocks": 4,
+    "questions": {
+      "Easy": 18,
+      "Medium": 9,
+      "Hard": 1
+    },
+    "concepts": 16,
+    "coverage": {
+      "Bullet 1": {
+        "terms": 7,
+        "missing": []
+      },
+      "Bullet 2": {
+        "terms": 7,
+        "missing": []
+      },
+      "Bullet 3": {
+        "terms": 13,
+        "missing": []
+      }
+    },
+    "words": 12151,
+    "status": "PASS",
+    "stranded_headings": []
+  },
+  "04-llm-gateway-inference-router": {
+    "pages": 25,
+    "fonts_embedded": true,
+    "raster_images": 0,
+    "blank_pages": [],
+    "overflow": [],
+    "bad_links": [],
+    "cover_links": 19,
+    "figures_in_pdf": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "mermaid_blocks": 4,
+    "questions": {
+      "Easy": 18,
+      "Medium": 9,
+      "Hard": 1
+    },
+    "concepts": 17,
+    "coverage": {
+      "Bullet 1": {
+        "terms": 12,
+        "missing": []
+      },
+      "Bullet 2": {
+        "terms": 9,
+        "missing": []
+      },
+      "Bullet 3": {
+        "terms": 10,
+        "missing": []
+      }
+    },
+    "words": 11957,
+    "status": "PASS",
+    "stranded_headings": []
+  }
+}

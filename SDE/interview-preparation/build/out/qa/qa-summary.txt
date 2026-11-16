@@ -1,0 +1,69 @@
+
+== 01-payment-transaction-processing-study-guide
+  pages                        160
+  outline_entries              209
+  internal_links               339
+  raster_images                0
+  blank_pages                  []
+  unembedded_fonts             []
+  text_outside_column_count    0
+  mermaid_blocks               21
+  figures_found                21
+  missing_figures              []
+  headings                     208
+  headings_missing             ['Table of Contents']
+  questions_found              45
+  md_words                     25510
+  md_words_missing             0
+
+== 02-distributed-object-storage-study-guide
+  pages                        152
+  outline_entries              217
+  internal_links               357
+  raster_images                0
+  blank_pages                  []
+  unembedded_fonts             []
+  text_outside_column_count    0
+  mermaid_blocks               21
+  figures_found                21
+  missing_figures              []
+  headings                     216
+  headings_missing             ['Table of Contents']
+  questions_found              45
+  md_words                     26304
+  md_words_missing             0
+
+== 03-real-time-event-processing-study-guide
+  pages                        139
+  outline_entries              210
+  internal_links               339
+  raster_images                0
+  blank_pages                  []
+  unembedded_fonts             []
+  text_outside_column_count    0
+  mermaid_blocks               19
+  figures_found                19
+  missing_figures              []
+  headings                     209
+  headings_missing             ['Table of Contents']
+  questions_found              45
+  md_words                     21510
+  md_words_missing             0
+
+== 04-llm-gateway-inference-router-study-guide
+  pages                        156
+  outline_entries              209
+  internal_links               340
+  raster_images                0
+  blank_pages                  []
+  unembedded_fonts             []
+  text_outside_column_count    2
+  mermaid_blocks               21
+  figures_found                21
+  missing_figures              []
+  headings                     208
+  headings_missing             ['Table of Contents']
+  questions_found              45
+  md_words                     28860
+  md_words_missing             0
+  outside column: [(45, ',    ', [517, 116, 544, 126]), (45, ',   ', [522, 205, 544, 215])]

@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Distributed Object Storage System — Interview Playbook</title>
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-serif-4/400.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-serif-4/400-italic.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-serif-4/600.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-serif-4/700.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-sans-3/400.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-sans-3/400-italic.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-sans-3/600.css">
+<link rel="stylesheet" href="../../../node_modules/@fontsource/source-sans-3/700.css">
+<link rel="stylesheet" href="../../../styles/playbook.css">
+<style>
+:root { --accent: #3B3F55; --tint: #ECEDF3; }
+@page { @top-left { content: "Book 2 · Distributed Object Storage"; } }
+</style>
+</head>
+<body class="book-2">
+
+<section class="cover">
+  <div class="cover-bar"></div>
+  <div class="cover-inner">
+    <div class="cover-top"><span>SDE Project Interview Playbook</span><span>Book 2 of 4</span></div>
+    <div class="cover-motif"><svg class="motif" viewBox="0 0 600 190" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="170" cy="95" r="72" stroke="#6E6E6E" fill="none" stroke-width="1.4"/><circle cx="170" cy="95" r="56" stroke="#9A9A9A" fill="none" stroke-width="1.1" stroke-dasharray="2 5"/><circle cx="242.0" cy="95.0" r="6" fill="#FFFFFF" stroke="#6E6E6E" stroke-width="1.3"/><circle cx="232.4" cy="131.0" r="4" fill="#FFFFFF" stroke="#6E6E6E" stroke-width="1.3"/><circle cx="206.0" cy="157.4" r="4" fill="#FFFFFF" stroke="#6E6E6E" stroke-width="1.3"/><circle cx="170.0" cy="167.0" r="6" fill="#FFFFFF" stroke="#6E6E6E" stroke-width="1.3"/><circle cx="134.0" cy="157.4" r="4" fill="#FFFFFF" stroke="#6E6E6E" stroke-width="1.3"/><circle cx="107.6" cy="131.0" r="4" fill="#FFFFFF" stroke="#6E6E6E" stroke-width="1.3"/><circle cx="98.0" cy="95.0" r="6" fill="#FFFFFF" stroke="#6E6E6E" stroke-width="1.3"/><circle cx="107.6" cy="59.0" r="4" fill="#FFFFFF" stroke="#6E6E6E" stroke-width="1.3"/><circle cx="134.0" cy="32.6" r="4" fill="#FFFFFF" stroke="#6E6E6E" stroke-width="1.3"/><circle cx="170.0" cy="23.0" r="6" fill="#FFFFFF" stroke="#6E6E6E" stroke-width="1.3"/><circle cx="206.0" cy="32.6" r="4" fill="#FFFFFF" stroke="#6E6E6E" stroke-width="1.3"/><circle cx="232.4" cy="59.0" r="4" fill="#FFFFFF" stroke="#6E6E6E" stroke-width="1.3"/><ellipse cx="360" cy="40" rx="30" ry="8" stroke="#6E6E6E" fill="none" stroke-width="1.4"/><path d="M330 40 v18 a30 8 0 0 0 60 0 v-18" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><ellipse cx="360" cy="74" rx="30" ry="8" stroke="#6E6E6E" fill="none" stroke-width="1.4"/><path d="M330 74 v18 a30 8 0 0 0 60 0 v-18" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><ellipse cx="360" cy="108" rx="30" ry="8" stroke="#6E6E6E" fill="none" stroke-width="1.4"/><path d="M330 108 v18 a30 8 0 0 0 60 0 v-18" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><ellipse cx="445" cy="40" rx="30" ry="8" stroke="#6E6E6E" fill="none" stroke-width="1.4"/><path d="M415 40 v18 a30 8 0 0 0 60 0 v-18" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><ellipse cx="445" cy="74" rx="30" ry="8" stroke="#6E6E6E" fill="none" stroke-width="1.4"/><path d="M415 74 v18 a30 8 0 0 0 60 0 v-18" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><ellipse cx="445" cy="108" rx="30" ry="8" stroke="#6E6E6E" fill="none" stroke-width="1.4"/><path d="M415 108 v18 a30 8 0 0 0 60 0 v-18" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><ellipse cx="530" cy="40" rx="30" ry="8" stroke="#6E6E6E" fill="none" stroke-width="1.4"/><path d="M500 40 v18 a30 8 0 0 0 60 0 v-18" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><ellipse cx="530" cy="74" rx="30" ry="8" stroke="#6E6E6E" fill="none" stroke-width="1.4"/><path d="M500 74 v18 a30 8 0 0 0 60 0 v-18" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><ellipse cx="530" cy="108" rx="30" ry="8" stroke="#6E6E6E" fill="none" stroke-width="1.4"/><path d="M500 108 v18 a30 8 0 0 0 60 0 v-18" stroke="#9A9A9A" fill="none" stroke-width="1.1"/><path d="M250 95 H320" stroke="#9A9A9A" fill="none" stroke-width="1.1" stroke-dasharray="4 4"/></svg></div>
+    <div class="cover-theme">Distributed storage · Replication</div>
+    <h1 class="cover-title">Distributed Object Storage System</h1>
+    <div class="cover-sub">Interview Playbook</div>
+    <div class="cover-rule"></div>
+    <p class="cover-desc"><em>A Dynamo-style, leaderless object store in C++20. Storage nodes talk gRPC, place objects with consistent hashing and virtual nodes, replicate with tunable N/W/R quorums, verify every chunk with CRC32C, survive crashes with a write-ahead log, keep metadata in RocksDB and repair replicas in the background. Everything you need for a 30–45 minute interview.</em></p>
+    <div class="cover-extra"><p><strong>Resume bullets this booklet defends</strong></p><ol>
+<li>Built storage nodes using gRPC, consistent hashing and configurable replication, with checksum-based integrity validation and concurrent I/O.</li>
+<li>Implemented write-ahead logging, async replica repair and concurrent I/O, enabling recovery from node failures while maintaining availability.</li>
+<li>Benchmarked 1,000 concurrent requests, achieving 10K ops/min with less than 200 ms p95 latency; optimised I/O to reduce CPU overhead ~25%.</li>
+</ol></div>
+    <div class="cover-contents"><div class="cc-head">Contents</div><div class="toc"><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-1"><span class="toc-text"><span class="toc-num">Part 1</span>Project Fundamentals</span></a><span class="leader"></span><span class="pn" data-t="part-1">2</span></div><div class="toc-entry toc-sec"><a href="#s-11-what-is-this-project"><span class="toc-text"><span class="toc-snum">1.1</span>What is this project?</span></a><span class="leader"></span><span class="pn" data-t="s-11-what-is-this-project">2</span></div><div class="toc-entry toc-sec"><a href="#s-12-fundamentals-required-for-this-project"><span class="toc-text"><span class="toc-snum">1.2</span>Fundamentals required for this project</span></a><span class="leader"></span><span class="pn" data-t="s-12-fundamentals-required-for-this-project">3</span></div></div><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-2"><span class="toc-text"><span class="toc-num">Part 2</span>High-Level Design and Architecture</span></a><span class="leader"></span><span class="pn" data-t="part-2">9</span></div><div class="toc-entry toc-sec"><a href="#s-21-technology-stack"><span class="toc-text"><span class="toc-snum">2.1</span>Technology stack</span></a><span class="leader"></span><span class="pn" data-t="s-21-technology-stack">9</span></div><div class="toc-entry toc-sec"><a href="#s-22-high-level-architecture"><span class="toc-text"><span class="toc-snum">2.2</span>High-level architecture</span></a><span class="leader"></span><span class="pn" data-t="s-22-high-level-architecture">9</span></div><div class="toc-entry toc-sec"><a href="#s-23-important-architectural-decisions"><span class="toc-text"><span class="toc-snum">2.3</span>Important architectural decisions</span></a><span class="leader"></span><span class="pn" data-t="s-23-important-architectural-decisions">12</span></div></div><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-3"><span class="toc-text"><span class="toc-num">Part 3</span>How the Project Works</span></a><span class="leader"></span><span class="pn" data-t="part-3">13</span></div><div class="toc-entry toc-sec"><a href="#s-31-one-complete-end-to-end-request-flow"><span class="toc-text"><span class="toc-snum">3.1</span>One complete end-to-end request flow</span></a><span class="leader"></span><span class="pn" data-t="s-31-one-complete-end-to-end-request-flow">13</span></div><div class="toc-entry toc-sec"><a href="#s-32-important-alternative-scenarios"><span class="toc-text"><span class="toc-snum">3.2</span>Important alternative scenarios</span></a><span class="leader"></span><span class="pn" data-t="s-32-important-alternative-scenarios">14</span></div><div class="toc-entry toc-sec"><a href="#s-33-important-guarantees-and-limitations"><span class="toc-text"><span class="toc-snum">3.3</span>Important guarantees and limitations</span></a><span class="leader"></span><span class="pn" data-t="s-33-important-guarantees-and-limitations">15</span></div></div><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-4"><span class="toc-text"><span class="toc-num">Part 4</span>Complete Interview Explanation</span></a><span class="leader"></span><span class="pn" data-t="part-4">15</span></div><div class="toc-entry toc-sec"><a href="#s-41-two-minute-explanation"><span class="toc-text"><span class="toc-snum">4.1</span>Two-minute explanation</span></a><span class="leader"></span><span class="pn" data-t="s-41-two-minute-explanation">15</span></div><div class="toc-entry toc-sec"><a href="#s-42-five-minute-explanation"><span class="toc-text"><span class="toc-snum">4.2</span>Five-minute explanation</span></a><span class="leader"></span><span class="pn" data-t="s-42-five-minute-explanation">16</span></div><div class="toc-entry toc-sec"><a href="#s-43-ten-minute-explanation"><span class="toc-text"><span class="toc-snum">4.3</span>Ten-minute explanation</span></a><span class="leader"></span><span class="pn" data-t="s-43-ten-minute-explanation">16</span></div></div><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-5"><span class="toc-text"><span class="toc-num">Part 5</span>Interview Questions and Answers</span></a><span class="leader"></span><span class="pn" data-t="part-5">18</span></div><div class="toc-entry toc-sec"><a href="#s-51-basic-understanding"><span class="toc-text"><span class="toc-snum">5.1</span>Basic understanding</span></a><span class="leader"></span><span class="pn" data-t="s-51-basic-understanding">18</span></div><div class="toc-entry toc-sec"><a href="#s-52-durability-integrity-and-repair"><span class="toc-text"><span class="toc-snum">5.2</span>Durability, integrity and repair</span></a><span class="leader"></span><span class="pn" data-t="s-52-durability-integrity-and-repair">20</span></div><div class="toc-entry toc-sec"><a href="#s-53-deeper-design-questions"><span class="toc-text"><span class="toc-snum">5.3</span>Deeper design questions</span></a><span class="leader"></span><span class="pn" data-t="s-53-deeper-design-questions">22</span></div><div class="toc-entry toc-sec"><a href="#s-54-numbers-and-resume-defence"><span class="toc-text"><span class="toc-snum">5.4</span>Numbers and resume defence</span></a><span class="leader"></span><span class="pn" data-t="s-54-numbers-and-resume-defence">23</span></div></div><div class="toc-part-block"><div class="toc-entry toc-part"><a href="#part-6"><span class="toc-text"><span class="toc-num">Part 6</span>Final Revision Sheet</span></a><span class="leader"></span><span class="pn" data-t="part-6">25</span></div></div></div>
+      <div class="cc-extra">16 fundamentals explained · 4 diagrams · 28 interview questions (18 easy, 9 medium, 1 hard) · one-page revision sheet</div></div>
+    <div class="cover-bottom"><div class="series-head">The series</div><ul class="series"><li class=""><span class="sq"></span>1. Payment &amp; Transaction Processing</li><li class="current"><span class="sq"></span>2. Distributed Object Storage</li><li class=""><span class="sq"></span>3. Real-Time Event Processing</li><li class=""><span class="sq"></span>4. LLM Gateway &amp; Inference Router</li></ul></div>
+  </div>
+</section>
+<div class="body">
+
+
+
+<div class="keephead"><div class="part-banner" id="part-1" data-part="1"><span class="part-kicker">Part 1</span><h1 class="part-title">Project Fundamentals</h1></div><div class="keephead"><h2 id="s-11-what-is-this-project"><span class="secnum">1.1</span>What is this project?</h2><p><strong>What it does.</strong> It stores files ("objects") such as images, model files, logs and backups across several machines. A client calls <code>PutObject(<wbr>bucket,<wbr> key,<wbr> bytes)</code> to store an object and <code>GetObject(<wbr>bucket,<wbr> key)</code> to read it back. Behind that simple API, the system decides which machines hold the object, keeps three copies, checks every byte for corruption, and keeps working when a machine dies.</p></div></div>
+
+
+<p><strong>The problem it solves.</strong> A single disk is a single point of failure: when it dies, the data and the service go with it. Copying files around by hand gives no integrity guarantee and no automatic recovery. Real object stores (Amazon S3, Google Cloud Storage) and databases such as Dynamo, Cassandra and Riak solve this with a small set of ideas: spread data with a hash ring, replicate it, use quorums to stay available, log writes before applying them, checksum everything, and repair replicas in the background. This project implements those ideas end to end.</p>
+<p><strong>Who would use it.</strong> Backend services that need to store blobs (user uploads, ML model artifacts, backups) and want durability and availability without a central metadata server.</p>
+<p><strong>What happens without it.</strong> One machine failure means lost data or downtime; silent bit rot goes unnoticed until a user downloads a corrupted file; adding a server means manually reshuffling data.</p>
+<p><strong>What makes it technically interesting.</strong> There is no master. Any node can coordinate any request, every node computes placement on its own, replicas can temporarily disagree, and the system still converges. It touches distributed systems (hashing, quorums, repair), storage engines (WAL, fsync, append-only files, RocksDB) and high-concurrency C++ I/O in one project.</p>
+<div class="box box-analogy keep"><div class="box-label">Analogy</div>
+<p>Imagine a library with five branches and no head office. Every book's title is turned into a number on a circular dial; the three branches clockwise from that number keep a copy. Any branch can take your request and phone the three owners. A book counts as safely shelved once two of the three confirm it is on the shelf. If one branch is closed, the others leave a note ("give them a copy when they reopen"), and once in a while branches compare inventories to catch anything the notes missed.</p>
+</div>
+<div class="box box-example keep"><div class="box-label">Example</div>
+<p>A client uploads <code>photos/cat.jpg</code> (2.5 MiB). The node it reaches hashes the key onto the ring and finds its three replicas: nodes 2, 3 and 4. It streams three chunks (1 MiB, 1 MiB, 0.5 MiB), each with a CRC32C checksum, to all three. Nodes 2 and 3 write the data, make it durable with their WALs and acknowledge; the client gets <code>OK</code> after those two acknowledgements. Node 4 acknowledges a few milliseconds later. If node 4 had been down, the coordinator would store a hint and copy the object to node 4 when it returns.</p>
+</div>
+<p><strong>Scope boundary.</strong> Not S3-compatible, not a file system, no multipart upload, no erasure coding, no cross-region replication, no linearizable consistency, no automatic large-scale rebalancing. Default cluster: 5 nodes, N=3, W=2, R=2.</p>
+<h2 id="s-12-fundamentals-required-for-this-project"><span class="secnum">1.2</span>Fundamentals required for this project</h2>
+<div class="table-block"><table>
+<thead>
+<tr>
+<th>Resume bullet</th>
+<th>Concepts you must be able to explain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Storage nodes using gRPC, consistent hashing and configurable replication, checksum integrity, concurrent I/O</td>
+<td>Object storage, gRPC, consistent hashing, virtual nodes, replication factor N, quorums, leaderless design, CRC32C, concurrent I/O</td>
+</tr>
+<tr>
+<td>2. Write-ahead logging, async replica repair, concurrent I/O, recovery from node failures with availability</td>
+<td>WAL and crash recovery, group commit, RocksDB metadata, append-only segments, hinted handoff, read repair, anti-entropy</td>
+</tr>
+<tr>
+<td>3. 1,000 concurrent requests, 10K ops/min, &lt; 200 ms p95, ~25% lower CPU</td>
+<td>Benchmark metrics, Little's law, CPU per operation</td>
+</tr>
+</tbody>
+</table></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">1</span><span class="concept-name">Distributed object storage</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> An object store saves blobs of bytes under a name (bucket + key) and returns them whole; no folders, no partial updates.</li>
+<li><span class="cl">Technical</span> Objects up to 64 MiB are streamed in 1 MiB chunks. Each write creates a new immutable version; deletes write a tombstone. Chunk bytes live in local files; per-object metadata (version, size, chunk locations, checksums) lives in RocksDB.</li>
+<li><span class="cl">Why it matters</span> Immutability makes replication and repair simple: copying version v to another node never conflicts with a half-applied update.</li>
+<li><span class="cl">In this project</span> Five identical nodes; each object lives on three of them.</li>
+<li><span class="cl">Interview angle</span> "How is this different from a database?" No queries, no transactions across keys; just put, get, head, delete and best-effort list, with durability and availability as the main goals.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">2</span><span class="concept-name">gRPC and Protocol Buffers</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> gRPC is a way for programs to call functions on other machines as if they were local, using a compact binary format.</li>
+<li><span class="cl">Technical</span> Services are defined in <code>.proto</code> files and code is generated for client and server. gRPC runs on HTTP/2, which multiplexes many calls over one connection, supports <strong>streaming</strong> RPCs (a Put is a client stream of chunks, a Get is a server stream), carries deadlines and status codes, and applies flow control (backpressure).</li>
+<li><span class="cl">Why it matters</span> Streaming 64 MiB objects in chunks with deadlines and backpressure would need framing and flow control built by hand over raw TCP.</li>
+<li><span class="cl">In this project</span> Each node hosts two services on one port: client-facing <code>ObjectStore</code> (Put, Get, Head, Delete, List) and internal <code>ReplicaService</code> (replica writes and reads, repair digests, ping). The C++ callback API keeps threads from blocking.</li>
+<li><span class="cl">Interview angle</span> "Why not REST/JSON?" Binary protobuf, streaming, deadlines and code generation for both services; REST would add JSON parsing cost and no native streaming flow control.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">3</span><span class="concept-name">Consistent hashing</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> A way to decide which servers hold a key so that adding or removing a server moves only a small fraction of the keys.</li>
+<li><span class="cl">Technical</span> Hash both servers and keys onto the same 64-bit circle (xxHash64 here). A key belongs to the first servers found walking clockwise from its position. Lookup is a binary search over the sorted ring tokens: O(log V). With plain <code>hash(key) % nodes</code>, changing the node count remaps almost every key.</li>
+<li><span class="cl">Why it matters</span> No central directory is needed, and membership changes move only about <code>1/nodes</code> of the data.</li>
+<li><span class="cl">In this project</span> Every node builds the same ring from the same node list, so any node can compute placement locally. A <strong>ring epoch</strong> number travels in every write and ping; a replica rejects writes stamped with a different epoch, preventing writes under a stale placement.</li>
+<li><span class="cl">Interview angle</span> "How many keys move when a sixth node joins?" Roughly one sixth: only the arcs just before the new node's tokens change owner.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">4</span><span class="concept-name">Virtual nodes</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Instead of placing each server once on the ring, place it many times so the load spreads evenly.</li>
+<li><span class="cl">Technical</span> Each physical node gets 128 tokens (<code>hash(<wbr>node_<wbr>name + "#" + i)</code>), so 5 nodes give 640 points. With one token per node, arcs are uneven and one node could own far more than its share; with many tokens, per-node load deviation shrinks roughly with <code>1/sqrt(vnodes)</code>.</li>
+<li><span class="cl">Why it matters</span> Balanced storage and traffic, and when a node fails its load is spread over <strong>all</strong> survivors rather than dumped on one neighbour.</li>
+<li><span class="cl">In this project</span> The preference list for a key is the first N <strong>distinct physical</strong> nodes clockwise, skipping extra tokens of a node already chosen, so three copies never land on one machine.</li>
+<li><span class="cl">Interview angle</span> "Trade-off of more vnodes?" A bigger ring in memory and more ranges for anti-entropy to compare; 128 is a common middle ground.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">5</span><span class="concept-name">Configurable replication (N and the preference list)</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Keep N copies of each object on N different machines; N is a setting.</li>
+<li><span class="cl">Technical</span> N (default 3) is cluster-wide. For each key the coordinator computes the <strong>preference list</strong>, the N owners, and sends a Put to all of them in parallel: synchronous up to W acknowledgements, asynchronous for the rest.</li>
+<li><span class="cl">Why it matters</span> N copies survive N−1 disk losses and also serve reads.</li>
+<li><span class="cl">In this project</span> No "which replicas have it" table exists; placement is always computed from the ring. Pod anti-affinity puts pods on different machines.</li>
+<li><span class="cl">Interview angle</span> "Why 3?" Survives one failure while a second is being repaired; standard durability/cost balance. Erasure coding would cut storage overhead but is out of scope.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">6</span><span class="concept-name">Quorum reads and writes (N, W, R)</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> A write is successful once W of the N replicas have it; a read asks R replicas and takes the newest answer.</li>
+<li><span class="cl">Technical</span> If <code>R + W &gt; N</code>, every read set overlaps every successful write set in at least one replica, so a read after a successful write sees it (absent a newer concurrent write). Default N=3, W=2, R=2. Write latency is the W-th fastest replica; read latency the R-th fastest. Consistency is per request: <code>ONE</code>, <code>QUORUM</code> or <code>ALL</code>.</li>
+<li><span class="cl">Why it matters</span> Writing to all N blocks on the slowest or a dead replica; writing to one risks data loss. Quorums give availability with one replica down.</li>
+<li><span class="cl">In this project</span> For reads, the coordinator asks <strong>all</strong> live replicas for metadata and proceeds when the first R answer, which cuts tail latency. N=3, W=3, R=1 would favour reads; W=1 risks loss.</li>
+<li><span class="cl">Interview angle</span> "Does R + W &gt; N make it strongly consistent?" No. It gives read-your-writes after a successful write, not linearizability (see Q19).</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">7</span><span class="concept-name">Leaderless (Dynamo-style) design and last-writer-wins</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> There is no primary copy. All replicas are equal, any node can coordinate, and conflicting versions are settled by a rule every node applies the same way.</li>
+<li><span class="cl">Technical</span> Each write gets a version <code>(<wbr>hybrid logical clock timestamp,<wbr> node id)</code>. An HLC stays close to wall-clock time but never goes backwards and advances when nodes see each other's timestamps. Every replica applies a version only if it is <strong>greater</strong> than the one it holds: last-writer-wins (LWW). The node id breaks ties.</li>
+<li><span class="cl">Why it matters</span> No leader election, no failover, and replicas converge to the same winner without talking to each other. Retries, repairs and replays are all safe because "apply if newer" is idempotent.</li>
+<li><span class="cl">In this project</span> The cost: two concurrent writes to one key silently keep only one, and clock skew can let an earlier write win. That is acceptable for immutable blobs where concurrent writers per key are rare.</li>
+<li><span class="cl">Interview angle</span> "Why not vector clocks?" They detect conflicts and return siblings to the client to resolve, which is more correct but more complex; LWW keeps metadata tiny.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">8</span><span class="concept-name">CRC32C checksums (integrity validation)</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> A checksum is a short fingerprint of data. Recompute it later; if it differs, the data was corrupted.</li>
+<li><span class="cl">Technical</span> CRC32C is a 32-bit cyclic redundancy check with hardware instructions on x86 (SSE4.2) and ARM, roughly 10+ GB/s per core. It detects all single-bit and short burst errors and random corruption with probability <code>1 − 2^-32</code>. It is not cryptographic and does not stop deliberate tampering.</li>
+<li><span class="cl">Why it matters</span> Disks, memory and network buffers can flip bits silently; TCP checksums and disk ECC miss real-world cases.</li>
+<li><span class="cl">In this project</span> End to end: the client computes a CRC per chunk and one for the whole object; the coordinator and each replica verify before writing; replicas verify on every read; the client verifies on download; a background <strong>scrubber</strong> re-reads sealed files. WAL records and segment headers have their own CRCs. A mismatch returns <code>DATA_LOSS</code>, the read switches to another replica, and repair rewrites the bad copy.</li>
+<li><span class="cl">Interview angle</span> "Why not SHA-256?" Roughly 10–20× slower without special instructions, and integrity, not security, is the goal.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">9</span><span class="concept-name">Write-ahead logging (WAL) and crash recovery</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Before changing your records, write a short note in a log saying what you are about to commit. After a crash, re-read the log to finish or redo the work.</li>
+<li><span class="cl">Technical</span> A Put touches two stores: chunk data in segment files and metadata in RocksDB. Order: <code>fdatasync</code> the chunk data; append a <code>PUT_COMMIT</code> record (key, version, chunk locations, CRC) to the WAL and <code>fdatasync</code> it; apply metadata to RocksDB; acknowledge. The WAL record is the single commit point. On restart the node replays WAL records after <code>applied_lsn</code> (stored in RocksDB), verifying each record and the chunks it references; a torn final record is truncated because it was never acknowledged.</li>
+<li><span class="cl">Why it matters</span> A crash between "data written" and "metadata updated" can never lose an acknowledged write or leave metadata pointing to missing data.</li>
+<li><span class="cl">In this project</span> RocksDB's own WAL is disabled (<code>disableWAL=true</code>) because this WAL covers both stores; <code>atomic_flush</code> plus an <code>applied_lsn</code> stored in every batch keeps RocksDB consistent. The WAL is truncated after each RocksDB flush, which bounds recovery time.</li>
+<li><span class="cl">Interview angle</span> "Why fsync data before the commit record?" So a durable commit record can never reference data that is not on disk.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">10</span><span class="concept-name">Group commit</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Instead of flushing to disk once per write, collect many writes and flush them together.</li>
+<li><span class="cl">Technical</span> <code>fdatasync</code> has a fixed cost (often milliseconds on cloud disks). One committer thread gathers up to 256 pending commits or waits up to 2 ms, then performs one <code>fdatasync</code> for the touched segments, one WAL append and one WAL <code>fdatasync</code>, applies the batch to RocksDB and completes every waiting write. Amortised flush cost per write = flush latency / batch size.</li>
+<li><span class="cl">Why it matters</span> Durability normally caps write throughput; group commit makes durability cheaper as concurrency rises.</li>
+<li><span class="cl">In this project</span> At low load a write may wait up to 2 ms for a batch; under load, a hundred concurrent Puts can share one flush. It is one of the main levers behind the CPU-reduction target.</li>
+<li><span class="cl">Interview angle</span> "Doesn't batching hurt latency?" Slightly at very low load; under concurrency it reduces queueing behind individual flushes, so p95 usually improves.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">11</span><span class="concept-name">RocksDB as the metadata store</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> RocksDB is an embedded key-value database (a library inside the process, not a server) that is fast for small records.</li>
+<li><span class="cl">Technical</span> It is an LSM tree: writes go to an in-memory memtable and are flushed to sorted SST files that are merged by background compaction. It offers fast point lookups (with bloom filters), ordered iteration, atomic multi-key <code>WriteBatch</code> and column families.</li>
+<li><span class="cl">Why it matters</span> Metadata is small, read on every request, needs atomic updates and ordered scans (for listing and repair digests).</li>
+<li><span class="cl">In this project</span> Column families hold the latest version per key, a ring-ordered index for anti-entropy, hints, segment accounting and node state. Chunk data is <strong>not</strong> stored in RocksDB: multi-MB values would be rewritten repeatedly by compaction (10× or more write amplification).</li>
+<li><span class="cl">Interview angle</span> "Why not SQLite or a central SQL database?" SQLite serialises writers; a remote database adds a network hop and a single point of failure.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">12</span><span class="concept-name">Append-only segment storage</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Write all chunks one after another into a few big files instead of creating one small file per chunk.</li>
+<li><span class="cl">Technical</span> Each node has 4 I/O shards, each with one active 1 GiB pre-allocated segment file. A writer reserves space with an atomic <code>fetch_add</code> on the file's tail offset, then writes with <code>pwrite</code> at that offset, so many threads write in parallel without a lock. Each record has a self-describing header (key hash, version, chunk index, CRCs). Full segments are sealed; a compactor later copies live records out of mostly-dead segments.</li>
+<li><span class="cl">Why it matters</span> File-per-chunk costs <code>open</code>, <code>write</code>, <code>fsync</code>, <code>close</code> and a directory <code>fsync</code> per chunk, plus inode churn; appends to a few open files are cheaper and let one flush cover many chunks.</li>
+<li><span class="cl">In this project</span> A crash after <code>pwrite</code> but before commit leaves unreferenced bytes; they are harmless garbage because no committed metadata points to them.</li>
+<li><span class="cl">Interview angle</span> "Cost?" Space must be reclaimed by compaction (write amplification ≤ 2× at a 50% live threshold), and recovery must find each segment's valid tail.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">13</span><span class="concept-name">Hinted handoff (hints)</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> If a replica misses a write because it is down, the coordinator writes itself a note to deliver that write later.</li>
+<li><span class="cl">Technical</span> When a preference-list replica is down, times out or errors, the coordinator stores a durable <strong>hint</strong> ("node X should have key K at version ≥ v") in its own RocksDB. Every 10 s it replays hints to nodes that are back up, copying the version from a healthy replica, rate-limited to 50 MiB/s so repair never starves foreground traffic.</li>
+<li><span class="cl">Why it matters</span> Writes keep succeeding with one replica down, and the missing copy is restored within seconds of the node returning.</li>
+<li><span class="cl">In this project</span> This is a <strong>strict</strong> quorum: only the N owners count toward W, and data is never written to a substitute node. Dynamo's original "hinted handoff" uses a sloppy quorum that writes to a stand-in node; here the hint lives at the coordinator instead. Say "hinted repair" or "hints at the coordinator" to be precise.</li>
+<li><span class="cl">Interview angle</span> "What if the coordinator dies with hints?" Hints are durable in RocksDB and resume after restart; if its disk is lost, anti-entropy still finds the gap.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">14</span><span class="concept-name">Read repair and anti-entropy</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Read repair fixes stale copies that a read happens to notice; anti-entropy periodically compares replicas to catch everything else.</li>
+<li><span class="cl">Technical</span> <strong>Read repair:</strong> when the R metadata answers show a replica with an older or missing version, the coordinator serves the newest version and schedules a background write to the stale replica. <strong>Anti-entropy:</strong> every 10 minutes per vnode range, two replicas split the range into 64 buckets and exchange a digest per bucket (XOR of hashes of key + version + tombstone). Matching digests mean "in sync"; for mismatched buckets they exchange key lists and push or pull the newer versions.</li>
+<li><span class="cl">Why it matters</span> Hints can be lost (coordinator disk failure), and a replaced node starts empty; only a full comparison can guarantee convergence.</li>
+<li><span class="cl">In this project</span> The three mechanisms layer: hints fix known misses, read repair fixes what readers notice, anti-entropy fixes the rest. Merkle trees (Cassandra) localise differences in O(log k) exchanges; bucketed digests are simpler and fine at millions of keys per node. Deletes keep tombstones for 24 h so anti-entropy cannot resurrect a deleted object.</li>
+<li><span class="cl">Interview angle</span> "Why keep tombstones?" A replica that missed the delete would otherwise look like it has a newer object and copy it back.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">15</span><span class="concept-name">Concurrent I/O</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Many requests read and write disks at the same time without blocking each other or creating a thread per request.</li>
+<li><span class="cl">Technical</span> gRPC callback (reactor) API, so network threads never block; a fixed I/O thread pool (8 threads) for blocking <code>pread</code>/<code>pwrite</code>; one group-commit thread for durability; lock-free offset reservation for appends; 1,024 striped locks only for the metadata read-compare-write; admission control capping in-flight requests per node at 512; and end-to-end backpressure through gRPC flow control (a slow replica slows the coordinator's reads from the client).</li>
+<li><span class="cl">Why it matters</span> Thread-per-request at 1,000 client sessions means hundreds of threads, context switching and memory growth.</li>
+<li><span class="cl">In this project</span> No lock is ever held across a network call or an <code>fdatasync</code>. Overload becomes fast <code>RESOURCE_<wbr>EXHAUSTED</code> errors that clients retry with backoff, instead of unbounded queues.</li>
+<li><span class="cl">Interview angle</span> "Why does your resume say concurrent I/O twice?" Bullet 1 is the request-handling model; bullet 2 is concurrent writes during recovery and repair. Be ready to explain both concretely.</li>
+</ul></div>
+
+<div class="concept"><div class="concept-head"><span class="concept-no">16</span><span class="concept-name">Benchmark metrics: ops/min, p95, concurrency and CPU per op</span></div><ul class="concept-list">
+<li><span class="cl">Simple</span> Throughput is operations completed per minute; p95 is the latency 95% of operations beat; concurrency is how many clients are active; CPU per op is how much processor time each operation costs.</li>
+<li><span class="cl">Technical</span> 10K ops/min ≈ 167 client-visible Get+Put operations per second (internal replica RPCs not counted). Little's law: requests in flight = throughput × latency, so 167 ops/s at 30 ms is only about 5 in flight. CPU per op = total node CPU time / successful ops at the same offered load.</li>
+<li><span class="cl">Why it matters</span> These are the resume's numbers; you must state exactly what they mean and that they are targets.</li>
+<li><span class="cl">In this project</span> A C++ load generator drives 1,000 sessions over 64 HTTP/2 channels, open-loop, 70% Get / 30% Put.</li>
+<li><span class="cl">Interview angle</span> "1,000 requests at the same time?" No: 1,000 concurrent client sessions; a separate burst test fires 1,000 simultaneously (Q25).</li>
+</ul></div>
+<div class="box box-caution keep"><div class="box-label">Resume flag</div>
+<p>Say these precisely. (1) "Benchmarked 1,000 concurrent requests … achieving" reads like a measured result; all four numbers are benchmark targets with a written method, and "1,000" means concurrent client <strong>sessions</strong>, not 1,000 requests executing at once. (2) "Maintaining availability" holds when at most one replica of a key is down (N=3, W=2); with two down, quorum writes to those keys fail. (3) If you say "hinted handoff", add that it is a strict-quorum variant with hints held by the coordinator, not Dynamo's sloppy quorum. (4) "Concurrent I/O" appears in two bullets; have one concrete answer ready (callback gRPC, bounded I/O pool, lock-free appends, group commit, admission control).</p>
+</div>
+<div class="keephead"><div class="part-banner" id="part-2" data-part="2"><span class="part-kicker">Part 2</span><h1 class="part-title">High-Level Design and Architecture</h1></div><h2 id="s-21-technology-stack"><span class="secnum">2.1</span>Technology stack</h2></div>
+
+<div class="table-block"><table>
+<thead>
+<tr>
+<th>Technology</th>
+<th>Purpose in the project</th>
+<th>Why it was selected</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C++20</td>
+<td>Storage-node binary, client library, load generator</td>
+<td>Explicit control of threads, buffers and syscalls, which is exactly what the CPU optimisation measures</td>
+</tr>
+<tr>
+<td>gRPC + Protocol Buffers</td>
+<td>Client API and node-to-node replication, repair and heartbeats</td>
+<td>HTTP/2 multiplexing, streaming RPCs, deadlines, flow control, code generation</td>
+</tr>
+<tr>
+<td>RocksDB</td>
+<td>Per-node metadata: latest versions, ring index, hints, segment state</td>
+<td>Embedded, atomic batches, ordered iteration, fast point lookups</td>
+</tr>
+<tr>
+<td>Append-only segment files</td>
+<td>Chunk data</td>
+<td>Few syscalls and fsyncs; sequential writes; no LSM write amplification for large values</td>
+</tr>
+<tr>
+<td>CRC32C (Abseil)</td>
+<td>Chunk, object, WAL and record checksums</td>
+<td>Hardware-accelerated, industry standard for storage integrity</td>
+</tr>
+<tr>
+<td>xxHash64</td>
+<td>Ring positions for keys and virtual nodes</td>
+<td>Fast, uniform, non-cryptographic</td>
+</tr>
+<tr>
+<td>Docker + Kubernetes StatefulSet</td>
+<td>Packaging; 5 pods with stable names and their own persistent volumes</td>
+<td>Storage nodes need stable identity and their own disk after rescheduling</td>
+</tr>
+<tr>
+<td>Prometheus metrics (auxiliary)</td>
+<td>Latency histograms, repair queues, CPU</td>
+<td>Observability; not a resume technology</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>How they work together.</strong> A client's gRPC stream reaches any node. That node uses xxHash64 and the ring to find the three owners, forwards chunks over internal gRPC streams, and each owner writes chunks into its segment files, commits through its WAL (with group commit) and records metadata in RocksDB. CRC32C is checked at every hop. Kubernetes gives each node a stable DNS name (<code>storage-node-0..4</code>) and its own disk, which is what the ring and the WAL depend on.</p>
+<div class="keephead"><h2 id="s-22-high-level-architecture"><span class="secnum">2.2</span>High-level architecture</h2><p><strong>In simple words.</strong> Every node runs the same program and plays two roles. As a <strong>coordinator</strong>, it accepts a client request, works out which three nodes own the key, sends the request to them, waits for enough answers (the quorum) and replies. As a <strong>replica</strong>, it stores its copy durably and serves reads. There is no master, no metadata server and no ZooKeeper. Background repair keeps replicas in sync.</p></div>
+
+
+<figure class="diagram" id="fig-1"><img src="diagrams/figure-1.svg" alt="Figure 1" style="width:430.6px"><figcaption><span class="fig-num">Figure 1</span><span class="fig-sep"> — </span>The simple picture: any node coordinates, three replicas store</figcaption></figure>
+<p><strong>Component responsibilities</strong></p>
+<div class="table-block"><table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gRPC server</td>
+<td>Hosts <code>ObjectStore</code> (clients) and <code>ReplicaService</code> (peers) on one port; callback reactors</td>
+</tr>
+<tr>
+<td>Coordinator</td>
+<td>Version assignment (HLC), preference list, quorum fan-out and wait, read resolution, hint creation, read-repair scheduling</td>
+</tr>
+<tr>
+<td>Ring manager</td>
+<td>Builds an immutable ring snapshot from the node list, 128 vnodes per node and the ring epoch</td>
+</tr>
+<tr>
+<td>Failure detector</td>
+<td>Pings peers every 1 s; <code>SUSPECT</code> after 3 s and <code>DOWN</code> after 5 s without reply</td>
+</tr>
+<tr>
+<td>LocalStore</td>
+<td>Facade for local persistence: segment appends, commit, reads, tombstones</td>
+</tr>
+<tr>
+<td>WAL + group committer</td>
+<td>Durable commit log; batches commits and flushes once per batch</td>
+</tr>
+<tr>
+<td>RocksDB metadata</td>
+<td>Latest version per key, ring-ordered index, hints, segment accounting, <code>applied_lsn</code></td>
+</tr>
+<tr>
+<td>Repair manager</td>
+<td>Replays hints, executes read repairs, runs anti-entropy, rate-limited</td>
+</tr>
+<tr>
+<td>Scrubber / compactor</td>
+<td>Re-verifies sealed segments; reclaims space from mostly-dead segments</td>
+</tr>
+<tr>
+<td>Admission controller + I/O pool</td>
+<td>Caps in-flight requests (512) and runs blocking disk I/O on 8 threads</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>How components communicate.</strong> Client to any node: gRPC <code>ObjectStore</code> over HTTP/2, synchronous (the client waits for the quorum); Put is a client stream of chunks, Get a server stream. Coordinator to replicas: gRPC <code>ReplicaService</code> streams, synchronous until W acknowledgements, then asynchronous for the rest. Node to node heartbeats: unary <code>Ping</code> every second with a 500 ms deadline. Repair: background RPCs (<code>ReplicaReadChunks</code>, <code>ReplicaWrite</code>, <code>RangeDigest</code>, <code>RangeKeys</code>), rate-limited. Disk I/O happens only on I/O threads, never on gRPC callback threads. When the coordinator is itself a replica, it calls <code>LocalStore</code> directly.</p>
+<p><strong>Complete data flow.</strong></p>
+<ol>
+<li><strong>Put:</strong> client streams chunks → coordinator verifies CRC, assigns HLC version, computes preference list → streams to all N replicas → each replica appends to a segment, then group commit (fsync data → WAL record → fsync WAL → RocksDB) → acknowledges → coordinator replies after W acks → late acks or failures handled in the background (hints).</li>
+<li><strong>Get:</strong> metadata requests to all live replicas → at R answers choose the highest version → stream chunks from one replica (local if possible), verifying CRC per chunk → client verifies the object CRC → stale replicas queued for read repair.</li>
+<li><strong>Repair (background):</strong> hints, read-repair queue and anti-entropy digest mismatches → read from a healthy replica → write to the lagging one.</li>
+</ol>
+
+<figure class="diagram" id="fig-2"><img src="diagrams/figure-2.svg" alt="Figure 2" style="width:657.6px"><figcaption><span class="fig-num">Figure 2</span><span class="fig-sep"> — </span>Detailed HLD. Top lane: how a request reaches its replicas. Bottom lane: what every node runs internally</figcaption></figure>
+<p><strong>Where data is stored.</strong> Chunk bytes: 1 GiB append-only segment files on each replica's persistent volume. Metadata: RocksDB on the same volume. Commit log: WAL segments of 64 MiB, truncated after RocksDB flushes. Hints: the coordinator's RocksDB. The ring is not stored; every node computes it from configuration. There is no global metadata store; metadata is replicated with the data by the same quorum write.</p>
+<p><strong>How it scales.</strong></p>
+<ul>
+<li><strong>Capacity:</strong> add nodes; with 5 nodes and N=3 each node holds about 60% of keys. A new node bumps the ring epoch and anti-entropy streams it the ranges it now owns (manual, not autoscaled).</li>
+<li><strong>Throughput:</strong> requests spread across all nodes through the Kubernetes Service; per-node concurrency is bounded by the I/O pool and admission control.</li>
+<li><strong>Hot keys:</strong> served by their three replicas only; reads can use <code>consistency=ONE</code> to spread load.</li>
+</ul>
+<p><strong>What happens when a major component fails</strong></p>
+<div class="table-block"><table>
+<thead>
+<tr>
+<th>Failure (N=3, W=2, R=2)</th>
+<th>Effect</th>
+<th>Recovery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One replica of a key down</td>
+<td>Reads and writes still succeed; hints queue for it</td>
+<td>Node returns → WAL replay → hint replay → anti-entropy</td>
+</tr>
+<tr>
+<td>Two replicas of a key down</td>
+<td>Quorum operations fail with <code>UNAVAILABLE</code>; <code>ONE</code> reads still work</td>
+<td>Bring a node back</td>
+</tr>
+<tr>
+<td>Node crash and restart</td>
+<td>Same disk; WAL replay restores metadata</td>
+<td>Automatic; hints and anti-entropy fill the gap</td>
+</tr>
+<tr>
+<td>Corrupt chunk on disk</td>
+<td>CRC mismatch → <code>DATA_LOSS</code> → read served from another replica</td>
+<td>Repair rewrites the bad copy</td>
+</tr>
+<tr>
+<td>Disk permanently lost</td>
+<td>Node replaced with an empty volume</td>
+<td>Anti-entropy rebuilds its ranges at ≤ 50 MiB/s</td>
+</tr>
+<tr>
+<td>Coordinator dies mid-request</td>
+<td>Client stream breaks; client retries on another node</td>
+<td>Puts have unknown outcome; retry writes a newer version</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="s-23-important-architectural-decisions"><span class="secnum">2.3</span>Important architectural decisions</h2>
+<p><strong>1. Leaderless quorum replication instead of a leader per shard.</strong>
+<em>Chosen:</em> Dynamo-style N/W/R quorums, any node coordinates. <em>Why:</em> no leader election or failover logic, availability with a replica down, tunable per request. <em>Alternative:</em> primary-backup or Raft per shard. <em>Why not:</em> needs leader election, failover and a replicated log; more work, less availability during leader changes. <em>Trade-off:</em> not linearizable; failed writes have unknown outcome.</p>
+<p><strong>2. Last-writer-wins with hybrid logical clock versions.</strong>
+<em>Chosen:</em> versions <code>(HLC, node id)</code>, apply only if newer. <em>Why:</em> deterministic convergence, 12 bytes of metadata, idempotent apply. <em>Alternative:</em> vector clocks with siblings. <em>Why not:</em> clients would have to merge conflicting blobs, which makes little sense for immutable objects. <em>Trade-off:</em> one of two concurrent writes is silently lost; clock skew can favour the faster clock.</p>
+<p><strong>3. Consistent hashing with 128 virtual nodes.</strong>
+<em>Chosen:</em> xxHash64 ring, preference list of N distinct nodes. <em>Why:</em> no directory service; minimal movement on membership change; even load. <em>Alternative:</em> modulo hashing, rendezvous hashing or a central placement table. <em>Why not:</em> modulo reshuffles almost everything; a directory is a new single point of failure. <em>Trade-off:</em> balance is statistical; the ring must match everywhere (epoch).</p>
+<p><strong>4. Strict quorum with coordinator-held hints.</strong>
+<em>Chosen:</em> only the N owners count; hints stored at the coordinator. <em>Why:</em> data only ever lives on its owners, so repair stays simple. <em>Alternative:</em> sloppy quorum writing to a substitute node. <em>Why not:</em> more availability but data on non-owners complicates repair and consistency. <em>Trade-off:</em> two owners down blocks writes for those keys.</p>
+<p><strong>5. Own WAL with group commit; RocksDB for metadata only; segments for data.</strong>
+<em>Chosen:</em> one commit record spanning data and metadata, RocksDB WAL disabled. <em>Why:</em> a single commit point and amortised fsync. <em>Alternative:</em> fsync per write, RocksDB's WAL as the commit point, or blobs inside RocksDB. <em>Why not:</em> per-write fsync is slow; RocksDB's WAL does not cover segment data; large values in an LSM tree cause heavy write amplification. <em>Trade-off:</em> custom replay code must be tested at crash points.</p>
+<p><strong>6. Callback gRPC with a bounded I/O pool and admission control.</strong>
+<em>Chosen:</em> non-blocking reactors, 8 I/O threads, 512 in-flight cap. <em>Why:</em> thread count independent of client count; overload becomes fast errors. <em>Alternative:</em> synchronous thread-per-RPC server. <em>Why not:</em> hundreds of threads under 1,000 sessions. <em>Trade-off:</em> reactor code is harder to write.</p>
+<div class="keephead"><div class="part-banner" id="part-3" data-part="3"><span class="part-kicker">Part 3</span><h1 class="part-title">How the Project Works</h1></div><div class="keephead"><h2 id="s-31-one-complete-end-to-end-request-flow"><span class="secnum">3.1</span>One complete end-to-end request flow</h2><p>A client uploads <code>photos/cat.jpg</code> with the default <code>QUORUM</code> consistency.</p></div></div>
+
+
+
+<figure class="diagram" id="fig-3"><img src="diagrams/figure-3.svg" alt="Figure 3" style="width:657.6px"><figcaption><span class="fig-num">Figure 3</span><span class="fig-sep"> — </span>Quorum Put with N=3, W=2: the client gets OK after two durable acknowledgements</figcaption></figure>
+<ol>
+<li><strong>Arrival.</strong> The client opens a <code>PutObject</code> stream to any node through the Kubernetes Service (or directly). That node is the coordinator.</li>
+<li><strong>Admission and validation.</strong> The admission controller checks the in-flight count (over 512 → <code>RESOURCE_<wbr>EXHAUSTED</code>); a bearer token is checked; the first message must be a valid header (bucket, key, size, object CRC).</li>
+<li><strong>Placement and version.</strong> The coordinator hashes the key, binary-searches the ring snapshot and takes the first three distinct physical nodes clockwise. It stamps a version from its hybrid logical clock.</li>
+<li><strong>Replica selection.</strong> Replicas the failure detector marks <code>DOWN</code> get a hint immediately. If fewer than W replicas are alive, it fails fast with <code>UNAVAILABLE</code> before sending any data.</li>
+<li><strong>Streaming.</strong> For each 1 MiB chunk: verify its CRC, then forward it to every open replica stream (local writes go to the I/O pool). gRPC flow control means a slow replica slows the client's stream rather than filling memory.</li>
+<li><strong>Replica write.</strong> Each replica verifies the chunk CRC, reserves space in a segment with an atomic add, writes it with <code>pwrite</code>, and after the last chunk verifies the whole-object CRC and submits a commit.</li>
+<li><strong>Durability (group commit).</strong> The committer batches commits: <code>fdatasync</code> the segments, append the WAL record, <code>fdatasync</code> the WAL, apply the metadata to RocksDB under a per-key lock (only if the version is newer). Then the replica acknowledges.</li>
+<li><strong>Quorum.</strong> After W=2 acknowledgements the coordinator returns <code>OK(version, crc)</code> to the client.</li>
+<li><strong>Background completion.</strong> The third acknowledgement arrives later; if it fails, a hint is stored and replayed when that node is healthy.</li>
+</ol>
+<p><strong>The read path (GetObject) in brief.</strong> The coordinator sends metadata reads to all live replicas, waits for the first R=2, chooses the highest version (a tombstone means <code>NOT_FOUND</code>), then streams chunks from one replica holding that version, verifying each CRC. If a chunk fails its CRC, it continues from that chunk on another replica. Any replica that answered with an older version is queued for read repair.</p>
+<div class="keephead"><h2 id="s-32-important-alternative-scenarios"><span class="secnum">3.2</span>Important alternative scenarios</h2><p><strong>Scenario A: One replica is down during a Put.</strong> Figure 4 shows the timeline.</p></div>
+
+
+<figure class="diagram" id="fig-4"><img src="diagrams/figure-4.svg" alt="Figure 4" style="width:495.7px"><figcaption><span class="fig-num">Figure 4</span><span class="fig-sep"> — </span>Replica D is down: the write succeeds on A and B, and a hint brings D up to date when it returns</figcaption></figure>
+<p>The client never sees the failure. Durability is temporarily two copies instead of three; a second failure among the same key's replicas would block writes to that key until a node returns.</p>
+<p><strong>Scenario B: A chunk is corrupt on disk.</strong> A replica's disk flips a bit in a sealed segment. On the next read (or scrubber pass), the stored CRC does not match, so the replica returns <code>DATA_LOSS</code> for that chunk. The coordinator continues the same stream from that chunk index on another replica holding the same version, so the client receives a complete, verified object. The repair manager then rewrites a fresh copy onto the bad replica and the corrupt record is marked dead.</p>
+<p><strong>Scenario C: A node crashes and restarts.</strong> Peers stop getting ping replies and mark it <code>DOWN</code> within ~5 s; writes for its keys go to the other two replicas plus hints. Kubernetes restarts the pod with the same persistent volume. Recovery: open RocksDB and read <code>applied_lsn</code>; replay WAL records after it, checking each record's CRC and that the chunks it references exist; truncate a torn final record (it was never acknowledged); find each active segment's valid tail and resume appending after it; flush RocksDB. The node reports ready, peers replay hints, and anti-entropy confirms convergence. Recovery time is bounded by the WAL tail since the last flush (illustratively, a few seconds).</p>
+<h2 id="s-33-important-guarantees-and-limitations"><span class="secnum">3.3</span>Important guarantees and limitations</h2>
+<div class="table-block"><table>
+<thead>
+<tr>
+<th>Guarantee</th>
+<th>Holds?</th>
+<th>Condition / reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Acknowledged write is durable</td>
+<td>Yes</td>
+<td>On ≥ W replicas, fsynced before ack; survives any number of process crashes and up to W−1 disk losses before repair</td>
+</tr>
+<tr>
+<td>Read-your-writes</td>
+<td>Yes, conditionally</td>
+<td>Same key, <code>R + W &gt; N</code>, write returned <code>OK</code>, no concurrent writer</td>
+</tr>
+<tr>
+<td>Linearizability</td>
+<td>No</td>
+<td>Leaderless quorums with LWW are not linearizable</td>
+</tr>
+<tr>
+<td>Monotonic reads</td>
+<td>No (in general)</td>
+<td>Two reads via different coordinators can hit different quorums; read repair shortens regressions</td>
+</tr>
+<tr>
+<td>Eventual consistency</td>
+<td>Yes</td>
+<td>Replicas converge after repair if writes stop</td>
+</tr>
+<tr>
+<td>Failed write has no effect</td>
+<td>No</td>
+<td>"Unknown outcome": a failed Put may have committed on fewer than W replicas and appear later</td>
+</tr>
+<tr>
+<td>No corrupt data returned silently</td>
+<td>Yes</td>
+<td>CRC checked at every hop; mismatches become errors and repairs</td>
+</tr>
+<tr>
+<td>Concurrent writes both kept</td>
+<td>No</td>
+<td>LWW keeps one</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Where consistency comes from:</strong> deterministic placement (same ring everywhere, guarded by epoch), deterministic conflict resolution (total order on versions) and idempotent apply ("apply only if newer"). Together they make each key behave like a last-writer-wins register: replicas can apply updates in any order, any number of times, and still converge. <strong>Failures</strong> are handled by quorums (stay available), hints, read repair and anti-entropy (converge), WAL replay (recover locally) and CRCs (detect corruption). <strong>Accepted trade-offs:</strong> no linearizability, silent loss of concurrent writes, unknown outcomes on failed writes, manual topology changes.</p>
+<div class="keephead"><div class="part-banner" id="part-4" data-part="4"><span class="part-kicker">Part 4</span><h1 class="part-title">Complete Interview Explanation</h1></div><h2 id="s-41-two-minute-explanation"><span class="secnum">4.1</span>Two-minute explanation</h2></div>
+
+<div class="box box-say"><div class="box-label">Say it aloud</div>
+<p>"I built a distributed object store in C++, in the style of Amazon's Dynamo. The problem is storing blobs like images or model files across machines so that losing one machine loses nothing and doesn't stop service.</p>
+<p>Every node runs the same gRPC server and there's no master. When a request arrives, the node it lands on becomes the coordinator: it hashes the key onto a consistent-hash ring with 128 virtual nodes per server and takes the first three distinct servers clockwise as replicas. A write streams 1 MB chunks, each with a CRC32C checksum, to all three in parallel, and succeeds once two of them have made it durable. A read asks the replicas for metadata, takes the newest version from the first two answers, and streams the data from one of them, verifying checksums.</p>
+<p>On each node, data goes into append-only segment files, a write-ahead log with group commit is the commit point, and RocksDB holds metadata, so a crash never loses an acknowledged write. If a replica is down, the coordinator stores a hint and replays it later; reads repair stale copies; and a periodic anti-entropy process compares replicas and fixes anything else.</p>
+<p>The benchmark target was 10K operations a minute at under 200 ms p95 with 1,000 client sessions, and about 25% less CPU per operation after the I/O optimisations. Those are targets with a documented method, not production measurements."</p>
+</div>
+<h2 id="s-42-five-minute-explanation"><span class="secnum">4.2</span>Five-minute explanation</h2>
+<div class="box box-say"><div class="box-label">Say it aloud</div>
+<p>"<strong>Problem and requirements.</strong> I wanted a storage engine that keeps objects durable and available across node failures without a central metadata server. Requirements: put, get, head, delete; N copies with configurable read and write quorums; integrity checks on every byte; crash recovery; background repair; and safe handling of many concurrent clients.</p>
+<p><strong>Technology.</strong> C++ for explicit control over threads, buffers and syscalls; gRPC for streaming RPCs with deadlines and flow control; RocksDB as an embedded metadata store; CRC32C for hardware-fast checksums; and Kubernetes StatefulSets, because storage nodes need stable names and their own disks.</p>
+<p><strong>Architecture.</strong> [Draw Figure 2.] Five identical nodes. Each is both a coordinator for requests it receives and a replica for keys it owns. Placement uses consistent hashing with 128 virtual nodes per server, so adding a node moves only about a fifth of the data and a failed node's load spreads across all survivors. Every node computes the same ring, so there's no lookup service.</p>
+<p><strong>Write path.</strong> The coordinator assigns a version from a hybrid logical clock, streams chunks to all three replicas and replies after two durable acknowledgements. On each replica the order matters: write chunk data and fsync, append a commit record to the WAL and fsync, then update RocksDB, then acknowledge. Group commit batches many writes into one fsync.</p>
+<p><strong>Read path.</strong> Ask all live replicas for metadata, use the first two, pick the highest version, stream from one replica, verify every chunk.</p>
+<p><strong>Key decisions.</strong> Leaderless quorums instead of a leader per shard, because there's no election or failover and it stays available with one replica down. Last-writer-wins with HLC versions, so replicas converge without coordination; the trade-off is that concurrent writes to one key keep only one. My own WAL instead of RocksDB's, because a write spans the data files and the metadata, and I need one commit point for both.</p>
+<p><strong>Reliability.</strong> Hints for missed writes, read repair for stale replicas, anti-entropy every ten minutes, WAL replay on restart, and checksums checked at every hop with a background scrubber.</p>
+<p><strong>Performance.</strong> The I/O optimisations were append-only segments instead of a file per chunk, group commit with a single WAL, and avoiding buffer copies. The resume's 10K ops/min, sub-200 ms p95 and 25% CPU figures are benchmark targets I designed for."</p>
+</div>
+<h2 id="s-43-ten-minute-explanation"><span class="secnum">4.3</span>Ten-minute explanation</h2>
+<div class="box box-say"><div class="box-label">Say it aloud</div>
+<p>"<strong>Motivation.</strong> I wanted one project that exercises the core ideas behind Dynamo, Cassandra and object stores, in C++ so the costs I'm optimising, syscalls, copies and threads, are visible.</p>
+<p><strong>Architecture.</strong> [Draw Figure 2.] Five nodes on Kubernetes as a StatefulSet, so each pod keeps its name and its persistent volume across restarts. A client can hit any node through a Service. There's no master and no ZooKeeper: the ring comes from a static node list plus an epoch number, and liveness comes from one-second heartbeats.</p>
+<p><strong>Placement.</strong> Keys and 128 tokens per node are hashed onto a 64-bit ring; a key's preference list is the first three distinct physical nodes clockwise. Virtual nodes balance ownership and spread a dead node's load. An epoch stamped on every write rejects nodes with a stale ring.</p>
+<p><strong>Quorums.</strong> N=3, W=2, R=2. Because R plus W is greater than N, any read set overlaps any successful write set, so you read your own write. But I'm careful to say this is not linearizable: concurrent reads and writes can see old, then new, then old. And a failed write has an unknown outcome, because it might have landed on one replica and later spread through repair. So clients treat errors as 'unknown' and retry, which is safe because a retry just writes a newer version with the same bytes.</p>
+<p><strong>Conflict resolution.</strong> Each write gets a version: a hybrid logical clock timestamp plus the node id. Every replica applies a version only if it's newer than what it has. That one rule makes client retries, hint replays, read repairs and WAL replays all idempotent, and every replica converges on the same winner. The cost is last-writer-wins: two concurrent writers to one key lose one write silently, and clock skew can favour the node with the faster clock.</p>
+<p><strong>Node internals.</strong> Chunk bytes go into big append-only segment files. A writer reserves space with an atomic fetch-add on the tail and writes with pwrite, so there's no lock on the data path. Metadata goes into RocksDB, which is great for small records and ordered scans but bad for multi-megabyte values because compaction would keep rewriting them. The WAL ties them together: fsync the data, append and fsync a commit record, then apply to RocksDB. I disabled RocksDB's own WAL because mine covers both stores, and I store an applied-LSN in every RocksDB batch so recovery knows where to start replaying. Group commit means one fsync covers up to 256 writes.</p>
+<p><strong>Integrity.</strong> CRC32C is computed by the client per chunk and verified at every hop and by a background scrubber. A mismatch becomes DATA_LOSS, the read continues from another replica, and repair rewrites the bad copy.</p>
+<p><strong>Failures.</strong> If a replica is down, writes still meet W=2 and the coordinator stores a hint, replayed every ten seconds once the node is back, rate-limited so repair doesn't hurt foreground latency. Reads that notice a stale replica trigger read repair. Anti-entropy compares 64 bucket digests per range every ten minutes and catches anything the others missed, including a node whose disk was replaced. Deletes are tombstones kept for 24 hours so anti-entropy can't resurrect them. On restart a node replays its WAL tail, truncates any torn record, and rejoins.</p>
+<p><strong>Concurrency.</strong> Callback reactors never block; disk I/O runs on an eight-thread pool, durability on one committer thread, and admission control caps 512 in-flight requests per node. No lock is held across a network call or an fsync.</p>
+<p><strong>Performance and numbers.</strong> The baseline wrote one file per chunk with an fsync each, used RocksDB's WAL as well as mine, copied buffers on every read and re-serialised chunks per replica. The optimised path removes each of those, which should cut CPU per operation by about a quarter. I'd measure CPU per op from cgroup counters at the same offered load, with an ablation per change. The load generator runs 1,000 client sessions with open-loop arrivals at 167 ops per second; by Little's law only a handful are actually in flight, which I'd say openly. All of the numbers are targets.</p>
+<p><strong>Limitations and next steps.</strong> No linearizability or conditional writes, manual topology changes, strict quorums block writes when two replicas are down, full-mesh heartbeats don't scale past a few dozen nodes, and three full copies cost 3× storage. Next I'd add Merkle trees or incremental digests, SWIM gossip, zone-aware placement, erasure coding for cold data and Raft-replicated metadata for keys that need compare-and-swap."</p>
+</div>
+<div class="keephead"><div class="part-banner" id="part-5" data-part="5"><span class="part-kicker">Part 5</span><h1 class="part-title">Interview Questions and Answers</h1></div><div class="keephead"><h2 id="s-51-basic-understanding"><span class="secnum">5.1</span>Basic understanding</h2><h4 class="question" id="q1"><span class="qnum">Q1</span><span class="qtext">What does your distributed object store do?</span><span class="qlevel q-easy">Easy</span></h4></div></div>
+
+
+<p>It stores objects (blobs of bytes up to 64 MiB) under a bucket and key, across a cluster of storage nodes, and keeps them durable and available when nodes fail. Clients call <code>PutObject</code>, <code>GetObject</code>, <code>HeadObject</code> and <code>DeleteObject</code> over gRPC. Any node can coordinate a request: it finds the key's three replicas on a consistent-hash ring, writes to them in parallel and replies after two have durably stored the data (W=2), or reads metadata from replicas and returns the newest version (R=2). Each node makes writes crash-safe with a write-ahead log, stores metadata in RocksDB and data in append-only segment files, and checks CRC32C checksums everywhere. Background repair (hints, read repair, anti-entropy) brings lagging replicas back in sync. It is a Dynamo-style, leaderless design, not S3-compatible and not a file system.</p>
+<h4 class="question" id="q2"><span class="qnum">Q2</span><span class="qtext">What is an object store, and how is it different from a file system or a database?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>An object store saves whole blobs under a flat key and returns them whole (put, get, head, delete, list); an overwrite creates a new immutable version. A file system adds directories, partial writes, appends, renames and POSIX semantics, which are much harder to distribute. A database adds queries, indexes and often multi-key transactions. Object stores give those up for easy scaling: because an object is written once as a unit, copying a version to another node is always safe and conflicts reduce to "which version is newest". This project follows that model: 1 MiB chunks, immutable versions, tombstones for deletes, garbage collection of superseded chunks.</p>
+<h4 class="question" id="q3"><span class="qnum">Q3</span><span class="qtext">Walk me through a Put request.</span><span class="qlevel q-easy">Easy</span></h4>
+<p>The client streams a header and 1 MiB chunks to any node, which becomes the coordinator. It checks admission (≤ 512 in flight) and the header, hashes the key onto the ring to find three replicas, and stamps a version from its hybrid logical clock. It streams each chunk, after verifying its CRC32C, to all three replicas. Each replica verifies the CRC, appends the chunk to a segment file, and after the last chunk submits a commit. A group-commit thread flushes the data, appends a commit record to the WAL, flushes the WAL and updates RocksDB, then the replica acknowledges. After two acknowledgements the coordinator replies <code>OK</code> with the version. The third replica's acknowledgement arrives in the background; if it fails, the coordinator stores a hint to repair it later.</p>
+<p class="followup"><strong>Related follow-up:</strong> "Why wait for two, not three?" Waiting for all three blocks on the slowest or a dead replica; two of three keeps writes available with one node down.</p>
+<h4 class="question" id="q4"><span class="qnum">Q4</span><span class="qtext">Walk me through a Get request.</span><span class="qlevel q-easy">Easy</span></h4>
+<p>The coordinator sends a lightweight metadata read to all live replicas and resolves at the first R=2 answers: highest version wins; a tombstone or nothing means <code>NOT_FOUND</code>. It then streams chunks from one replica holding that version (itself if possible), verifying each CRC; the client verifies chunks and the object CRC. A failed chunk continues from the same index on another replica. Replicas that returned older versions are queued for read repair. Asking all replicas but waiting for two cuts tail latency for a few extra metadata reads.</p>
+<h4 class="question" id="q5"><span class="qnum">Q5</span><span class="qtext">Why consistent hashing instead of <code>hash(<wbr>key) % number_<wbr>of_<wbr>nodes</code>?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>With modulo hashing, the node for a key depends on the node count, so going from 5 to 6 nodes changes the owner of roughly 5 in 6 keys and you must copy almost all the data. Consistent hashing places both nodes and keys on the same circular hash space; a key belongs to the next nodes clockwise. Adding a node only takes over the arcs just before its positions, about <code>1/(nodes+1)</code> of the keys; removing one hands its arcs to neighbours. Every node can compute placement locally with a binary search over the sorted ring, so no central directory is needed. Here the ring uses xxHash64 and 128 virtual nodes per server, and the preference list is the first three distinct physical servers clockwise. An epoch number in every write stops a node with an outdated ring from writing to the wrong replicas.</p>
+<p class="followup"><strong>Related follow-up:</strong> "Alternatives?" Rendezvous (highest-random-weight) hashing, jump consistent hash, or a placement directory.</p>
+<h4 class="question" id="q6"><span class="qnum">Q6</span><span class="qtext">What are virtual nodes and why do you need them?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>With one position per server on the ring, the arcs between servers are random lengths, so one server can own far more keys than another, and when a server dies, its whole arc falls on a single neighbour, doubling that neighbour's load. Virtual nodes give each physical server many positions (128 here, so 640 in a five-node cluster). Each server then owns many small arcs, and the law of large numbers evens out the total: imbalance shrinks roughly with one over the square root of the vnode count. When a server fails, its many small arcs are inherited by many different neighbours, spreading the extra load across all survivors. The preference list skips additional tokens of a node that is already selected, so three replicas always land on three different machines. The cost is a larger ring structure and more ranges to compare during anti-entropy.</p>
+<h4 class="question" id="q7"><span class="qnum">Q7</span><span class="qtext">Explain N, W and R, and why R + W &gt; N matters.</span><span class="qlevel q-easy">Easy</span></h4>
+<p>N is how many replicas store each object (3). W is how many must acknowledge a write before it counts as successful (2). R is how many replicas a read consults before answering (2). If R + W &gt; N, any set of R replicas must overlap any set of W replicas in at least one node, by simple counting: 2 + 2 = 4 &gt; 3. So a read that follows a successful write always includes at least one replica that has the write, and because the read takes the highest version, it returns that write (unless a newer write has happened). Tuning changes the trade-off: W=3, R=1 gives fast reads but any replica failure blocks writes; W=1, R=1 is highly available but only eventually consistent and risks losing a write if that one replica dies before repair. Consistency is selectable per request: <code>ONE</code>, <code>QUORUM</code>, <code>ALL</code>.</p>
+<h4 class="question" id="q8"><span class="qnum">Q8</span><span class="qtext">Why did you use gRPC?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Three reasons: streaming, efficiency and built-in reliability features. Objects can be 64 MiB, so a Put is a client-streaming RPC (a header, then 1 MiB chunks) and a Get is a server-streaming RPC; HTTP/2 flow control gives backpressure automatically, so a slow replica slows the sender instead of exhausting memory. Protocol Buffers are compact binary messages with generated C++ code for both the client-facing <code>ObjectStore</code> service and the internal <code>ReplicaService</code>. gRPC also provides deadlines that propagate to downstream calls, standard status codes (<code>UNAVAILABLE</code>, <code>DEADLINE_EXCEEDED</code>, <code>DATA_LOSS</code>, <code>RESOURCE_<wbr>EXHAUSTED</code>), connection multiplexing (many calls on one connection) and keepalives. The C++ callback API lets a few threads serve many concurrent streams. Raw TCP would require building framing, flow control and deadline propagation by hand; REST/JSON would add parsing cost and lack native streaming backpressure.</p>
+<div class="keephead"><h2 id="s-52-durability-integrity-and-repair"><span class="secnum">5.2</span>Durability, integrity and repair</h2><h4 class="question" id="q9"><span class="qnum">Q9</span><span class="qtext">What is a write-ahead log and why do you need one?</span><span class="qlevel q-easy">Easy</span></h4></div>
+
+<p>A WAL is an append-only file where you durably record that an operation committed, before (or while) applying it to your main data structures, so a crash can never leave you in a half-updated state. Here a Put touches two places: chunk bytes in segment files and metadata in RocksDB. Without a single commit point, a crash between them could leave metadata pointing at missing data, or data that nothing points to, or an acknowledged write that vanished. The replica therefore fsyncs the chunk data, appends a <code>PUT_COMMIT</code> record (key, version, size, checksum, chunk locations) to the WAL and fsyncs it, then updates RocksDB, and only then acknowledges. On restart it replays every WAL record after the last applied sequence number. Anything acknowledged is in the WAL; anything not in the WAL was never acknowledged.</p>
+<p class="followup"><strong>Related follow-up:</strong> "Doesn't the WAL slow writes?" Group commit amortises the flush across many writes (Q21).</p>
+<h4 class="question" id="q10"><span class="qnum">Q10</span><span class="qtext">Why CRC32C, and where exactly do you verify it?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Data can be silently corrupted in a disk sector, in RAM or in a network buffer, and neither TCP's checksum nor disk ECC catches every case. CRC32C is a 32-bit checksum that is hardware-accelerated on modern CPUs (around 10 GB/s per core), detects all single-bit and short burst errors and random corruption with very high probability, and is the industry standard in storage (Google Cloud Storage, iSCSI, ext4 metadata). The client computes one CRC per chunk and one for the whole object, and the checksum is verified end to end: by the coordinator on receipt, by each replica before writing, by the replica on every read, by the client on download, and by a background scrubber over sealed segments. WAL records and segment headers carry their own CRCs to detect torn writes. It is not a cryptographic hash, so it protects against accidents, not attackers.</p>
+<h4 class="question" id="q11"><span class="qnum">Q11</span><span class="qtext">Why RocksDB for metadata but not for the object data?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Metadata (latest version, size, chunk locations, checksums) is small, read on every request, and needs atomic multi-key updates and ordered iteration for listing and range digests. RocksDB is an embedded LSM-tree key-value store that provides exactly that: point lookups with bloom filters, a block cache, atomic <code>WriteBatch</code> and column families, without a network hop or a separate server. Object data is the opposite: large, immutable and read sequentially. In an LSM tree, values are rewritten every time compaction merges files, so storing megabyte chunks there would multiply disk writes by ten or more. Data therefore goes into append-only segment files, and RocksDB stores only <code>(<wbr>segment,<wbr> offset,<wbr> length)</code> pointers. RocksDB's own WAL is disabled, because the project's WAL is the commit point for both stores.</p>
+<h4 class="question" id="q12"><span class="qnum">Q12</span><span class="qtext">What is hinted handoff in your design?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>When a replica is down, slow or erroring, the coordinator still completes the write if W replicas acknowledge, and records a durable hint in its own RocksDB: "node X should have key K at version ≥ v". Every 10 seconds a repair loop copies that version from a healthy replica to each target that is back up and deletes the hint, retrying with backoff; repair traffic is capped at 50 MiB/s to protect foreground latency. Because applying a version is idempotent ("only if newer"), a replay racing a normal write is harmless. Precision: Dynamo's original hinted handoff writes data to a substitute node (sloppy quorum); here the quorum is strict, data never lives on a non-owner, and the hint sits at the coordinator.</p>
+<p class="followup"><strong>Related follow-up:</strong> "What if hints are lost?" Anti-entropy still finds the gap on its next cycle.</p>
+<h4 class="question" id="q13"><span class="qnum">Q13</span><span class="qtext">What is the difference between read repair and anti-entropy?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Both fix lagging replicas but find problems differently. <strong>Read repair</strong> is opportunistic: during a Get, if one replica returns an older or missing version, the coordinator serves the newest and schedules a background write to the stale replica; it fixes only keys being read. <strong>Anti-entropy</strong> is systematic: every 10 minutes per vnode range, two replicas compare 64 bucket digests (XOR of hashes of key, version, tombstone); for mismatched buckets they exchange key lists and copy the newer side. It catches everything, including unread keys, lost hints and rebuilt empty disks. Merkle trees need fewer exchanges at huge scale; bucketed digests are simpler at millions of keys per node.</p>
+<h4 class="question" id="q14"><span class="qnum">Q14</span><span class="qtext">What happens when a storage node fails, and how does it recover?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Peers ping every second and mark a node <code>DOWN</code> after 5 s; failed RPCs and Kubernetes readiness also notice. If it was coordinating a request, the client's stream breaks and the client retries elsewhere. If it was a replica, writes still meet W=2 with the other two and coordinators store hints; reads use the remaining two. Affected keys temporarily have two copies. On restart with the same volume, the node replays its WAL, truncates a torn tail, finds segment ends and rejoins; hints and anti-entropy fill gaps (Scenario C). If the disk is lost, a fresh node starts empty and anti-entropy streams all its ranges from peers, rate-limited.</p>
+<h4 class="question" id="q15"><span class="qnum">Q15</span><span class="qtext">What does "Dynamo-style leaderless" mean, and what does it imply for consistency?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>There is no primary replica for a key: all replicas accept writes, any node can coordinate, and consistency comes from quorums plus a deterministic conflict rule instead of a leader ordering writes. Benefits: no leader election, no failover pause, writes continue with a replica down. Implications: eventual consistency with tunable strength. With R + W &gt; N you get read-your-writes after a successful write, but not linearizability or monotonic reads across coordinators; concurrent writes are settled by last-writer-wins (one is lost); and a failed write may still partially apply. Amazon's Dynamo, Cassandra and Riak make the same trade-off; systems that need strict ordering, such as compare-and-swap, use leader-based consensus like Raft (Q28).</p>
+<h4 class="question" id="q16"><span class="qnum">Q16</span><span class="qtext">What exactly is "concurrent I/O" in your resume?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Many reads and writes hit disks and network at once, safely and with bounded resources. Concretely: callback gRPC (no thread per request); blocking <code>pread</code>/<code>pwrite</code> on a fixed 8-thread I/O pool; one group-commit thread batching flushes; parallel appends to one segment file, each writer reserving its own byte range with an atomic <code>fetch_add</code> and writing with positional <code>pwrite</code>; a short striped per-key lock only for the metadata version compare; admission control at 512 in-flight requests per node. Concurrent writes to one key are resolved by version, not by cross-node locks, and no lock is held across a network call or an fsync. In bullet 2 the same machinery also lets repair and recovery writes run alongside live traffic.</p>
+<h4 class="question" id="q17"><span class="qnum">Q17</span><span class="qtext">What are the main limitations, and what would you improve?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>Consistency: not linearizable, no compare-and-swap, last-writer-wins can lose concurrent writes, failed writes have unknown outcomes. Availability: two replicas down blocks writes for those keys. Scale: full-mesh heartbeats and full-range anti-entropy suit about eight nodes; topology changes are manual. Efficiency: 3× storage; 4 KiB alignment wastes space on tiny objects; non-replica coordinators add a hop. Security: static tokens, TLS off by default, no encryption at rest. Improvements: Merkle trees and SWIM gossip, a ring-change planner, zone-aware placement, erasure coding for cold data, replica-aware client routing, mTLS, Raft-replicated metadata for conditional writes, and running the benchmark to replace targets with measurements.</p>
+<div class="keephead"><h2 id="s-53-deeper-design-questions"><span class="secnum">5.3</span>Deeper design questions</h2><h4 class="question" id="q18"><span class="qnum">Q18</span><span class="qtext">How do you resolve concurrent writes to the same key?</span><span class="qlevel q-medium">Medium</span></h4></div>
+
+<p>Every write gets a version from the coordinator: a hybrid logical clock (HLC) timestamp plus the coordinator's node id as a tie-breaker. An HLC is <code>max(<wbr>wall clock,<wbr> highest timestamp seen)</code> with a counter, so it stays near real time, never runs backwards, and moves forward when nodes exchange timestamps in pings and write headers. Every replica applies an incoming version only if it is greater than the stored one, holding a per-key striped lock during that read-compare-write. Because all replicas use the same total order, they all keep the same winner regardless of arrival order: last-writer-wins. The cost is that two genuinely concurrent writes keep only one, silently, and if node A's clock is 300 ms ahead, a write through A at t=0 can beat a write through B at t=100 ms. That is acceptable for immutable blobs with rare concurrent writers; applications needing read-modify-write must serialise writes themselves.</p>
+<p class="followup"><strong>Related follow-up:</strong> "Why not vector clocks?" They detect concurrency and return siblings for the client to merge, which is more correct but complicates the API for blobs.</p>
+<h4 class="question" id="q19"><span class="qnum">Q19</span><span class="qtext">Is your system strongly consistent?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>No, and it is important to say why precisely. With N=3, W=2, R=2, quorums overlap, so after a write returns <code>OK</code>, a later read returns it or something newer: read-your-writes. But it is not linearizable. A read concurrent with a write can see the new version on one quorum and a later read can hit a different quorum that still has the old one (until read repair runs), so clients can observe new-then-old. Monotonic reads are not guaranteed across coordinators. Concurrent writes are resolved by last-writer-wins, not by a single ordering authority. And a write that fails or times out may have committed on one replica and become visible later through repair: the "unknown outcome" rule. What it does guarantee: acknowledged writes are durable, replicas converge (eventual consistency) and no corrupt data is returned silently. Strong consistency would need consensus (Raft) per shard.</p>
+<h4 class="question" id="q20"><span class="qnum">Q20</span><span class="qtext">Why your own WAL when RocksDB already has one?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>Because a Put modifies two stores and RocksDB's WAL protects only RocksDB. The chunk bytes go into segment files and the metadata into RocksDB; atomicity across both needs one commit point that covers both. The project's WAL record (<code>PUT_COMMIT</code>) contains the chunk locations and checksums, so recovery can check that the data it points to really exists before applying it. With that WAL authoritative, RocksDB's own WAL would be a second, redundant log write per operation, so writes use <code>disableWAL=true</code>. To keep RocksDB consistent after a crash, every RocksDB batch also writes <code>applied_lsn</code>, the highest WAL sequence number it contains, and <code>atomic_flush</code> makes all column families flush together. After a crash, RocksDB recovers to its last flush, <code>applied_lsn</code> says how far that state goes, and the node replays its WAL from the next record. The trade-off: correctness now depends on custom replay code, which must be tested by killing the process at every crash point.</p>
+<h4 class="question" id="q21"><span class="qnum">Q21</span><span class="qtext">What is group commit and why does it make writes faster?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>Durable writes need <code>fdatasync</code>, which forces data to stable storage and has a fixed cost per call, typically sub-millisecond on local NVMe and several milliseconds on cloud volumes. If each Put did its own flushes (data, plus RocksDB's WAL), throughput would be capped by flush latency and CPU would be spent in the kernel. With group commit, writers enqueue their commit and wait on a future. One committer thread takes up to 256 pending commits or whatever arrived within 2 ms, flushes the touched segment files once, appends all the WAL records, flushes the WAL once, applies the metadata to RocksDB in one batch, and completes every waiting writer. The number of flushes drops from one per write to one per batch, so the cost per write falls as concurrency rises. The trade-off is up to 2 ms of extra latency at very low load and a single committer thread, which is fine at hundreds of commits per second.</p>
+<h4 class="question" id="q22"><span class="qnum">Q22</span><span class="qtext">A Put times out. What should the client do, and is a retry safe?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>The client must treat the outcome as unknown. A timeout or <code>UNAVAILABLE</code> can happen after one or even two replicas committed (the response was lost), or before any did. In a leaderless store a partially applied write is not rolled back: a replica that committed keeps that version, and repair may later spread it. The safe action is to retry the same bytes, possibly through another node, with backoff. The retry gets a new, higher version from its coordinator, and all replicas apply it because it is newer, superseding the earlier attempt; the old version's chunks become garbage and are compacted later. Since the content is identical, the final state is the same as if the first attempt had succeeded: Puts are effectively idempotent for identical content, so no server-side deduplication table is needed. A request id is logged so the attempts can be correlated. A Put that returned <code>OK</code> is durable on at least W replicas.</p>
+<h4 class="question" id="q23"><span class="qnum">Q23</span><span class="qtext">Why a strict quorum rather than a sloppy quorum? What if two of three replicas are down?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>In a sloppy quorum (as in the original Dynamo), if an owner is down, the coordinator writes to the next healthy node on the ring as a stand-in, which holds the data plus a hint and hands it back later. That keeps writes available even when several owners are down, but data then lives on nodes that do not own it, which complicates repair, reads and reasoning about where copies are. This project uses a strict quorum: only the three owners count toward W. Data only ever lives on its owners, so repair and anti-entropy stay simple. The consequence: with two of a key's three replicas down, a <code>QUORUM</code> write cannot reach W=2, so it fails fast with <code>UNAVAILABLE</code> (the coordinator checks before sending data); reads at <code>QUORUM</code> also fail, but <code>consistency=ONE</code> reads still work. Writes resume when a node returns. Optional sloppy quorum is listed as a future improvement.</p>
+<h4 class="question" id="q24"><span class="qnum">Q24</span><span class="qtext">How would you add a sixth node?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>It is an operator action: add <code>storage-node-5</code> to the StatefulSet and bump the node list and ring epoch in configuration. Every node builds the new ring; the new node's 128 tokens take over the arcs just before them, about a sixth of the keyspace. Replicas reject writes stamped with the old epoch, so a stale coordinator cannot write under the wrong placement. Anti-entropy finds the new node's ranges empty and streams those keys from existing replicas, rate-limited. Once digests match, old owners no longer in the preference list drop those keys after confirming N copies. It is manual and coarse; a planner that streams only moved ranges is a listed improvement.</p>
+<div class="keephead"><h2 id="s-54-numbers-and-resume-defence"><span class="secnum">5.4</span>Numbers and resume defence</h2><h4 class="question" id="q25"><span class="qnum">Q25</span><span class="qtext">What does "1,000 concurrent requests at 10K ops/min" actually mean?</span><span class="qlevel q-medium">Medium</span></h4></div>
+
+<p>10K ops/min is about 167 client-visible operations per second (Gets and Puts that return <code>OK</code>), on a mix of 70% reads and 30% writes with object sizes of 4 KiB, 64 KiB and 1 MiB at 40/50/10%. Internal replica RPCs are not counted, even though each Put creates three replica writes. "1,000 concurrent" must be read as 1,000 concurrent <strong>client sessions</strong>: the load generator runs 1,000 logical clients over 64 HTTP/2 connections with open-loop Poisson arrivals totalling 167 ops/s. By Little's law, in-flight requests = throughput × latency, so at 167 ops/s and ~30 ms mean latency only about five requests are actually executing at once. If 1,000 were in flight continuously at 167 ops/s, mean latency would be about 6 seconds, contradicting p95 &lt; 200 ms. The 1,000 sessions test the concurrency model (no thread explosion, bounded memory); a separate burst scenario fires 1,000 requests simultaneously. These are benchmark targets, not recorded results.</p>
+<h4 class="question" id="q26"><span class="qnum">Q26</span><span class="qtext">How did the I/O optimisations reduce CPU by about 25%, and how would you prove it?</span><span class="qlevel q-medium">Medium</span></h4>
+<p>The baseline wrote each chunk to its own file (open, write, fsync, close, plus a directory fsync), used RocksDB's WAL in addition to its own (two logs, two flushes), allocated a fresh buffer and copied each chunk on every read, and re-serialised each chunk once per replica. The optimised path appends to pre-allocated segment files with lock-free offset reservation, uses group commit with a single WAL, reads into pooled buffers handed to gRPC without a copy, and forwards already-serialised bytes to replicas. Kernel CPU falls (fewer syscalls and filesystem metadata operations) and user CPU falls (fewer copies and allocations). The metric is CPU time per operation summed across all storage pods from cgroup counters, at the same offered load: <code>(<wbr>baseline − optimised) /<wbr> baseline</code>, e.g. 1,600 µs → 1,200 µs = 25% (illustrative). Proof needs three runs per build, an ablation per change, flame graphs showing filesystem and memcpy frames shrinking, and the server threading change measured separately so it does not inflate the I/O number. It is a target, not a measurement.</p>
+<h4 class="question" id="q27"><span class="qnum">Q27</span><span class="qtext">How would you measure p95 &lt; 200 ms correctly?</span><span class="qlevel q-easy">Easy</span></h4>
+<p>At the client, from the <strong>intended</strong> send time to completion (Put: response received; Get: last byte received). Measuring from the actual send time hides queueing when the generator falls behind (coordinated omission). Use open-loop arrivals, a 3-minute warm-up excluded and a 10-minute window (~100,000 samples, so p95 is the 95,190th smallest) in an HDR histogram. Report p95 and p99 overall, per operation and per size class, because 1 MiB objects can hide a much worse p95 inside a mixed number. Cross-check with server histograms, measure the disk's fsync floor with fio, report failure periods separately, and take the median of three runs.</p>
+<h4 class="question" id="q28"><span class="qnum">Q28</span><span class="qtext">Why not use Raft per shard instead of leaderless quorums?</span><span class="qlevel q-hard">Hard</span></h4>
+<p>Raft gives each shard a leader that orders all writes through a replicated log, which provides linearizable reads and writes and makes compare-and-swap easy. The costs are leader election, failover pauses when the leader dies (writes stop until a new leader is elected), all writes funnelling through one node per shard, and significantly more code: log replication, snapshots, membership changes. A leaderless quorum design has no election and no failover pause, any replica can accept writes, and it stays available with a replica down; its costs are weaker consistency (last-writer-wins, unknown outcomes, no linearizability). For an object store holding immutable blobs, where concurrent writers to one key are rare and availability matters most, leaderless is a good fit; for metadata that needs conditional updates, such as bucket policies or a manifest that must not lose concurrent edits, Raft would be the right tool. A sensible hybrid is Raft-replicated metadata with quorum-replicated data, which is listed as a future improvement.</p>
+<div class="page-break"></div>
+<div class="part-banner" id="part-6" data-part="6"><span class="part-kicker">Part 6</span><h1 class="part-title">Final Revision Sheet</h1></div>
+<div class="rev2">
+<h3>1. Project in one paragraph</h3>
+<p>A Dynamo-style, leaderless object store in C++. Any node coordinates: hash the key onto a consistent-hash ring (128 vnodes per node), take three distinct replicas, stream 1 MiB chunks with CRC32C to all three, reply after two durable acks (N=3, W=2, R=2). Each replica appends data to segment files, commits through a WAL with group commit, and keeps metadata in RocksDB. Hints, read repair and anti-entropy converge replicas; WAL replay recovers crashes. Five pods in a Kubernetes StatefulSet.</p>
+<h3>2. Architecture in one diagram</h3>
+<p class="flowline"><b>Put:</b> Client → any node (coordinator: ring lookup, HLC version) → 3 replicas in parallel → each: segment append → fsync → WAL record → fsync → RocksDB → ack → OK at W=2</p>
+<p class="flowline"><b>Get:</b> metadata from all live replicas → first R=2 → highest version → stream chunks from one replica, CRC checked → read repair for stale replicas</p>
+<p class="flowline"><b>Repair:</b> hints (every 10 s) · read repair · anti-entropy (10 min, 64 bucket digests)</p>
+<h3>3. Stack and responsibilities</h3>
+<ul>
+<li><strong>C++20:</strong> node binary, client, load generator</li>
+<li><strong>gRPC/protobuf:</strong> client API, replication, repair, pings</li>
+<li><strong>RocksDB:</strong> metadata, hints, ring index</li>
+<li><strong>Segment files:</strong> chunk data</li>
+<li><strong>CRC32C:</strong> integrity everywhere</li>
+<li><strong>K8s StatefulSet + PVC:</strong> stable names and disks</li>
+</ul>
+<h3>4. Five most important concepts</h3>
+<ol>
+<li>Consistent hashing + virtual nodes</li>
+<li>Quorums: R + W &gt; N</li>
+<li>LWW with HLC versions; "apply only if newer"</li>
+<li>WAL commit point + group commit</li>
+<li>Hints → read repair → anti-entropy</li>
+</ol>
+<h3>5. Five key decisions</h3>
+<ol>
+<li>Leaderless quorums, not Raft</li>
+<li>LWW, not vector clocks</li>
+<li>Strict quorum, hints at coordinator</li>
+<li>Own WAL; RocksDB for metadata only</li>
+<li>Callback gRPC + bounded I/O pool</li>
+</ol>
+<h3>6. Five likely questions</h3>
+<ol>
+<li>Why consistent hashing? What are vnodes?</li>
+<li>Explain N/W/R. Is it strongly consistent?</li>
+<li>What happens when a node dies?</li>
+<li>Why a WAL? How does recovery work?</li>
+<li>What do 1,000 concurrent / 10K ops/min mean?</li>
+</ol>
+<h3>7. Main limitations</h3>
+<p>Not linearizable; concurrent writes lose one; failed writes have unknown outcome; two replicas down blocks writes; manual topology; full-mesh heartbeats; 3× storage; numbers unmeasured.</p>
+<h3>8. Numerical claims and evidence status</h3>
+<div class="table-block keep"><table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Meaning</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1,000 concurrent</td>
+<td>1,000 client sessions, 64 channels</td>
+<td>Target, unverified</td>
+</tr>
+<tr>
+<td>10K ops/min</td>
+<td>≈ 167 client Get+Put/s, 70/30 mix</td>
+<td>Target, unverified</td>
+</tr>
+<tr>
+<td>&lt; 200 ms p95</td>
+<td>Client-side, intended send → last byte</td>
+<td>Target, unverified</td>
+</tr>
+<tr>
+<td>~25% CPU</td>
+<td>CPU µs per op, same load, I/O path only</td>
+<td>Target, unverified</td>
+</tr>
+</tbody>
+</table></div>
+<h3>9. Ten things to remember</h3>
+<ol>
+<li>Any node can coordinate; no master, no ZooKeeper.</li>
+<li>Preference list = first 3 <strong>distinct physical</strong> nodes clockwise.</li>
+<li>2 + 2 &gt; 3 → read-your-writes, not linearizable.</li>
+<li>Put order: data fsync → WAL record fsync → RocksDB → ack.</li>
+<li>RocksDB WAL disabled; <code>applied_lsn</code> tells replay where to start.</li>
+<li>Group commit: ≤ 256 commits or 2 ms per fsync.</li>
+<li>CRC32C checked by client, coordinator, replica (write and read), scrubber.</li>
+<li>Failed Put = unknown outcome; retry writes a newer version.</li>
+<li>Failure detector: ping 1 s, SUSPECT 3 s, DOWN 5 s; tombstones kept 24 h.</li>
+<li>"1,000 concurrent" = sessions; Little's law ≈ 5 in flight.</li>
+</ol>
+</div>
+</div>
+</body></html>

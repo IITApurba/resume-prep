@@ -1,0 +1,276 @@
+{
+  "DATA/01-risk-aware-process-reward-modeling": {
+    "pages": 20,
+    "status": "PASS",
+    "words": 10265,
+    "fonts_embedded": true,
+    "raster_images": 0,
+    "blank_pages": [],
+    "overflow": [],
+    "bad_links": [],
+    "figures": [
+      1,
+      2
+    ],
+    "mermaid": 2,
+    "questions": {
+      "Easy": 15,
+      "Medium": 9,
+      "Hard": 1
+    },
+    "answers_under_90_words": [],
+    "answer_words_min": 116,
+    "answer_words_mean": 149,
+    "concepts": 12,
+    "missing_headings_in_pdf": [],
+    "coverage_missing": {
+      "Bullet 1": [],
+      "Bullet 2": [],
+      "Bullet 3": []
+    },
+    "stranded": []
+  },
+  "DATA/02-llm-post-training-sft-dpo": {
+    "pages": 19,
+    "status": "PASS",
+    "words": 9364,
+    "fonts_embedded": true,
+    "raster_images": 0,
+    "blank_pages": [],
+    "overflow": [],
+    "bad_links": [],
+    "figures": [
+      1,
+      2
+    ],
+    "mermaid": 2,
+    "questions": {
+      "Easy": 15,
+      "Medium": 9,
+      "Hard": 1
+    },
+    "answers_under_90_words": [],
+    "answer_words_min": 124,
+    "answer_words_mean": 141,
+    "concepts": 12,
+    "missing_headings_in_pdf": [],
+    "coverage_missing": {
+      "Bullet 1": [],
+      "Bullet 2": [],
+      "Bullet 3": []
+    },
+    "stranded": []
+  },
+  "DATA/03-fraud-detection-risk-analysis": {
+    "pages": 19,
+    "status": "PASS",
+    "words": 9415,
+    "fonts_embedded": true,
+    "raster_images": 0,
+    "blank_pages": [],
+    "overflow": [],
+    "bad_links": [],
+    "figures": [
+      1,
+      2
+    ],
+    "mermaid": 2,
+    "questions": {
+      "Easy": 15,
+      "Medium": 10,
+      "Hard": 1
+    },
+    "answers_under_90_words": [],
+    "answer_words_min": 109,
+    "answer_words_mean": 139,
+    "concepts": 12,
+    "missing_headings_in_pdf": [],
+    "coverage_missing": {
+      "Bullet 1": [],
+      "Bullet 2": [],
+      "Bullet 3": []
+    },
+    "stranded": []
+  },
+  "DATA/04-leakage-safe-time-series-forecasting": {
+    "pages": 20,
+    "status": "PASS",
+    "words": 9576,
+    "fonts_embedded": true,
+    "raster_images": 0,
+    "blank_pages": [],
+    "overflow": [],
+    "bad_links": [],
+    "figures": [
+      1,
+      2
+    ],
+    "mermaid": 2,
+    "questions": {
+      "Easy": 16,
+      "Medium": 9,
+      "Hard": 1
+    },
+    "answers_under_90_words": [],
+    "answer_words_min": 129,
+    "answer_words_mean": 138,
+    "concepts": 14,
+    "missing_headings_in_pdf": [],
+    "coverage_missing": {
+      "Bullet 1": [],
+      "Bullet 2": [],
+      "Bullet 3": []
+    },
+    "stranded": []
+  },
+  "QUANT/01-limit-order-book-alpha-research": {
+    "pages": 20,
+    "status": "PASS",
+    "words": 9824,
+    "fonts_embedded": true,
+    "raster_images": 0,
+    "blank_pages": [],
+    "overflow": [],
+    "bad_links": [],
+    "figures": [
+      1
+    ],
+    "mermaid": 1,
+    "questions": {
+      "Easy": 16,
+      "Medium": 9,
+      "Hard": 1
+    },
+    "answers_under_90_words": [],
+    "answer_words_min": 131,
+    "answer_words_mean": 144,
+    "concepts": 13,
+    "missing_headings_in_pdf": [],
+    "coverage_missing": {
+      "Bullet 1": [],
+      "Bullet 2": [],
+      "Bullet 3": []
+    },
+    "stranded": []
+  },
+  "QUANT/02-cross-sectional-alpha-discovery": {
+    "pages": 20,
+    "status": "PASS",
+    "words": 9455,
+    "fonts_embedded": true,
+    "raster_images": 0,
+    "blank_pages": [],
+    "overflow": [],
+    "bad_links": [],
+    "figures": [
+      1
+    ],
+    "mermaid": 1,
+    "questions": {
+      "Easy": 16,
+      "Medium": 9,
+      "Hard": 1
+    },
+    "answers_under_90_words": [],
+    "answer_words_min": 117,
+    "answer_words_mean": 137,
+    "concepts": 13,
+    "missing_headings_in_pdf": [],
+    "coverage_missing": {
+      "Bullet 1": [],
+      "Bullet 2": [],
+      "Bullet 3": []
+    },
+    "stranded": []
+  },
+  "QUANT/03-market-impact-optimal-execution": {
+    "pages": 19,
+    "status": "PASS",
+    "words": 9456,
+    "fonts_embedded": true,
+    "raster_images": 0,
+    "blank_pages": [],
+    "overflow": [],
+    "bad_links": [],
+    "figures": [
+      1
+    ],
+    "mermaid": 1,
+    "questions": {
+      "Easy": 16,
+      "Medium": 9,
+      "Hard": 1
+    },
+    "answers_under_90_words": [],
+    "answer_words_min": 131,
+    "answer_words_mean": 143,
+    "concepts": 11,
+    "missing_headings_in_pdf": [],
+    "coverage_missing": {
+      "Bullet 1": [],
+      "Bullet 2": [],
+      "Bullet 3": []
+    },
+    "stranded": []
+  },
+  "QUANT/04-portfolio-risk-stress-testing": {
+    "pages": 20,
+    "status": "PASS",
+    "words": 9481,
+    "fonts_embedded": true,
+    "raster_images": 0,
+    "blank_pages": [],
+    "overflow": [],
+    "bad_links": [],
+    "figures": [
+      1
+    ],
+    "mermaid": 1,
+    "questions": {
+      "Easy": 16,
+      "Medium": 9,
+      "Hard": 1
+    },
+    "answers_under_90_words": [],
+    "answer_words_min": 127,
+    "answer_words_mean": 142,
+    "concepts": 13,
+    "missing_headings_in_pdf": [],
+    "coverage_missing": {
+      "Bullet 1": [],
+      "Bullet 2": [],
+      "Bullet 3": []
+    },
+    "stranded": []
+  },
+  "QUANT/05-fraud-detection-risk-analysis": {
+    "pages": 19,
+    "status": "PASS",
+    "words": 9379,
+    "fonts_embedded": true,
+    "raster_images": 0,
+    "blank_pages": [],
+    "overflow": [],
+    "bad_links": [],
+    "figures": [
+      1
+    ],
+    "mermaid": 1,
+    "questions": {
+      "Easy": 16,
+      "Medium": 9,
+      "Hard": 1
+    },
+    "answers_under_90_words": [],
+    "answer_words_min": 125,
+    "answer_words_mean": 138,
+    "concepts": 13,
+    "missing_headings_in_pdf": [],
+    "coverage_missing": {
+      "Bullet 1": [],
+      "Bullet 2": [],
+      "Bullet 3": []
+    },
+    "stranded": []
+  }
+}

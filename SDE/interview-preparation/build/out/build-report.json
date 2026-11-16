@@ -1,0 +1,444 @@
+[
+  {
+    "book": "01-payment-transaction-processing-study-guide",
+    "pages": 160,
+    "figures": 21,
+    "tables": 61,
+    "layouts": [
+      {
+        "num": "3.1",
+        "mode": "inline",
+        "scale": 0.812
+      },
+      {
+        "num": "4.1",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "5.1",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "5.2",
+        "mode": "inline",
+        "scale": 0.722
+      },
+      {
+        "num": "5.3a",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "5.3b",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "6.1a",
+        "mode": "inline",
+        "scale": 0.687
+      },
+      {
+        "num": "6.1b",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "8.1",
+        "mode": "inline",
+        "scale": 0.786
+      },
+      {
+        "num": "9.1",
+        "mode": "fullpage",
+        "scale": 0.598
+      },
+      {
+        "num": "9.2",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "9.3",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "10.1a",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "10.1b",
+        "mode": "landscape",
+        "scale": 0.82
+      },
+      {
+        "num": "10.2",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "10.3",
+        "mode": "inline",
+        "scale": 0.784
+      },
+      {
+        "num": "10.4",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "10.5",
+        "mode": "inline",
+        "scale": 0.784
+      },
+      {
+        "num": "12.1",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "15.1",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "22.1",
+        "mode": "inline",
+        "scale": 0.76
+      }
+    ]
+  },
+  {
+    "book": "02-distributed-object-storage-study-guide",
+    "pages": 152,
+    "figures": 21,
+    "tables": 60,
+    "layouts": [
+      {
+        "num": "3.1",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "4.1",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "5.1",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "5.2",
+        "mode": "inline",
+        "scale": 0.81
+      },
+      {
+        "num": "5.3",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "5.4a",
+        "mode": "inline",
+        "scale": 0.698
+      },
+      {
+        "num": "5.4b",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "6.1a",
+        "mode": "inline",
+        "scale": 0.592
+      },
+      {
+        "num": "6.1b",
+        "mode": "inline",
+        "scale": 0.651
+      },
+      {
+        "num": "8.1",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "9.1",
+        "mode": "fullpage",
+        "scale": 0.59
+      },
+      {
+        "num": "9.2",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "9.3",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "10.1",
+        "mode": "fullpage",
+        "scale": 0.616
+      },
+      {
+        "num": "10.2",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "10.3",
+        "mode": "inline",
+        "scale": 0.725
+      },
+      {
+        "num": "10.4",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "11.1",
+        "mode": "inline",
+        "scale": 0.813
+      },
+      {
+        "num": "12.1",
+        "mode": "fullpage",
+        "scale": 0.58
+      },
+      {
+        "num": "15.1",
+        "mode": "landscape",
+        "scale": 0.735
+      },
+      {
+        "num": "22.1",
+        "mode": "inline",
+        "scale": 0.82
+      }
+    ]
+  },
+  {
+    "book": "03-real-time-event-processing-study-guide",
+    "pages": 139,
+    "figures": 19,
+    "tables": 69,
+    "layouts": [
+      {
+        "num": "3.1",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "4.1",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "5.1",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "5.2a",
+        "mode": "fullpage",
+        "scale": 0.675
+      },
+      {
+        "num": "5.2b",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "5.3",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "6.1a",
+        "mode": "landscape",
+        "scale": 0.82
+      },
+      {
+        "num": "6.1b",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "6.1c",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "6.2",
+        "mode": "inline",
+        "scale": 0.729
+      },
+      {
+        "num": "8.1",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "9.1",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "9.2",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "9.3",
+        "mode": "landscape",
+        "scale": 0.82
+      },
+      {
+        "num": "10.1",
+        "mode": "inline",
+        "scale": 0.621
+      },
+      {
+        "num": "10.2",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "10.3",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "12.1",
+        "mode": "fullpage",
+        "scale": 0.549
+      },
+      {
+        "num": "22.1",
+        "mode": "inline",
+        "scale": 0.714
+      }
+    ]
+  },
+  {
+    "book": "04-llm-gateway-inference-router-study-guide",
+    "pages": 156,
+    "figures": 21,
+    "tables": 62,
+    "layouts": [
+      {
+        "num": "3.1",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "4.1",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "5.1",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "5.2a",
+        "mode": "inline",
+        "scale": 0.745
+      },
+      {
+        "num": "5.2b",
+        "mode": "inline",
+        "scale": 0.77
+      },
+      {
+        "num": "5.3",
+        "mode": "inline",
+        "scale": 0.632
+      },
+      {
+        "num": "5.4",
+        "mode": "fullpage",
+        "scale": 0.555
+      },
+      {
+        "num": "5.5",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "6.1a",
+        "mode": "landscape",
+        "scale": 0.82
+      },
+      {
+        "num": "6.1b",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "6.1c",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "8.1",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "8.2",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "9.1",
+        "mode": "fullpage",
+        "scale": 0.699
+      },
+      {
+        "num": "9.2",
+        "mode": "inline",
+        "scale": 0.82
+      },
+      {
+        "num": "10.1a",
+        "mode": "inline",
+        "scale": 0.718
+      },
+      {
+        "num": "10.1b",
+        "mode": "inline",
+        "scale": 0.626
+      },
+      {
+        "num": "10.2",
+        "mode": "inline",
+        "scale": 0.739
+      },
+      {
+        "num": "10.3",
+        "mode": "inline",
+        "scale": 0.809
+      },
+      {
+        "num": "12.1",
+        "mode": "inline",
+        "scale": 0.784
+      },
+      {
+        "num": "22.1",
+        "mode": "fullpage",
+        "scale": 0.586
+      }
+    ]
+  }
+]
